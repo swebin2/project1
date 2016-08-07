@@ -1,0 +1,32 @@
+
+/* FONTS*/
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:700,600,400,300|Montserrat:400,700|Lato:400,300,700,900,400italic);
+@import url('../css/font-awesome.min.css');
+@import url('../css/style.css');
+
+/* PLUGIN CSS */
+
+@import url('../css/slider-pro.css');
+@import url('../css/bootstrap.css');
+@import url('../css/owl.carousel.css');
+@import url('../css/owl.transitions.css');
+@import url('../css/owl.theme.css');
+@import url('../css/prettyPhoto.css');
+@import url('../css/yamm.css');
+@import url('../css/main.css');
+
+/*@import url('../css/isotope.css');
+@import url('../css/validation-2.2.min.css');
+@import url('../css/jquery.datetimepicker.css');
+@import url('../css/animate.css');
+@import url('../css/sidebar.css');
+@import url('../css/debugging.css');*/
+
+
+
+/* MAIN CSS */
+@import url('../css/theme.css');
+@import url('../css/blog.css');
+@import url('../css/responsive.css');
+@import url('../css/color.css');
+

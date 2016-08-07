@@ -1,0 +1,145 @@
+
+
+
+
+/* ---------------------------------------------------------
+
+
+
+Base CSS
+
+
+
+------------------------------------------------------------*/
+
+body {  }
+
+
+
+
+.section-padding {
+
+
+
+    padding: 90px 0;
+
+
+
+}
+
+
+/* --------------------------------------------------------
+
+
+
+Why Choose Us CSS
+
+
+
+-----------------------------------------------------------*/
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+.why_choose_us_txt h1{
+color: #353535;   
+ font-size: 32px;
+    font-weight: 700;
+    margin: 20px 0 25px;
+}
+
+
+
+.why_choose_us_txt p{
+
+
+    line-height: 28px;
+    font-size: 17px;
+
+
+
+}
+
+
+
+.single_why_choose{
+
+
+
+    text-align: center;
+
+
+
+    padding-top: 30px;
+
+
+
+}
+
+
+
+.single_why_choose_icon{
+
+
+
+    background: #3B99D7;
+
+
+
+    border-radius: 50%;
+
+
+
+    line-height: 75px;
+
+
+
+    width: 75px;
+
+
+
+    margin: 0 auto;
+
+
+
+    overflow:hidden;
+
+
+
+}
+
+
+
+.single_why_choose h3{
+
+
+
+    font-size: 18px;
+
+
+
+    margin-top: 15px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

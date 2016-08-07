@@ -1,0 +1,142 @@
+.bg-purple {
+	background-color: #2e305d;
+}
+.text-bold {
+	font-weight: 700;
+}
+.text-semibold {
+	font-weight: 600;
+}
+.text-normal {
+	font-weight: 400;
+}
+.mrgt7x {
+	margin-top: 70px;
+}
+.mrgt8x {
+	margin-top: 80px;
+}
+.mrgt9x {
+	margin-top: 90px;
+}
+.mrgt10x {
+	margin-top: 100px;
+}
+.mrgt12x {
+	margin-top: 120px;
+}
+.mrgt15x {
+	margin-top: 150px;
+}
+.mrgb2x {
+	margin-bottom: 20px;
+}
+.mrgb4x {
+	margin-bottom: 40px;
+}
+.mrgb3x {
+	margin-bottom: 30px;
+}
+.mrgb5x {
+	margin-bottom: 50px;
+}
+.mrgb6x {
+	margin-bottom: 60px;
+}
+.mrgb7x {
+	margin-bottom: 70px;
+}
+.mrgb8x {
+	margin-bottom: 80px;
+}
+.mrgb9x {
+	margin-bottom: 90px;
+}
+.mrgb10x {
+	margin-bottom: 100px;
+}
+.mrgb11x {
+	margin-bottom: 110px;
+}
+.mrgb12x {
+	margin-bottom: 120px;
+}
+.mrgb13x {
+	margin-bottom: 130px;
+}
+.mrgt13x {
+	margin-top: 130px;
+}
+.mrgb16x {
+	margin-bottom: 160px;
+}
+.mrgb15x {
+	margin-bottom: 150px;
+}
+/*------------------------------------------------------
+  HEADER
+-------------------------------------------------------*/ 
+
+
+/*-----------------------------------------------
+  FEATURED POST SECTION
+  ----------------------------------------------*/
+.section-desc h1 {
+	margin-bottom: 10px;
+}
+.section-desc > img {
+	margin-right: 8px;
+	margin-top: -8px;
+}
+.section-desc span, .section-desc h5 {
+	color: #d5d7ff;
+	font-family: 'Lato', sans-serif;
+}
+.section-desc h5 {
+	font-style: italic;
+	line-height: 32px;
+	margin-bottom: 18px;
+	padding-right: 30px;
+}
+.section-desc h1 + img + span + p {
+	padding-right: 36px;
+}
+.section-img {
+	float: left;
+}
+.post-text h1 {
+	font-family: 'Lato', sans-serif;
+	color: #ececec;
+}
+.post-text h3 {
+	font-family: 'Lato', sans-serif;
+	line-height: 33px;
+	COLOR: #F8F8F9;
+	FONT-SIZE: 17PX;
+	FONT-WEIGHT: bolder;
+	text-align: center;
+}
+.post-text h6 {
+	font-family: 'Lato', sans-serif;
+	line-height: 33px;
+	COLOR: #2D3E50;
+}
+.post-text {
+	background-color: #6B6B6B;
+	padding: 4px 40px 64px 54%;
+}
+.post-text p {
+	margin-top: 22px;
+	margin-bottom: 33px;
+}
+.post-text h6 {
+	margin-top: 5px;
+}
+.section-post .owl-pagination {
+	position: absolute;
+	bottom: 35px;
+	right: 50px;
+}
+/*--------------------------------------------------
+  OUR TEACHERS SECTION
+--------------------------------------------------*/

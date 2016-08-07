@@ -1,0 +1,920 @@
+ @media (min-width: 992px) and (max-width: 1199px) {
+.nav > li > a {
+	padding: 55px 12px;
+}
+.mini-desc {
+	padding: 18px 33px 20px;
+}
+.select-box::after {
+	right: 5px;
+}
+.lower-desc {
+	padding: 20px 8px;
+}
+.upper-desc {
+	padding: 20px;
+}
+.post-text {
+	padding: 0 18px 8px 62%;
+}
+.faculty-box:hover .faculty-text {
+	padding-top: 48px;
+}
+.faculty-icon {
+	left: 30%;
+}
+.sec-position {
+	width: 100%;
+	margin-bottom: 20px;
+	position: relative;
+'
+}
+.testi-slider.mrgt12x {
+	margin-top: 70px;
+}
+.testi-slider .owl-pagination {
+	bottom: 0;
+}
+/*home page 2 */
+.home-top-section .nav > li > a {
+	padding: 30px 16px 28px;
+}
+.stat-box {
+	margin-right: 18px;
+}
+.inbox-right {
+	padding: 25px 35px;
+}
+.topbar-icons .dropdown-menu {
+	left: 70%;
+}
+.assig-data ul li {
+	padding: 14px 10px;
+}
+.submit-work #menuBarDiv a.btn-default {
+	padding: 12px 15px;
+}
+.blog-posts .event-text {
+	padding: 9px 10px 6px 15px;
+}
+.post-area {
+	padding-left: 46%;
+}
+.review-vote {
+	width: 22%;
+}
+.rating-points {
+	width: 74%;
+}
+.person-pic {
+	margin-bottom: 10px;
+}
+.learning-nav .nav-pills > li > a {
+	font-size: 12px;
+	padding: 0 10px;
+}
+.course-price h5 {
+	font-size: 20px;
+}
+#menuBarDiv {
+	width: 100%;
+}
+.event-text.bg-dark-grey {
+	padding: 6px 14px 6px 6px;
+}
+.event-text p {
+	margin-bottom: 4px;
+}
+.event-text {
+	padding: 16px 10px;
+}
+}
+@media (min-width: 768px) and (max-width: 991px) {
+.nav > li > a {
+	font-size: 14px;
+	padding: 55px 8px;
+}
+.slider-text {
+	top: 20%;
+}
+.mini-desc {
+	padding: 18px 22px 20px;
+}
+#courses-form .form-group {
+	margin-bottom: 8px;
+}
+#courses-form .form-group a {
+	margin-left: 0;
+}
+.course-img img, .event-img img {
+	width: 100%;
+}
+.course-box {
+	margin-bottom: 10px;
+}
+.courses-carousel .owl-prev::before, .courses-carousel .owl-next::before {
+	top: -6%;
+}
+.tab-options .nav > li > a {
+	margin-right: 6px;
+}
+.tab-options .nav > li > a .bg-purple {
+	margin-right: 10px;
+}
+.tab-options {
+	margin-bottom: 20px;
+}
+.sec-position {
+	width: 100%;
+	margin-bottom: 20px;
+	position: relative;
+'
+}
+.inner-border {
+	padding: 14px 22px;
+}
+.section-desc {
+	margin-bottom: 20px;
+}
+.faculty-box:hover .faculty-text {
+	padding-top: 52px;
+}
+.faculty-icon {
+	left: 31%;
+}
+.xlarge-heading {
+	font-size: 50px;
+}
+.testi-slider.mrgt12x {
+	margin-top: 0;
+}
+.testi-slider .owl-pagination {
+	bottom: 0;
+}
+.testi-box {
+	padding: 0;
+}
+.std-blog-hover a {
+	left: 22%;
+}
+.testi-box > p {
+	margin: 15px 0;
+}
+.widget-area li a, .widget-area p, .widget-area a {
+	font-size: 13px;
+}
+/* home page 2 */
+.homepage-2 header {
+	position: relative;
+}
+.breadcrumb-banner {
+	bottom: -36px;
+}
+.person-img {
+	float: none;
+}
+.scrollbar {
+	height: 465px;
+}
+.font-style, .list-style, .imge-style {
+	padding: 12px 10px;
+}
+.ac-teaching .upper-desc {
+	padding: 20px 10px;
+}
+.topbar-icons .dropdown-menu {
+	left: 60%;
+}
+.topic-name h6 {
+	font-size: 15px;
+}
+.assig-data ul li {
+	padding: 14px 4px;
+	font-size: 11px;
+}
+.submit-work #menuBarDiv a.btn-default {
+	padding: 12px 8px;
+}
+.post-area {
+	padding-left: 16%;
+}
+.blog-posts .event-text {
+	padding: 10px 12px;
+}
+.rating-points {
+	width: 72%;
+}
+.review-vote {
+	width: 22%;
+}
+.person-pic {
+	margin-bottom: 10px;
+}
+.drop {
+	padding: 40px 12px;
+}
+.assign-title {
+	width: 70%;
+}
+.course-price h5 {
+	font-size: 16px;
+}
+.right-sidebar {
+	margin-top: 10px;
+}
+.event-text.bg-dark-grey {
+	padding: 35px;
+}
+.event-text {
+	padding: 30px;
+}
+#register-form .select-box {
+	width: 110px;
+	margin-right: 4px;
+}
+.quiz-box span.dark-purple {
+	padding: 10px 7px;
+}
+.assig-tabs .tab-content ul li {
+	text-align: center;
+}
+}
+@media (min-width: 591px) and (max-width: 767px) {
+.slider-text {
+	top: 16%;
+}
+.large-heading {
+	font-size: 30px;
+}
+.slider-carousel .owl-pagination {
+	left: 37%;
+}
+.mini-item, .course-box, .section-desc, .tab-options, .tab-img, .std-box, .widget-area {
+	margin-bottom: 15px;
+}
+.mini-img img, #menuBarDiv, .event-img img {
+	width: 100%;
+}
+#courses-form .form-group {
+	margin-bottom: 8px;
+}
+#courses-form .form-group a {
+	margin-left: 0;
+}
+.courses-carousel .owl-prev::before, .courses-carousel .owl-next::before {
+	top: -6%;
+}
+.tab-options .nav > li > a {
+	margin-right: 10px;
+}
+.sec-position {
+	width: 100%;
+	margin-bottom: 20px;
+	position: relative;
+'
+}
+.inner-border {
+	padding: 8px 22px;
+}
+.post-text {
+	padding: 0 10px 17px 66%;
+}
+.section-post .owl-pagination {
+	bottom: 25px;
+	right: 8px;
+}
+.newsletter .col-md-5 {
+	position: relative;
+	top: 0;
+}
+.testi-slider.mrgt12x {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.testi-slider .owl-pagination {
+	bottom: 0;
+}
+.std-blog-hover a {
+	left: 29%;
+}
+/*home page 2 */
+.homepage-2 header {
+	position: relative;
+}
+.breadcrumb {
+	padding: 26px 14px 26px 2%;
+}
+.breadcrumb-banner {
+	bottom: -13%;
+}
+.topic-name h6, .topbar-icons {
+	float: none;
+}
+.topbar-icons {
+	display: inline-block;
+}
+.popup-topbar {
+	text-align: center;
+}
+.topbar-icons .dropdown-menu {
+	left: 0;
+	top: 128px;
+}
+.submit-work #menuBarDiv a.btn-default {
+	padding: 12px 14px;
+}
+.post-area {
+	padding-left: 20%;
+}
+.blog-posts .event-text {
+	padding: 10px;
+}
+.event-meta {
+	margin-bottom: 6px;
+	margin-top: 6px;
+}
+.event-text p {
+	margin-bottom: 3px;
+	font-size: 12px;
+}
+.event-text, .learning-nav .nav-pills > li > a {
+	font-size: 12px;
+}
+.rating-points > li.last-point span {
+	margin-left: 5px;
+}
+.rating-points > li span {
+	margin-right: 5px;
+}
+.rating-points {
+	width: 82%;
+}
+.person-pic {
+	margin-bottom: 10px;
+}
+.course-submission {
+	padding-left: 0;
+}
+.right-sidebar {
+	margin-top: 10px;
+}
+.event-text.bg-dark-grey, .event-text {
+	padding: 30px;
+}
+.faculty-box:hover .faculty-text {
+	padding-top: 46px;
+}
+.search-bar input[type="submit"] {
+	top: 67px;
+}
+.search-bar::after {
+	top: 87px;
+}
+.assig-tabs .tab-content ul li {
+	text-align: center;
+}
+}
+@media (min-width: 361px) and (max-width: 590px) {
+.login-ac > li > a {
+	padding: 0 14px;
+}
+.large-heading {
+	font-size: 30px;
+}
+.slider-text {
+	top: 10%;
+}
+.slider-carousel .owl-pagination {
+	left: 32%;
+}
+.mini-item, .course-box, .tab-img, .tab-options, .section-desc, .testi-slider, .std-box, .widget-area {
+	margin-bottom: 20px;
+}
+.select-box::after {
+	right: 4px;
+}
+.courses-form a {
+	margin-left: 0;
+}
+#courses-form .form-group {
+	margin-bottom: 10px;
+}
+.e-learning-item > p {
+	padding-right: 0;
+}
+.courses-carousel .owl-prev::before, .courses-carousel .owl-next::before {
+	top: -6%;
+}
+.lower-desc {
+	padding: 20px 8px;
+}
+.upper-desc {
+	padding: 20px 6px;
+}
+.tab-options .nav > li > a {
+	margin-right: 10px;
+}
+.sec-position {
+	width: 100%;
+	margin-bottom: 20px;
+	position: relative;
+'
+}
+.section-img, .profile-designation .text-bold {
+	float: none;
+}
+.section-img img, .event-item .col-xs-6, .event-img img, .review-vote, .rating-points, #menuBarDiv, .course-img img {
+	width: 100%;
+}
+.post-text {
+	padding: 20px;
+}
+.filter-bar li > a {
+	width: 86px;
+	margin-right: 4px;
+}
+.newsletter .col-md-5 {
+	position: relative;
+}
+.testi-slider.mrgt12x, .review-vote {
+	margin-top: 20px;
+}
+.testi-slider .owl-pagination {
+	bottom: 0;
+}
+.std-blog-hover a {
+	left: 19%;
+	top: 38%;
+}
+/*home page 2 */
+.homepage-2 header {
+	position: relative;
+}
+.main-slider-carousel .owl-pagination {
+	top: 15%;
+}
+.stat-box {
+	margin-right: 35px;
+}
+.breadcrumb-banner {
+	bottom: -13%;
+}
+.breadcrumb {
+	padding: 26px 0 26px 0;
+}
+.inbox-right {
+	padding: 37px 20px;
+}
+.font-style, .list-style, .imge-style {
+	padding: 12px 10px;
+}
+.breadcrumb > li > a {
+	font-size: 12px;
+	padding: 0 14px;
+}
+.font-hover {
+	top: 9px;
+}
+.topic-name h6, .topbar-icons {
+	float: none;
+}
+.topbar-icons {
+	display: inline-block;
+}
+.popup-topbar {
+	text-align: center;
+}
+.topbar-icons .dropdown-menu {
+	left: 0;
+	top: 130px;
+}
+.submit-work #menuBarDiv a.btn-default {
+	padding: 12px 7px;
+}
+.post-area {
+	padding-left: 26%;
+}
+.rating-points > li span {
+	font-size: 11px;
+}
+.rating-points > li span {
+	margin-right: 8px;
+}
+.rating-points > li.last-point span {
+	margin-left: 6px;
+}
+.person-pic {
+	margin-bottom: 60px;
+}
+.learning-nav .nav-pills > li > a {
+	font-size: 11px;
+	padding: 0 7px;
+}
+.left-tab-area #menuBarDiv a.btn-default {
+	padding: 12px 18px;
+}
+.add-buttons a {
+	margin-right: 5px;
+}
+.course-submission {
+	padding-left: 0;
+}
+.right-sidebar {
+	margin-top: 10px;
+}
+.event-text.bg-dark-grey, .event-text {
+	padding: 30px;
+}
+.total-score ul {
+	padding: 15px;
+}
+.assig-tabs .tab-content ul li, .assig-content ul li {
+	text-align: center;
+}
+}
+@media (min-width: 261px) and (max-width: 360px) {
+.login-ac > li > a {
+	padding: 0 14px;
+}
+.large-heading {
+	font-size: 20px;
+}
+.slider-text {
+	top: 10%;
+}
+.slider-carousel .owl-pagination {
+	left: 15%;
+}
+.top-header ul, .mini-item, .course-box, .tab-img, .tab-options, .section-desc, .testi-slider, .std-box, .widget-area {
+	margin-bottom: 20px;
+}
+.slider-btn {
+	margin-top: 13px;
+}
+.col-xs-8, .col-xs-4, .col-xs-6, .course-img img, .section-img img, .col-xs-5, .col-xs-7, .lecturebox-left {
+	width: 100%;
+}
+#courses-form .form-group, .filter-bar li > a, .stat-box {
+	margin-bottom: 8px;
+}
+.courses-form a {
+	margin-left: 0;
+}
+.courses-carousel .owl-prev::before, .courses-carousel .owl-next::before {
+	top: -6%;
+}
+.sec-position {
+	width: 100%;
+	margin-bottom: 20px;
+	position: relative;
+'
+}
+.about-inner-img {
+	display: none;
+}
+.section-img {
+	float: none;
+}
+.post-text {
+	padding: 20px;
+}
+.filter-bar li > a {
+	width: 86px;
+}
+.newsletter .col-md-5 {
+	position: relative;
+}
+.testi-slider.mrgt12x {
+	margin-top: 20px;
+}
+.testi-slider .owl-pagination {
+	bottom: 0;
+	right: 20px;
+}
+/*home page 2 */
+.homepage-2 header {
+	position: relative;
+}
+.slider-img .img-responsive {
+	max-width: 150%;
+}
+.main-slider-carousel .owl-pagination {
+	top: 18%;
+}
+.breadcrumb {
+	padding: 25px 0;
+}
+.breadcrumb > li > a {
+	padding: 10px 22px;
+}
+#write-msg textarea {
+	padding: 150px 20px 20px;
+}
+.font-hover {
+	top: 9px;
+}
+.list-style {
+	border: none;
+}
+.ac-teaching.option-btn.mrgt5x {
+	margin-top: 85px;
+}
+.topic-name h6, .topbar-icons, .person-pic {
+	float: none;
+}
+.topbar-icons {
+	display: inline-block;
+}
+.popup-topbar {
+	text-align: center;
+}
+.topbar-icons > li > a {
+	padding: 16px 20px;
+}
+.topbar-icons .dropdown-menu {
+	top: 150px;
+	left: 0;
+}
+.submit-work #menuBarDiv a.btn-default {
+	padding: 12px 7px;
+}
+.submit-work .Editor-editor {
+	padding: 27% 3% 10px;
+}
+.learning-exp p {
+	padding-left: 30px;
+}
+.article-text {
+	padding-left: 0;
+	padding-top: 10px;
+}
+.rating-points > li a, .img-box {
+	margin-bottom: 5px;
+}
+.review-vote {
+	width: 25%;
+}
+.comment-reply, .course-submission {
+	padding-left: 0;
+}
+.title-bg.course-page .breadcrumb {
+	padding: 17px 14px 17px 33%;
+}
+.left-tab-area #menuBarDiv, .course-info .text-bold {
+	width: 100%;
+}
+.left-tab-area #menuBarDiv a.btn-default {
+	padding: 12px;
+}
+.dis-boxconent {
+	padding-left: 21%;
+}
+.course-option .nav-pills > li > a {
+	font-size: 11px;
+	padding: 0 8px;
+	border-right: none;
+}
+.design-fields .tab-content {
+	padding: 30px 10px 50px;
+}
+.outline-tab .panel-default > .panel-heading {
+	padding: 20px 8px;
+}
+.outline-tab .panel-body {
+	padding: 30px 20px;
+}
+.lower-desc {
+	padding: 20px 5px;
+}
+.course-price h5 {
+	font-size: 20px;
+}
+.submit-btns .btn-default.bg-orange {
+	margin-left: 0;
+	margin-bottom: 10px;
+}
+.event-text.bg-dark-grey, .event-text {
+	padding: 20px;
+}
+.faq .panel-default > .panel-heading {
+	padding: 14px 6px;
+}
+.assig-tabs .tab-content ul li, .assig-content ul li {
+	text-align: center;
+}
+}
+@media (min-width: 0px) and (max-width: 260px) {
+.slider-text {
+	top: 10%;
+}
+.slider-carousel .owl-pagination {
+	left: 2%;
+}
+.top-header ul, .mini-item, .course-box, .tab-img, .tab-options, .section-desc, .testi-slider, .std-box, .widget-area, .single-event a, .img-box {
+	margin-bottom: 20px;
+}
+.slider-btn {
+	margin-top: 13px;
+	background-size: 135px;
+}
+.slider-text a {
+	padding: 10px 12px;
+}
+.col-xs-8, .col-xs-4, .col-xs-6, .course-img img, .section-img img, .faculty-portfolio .col-md-3, .person-info, .msg-time, .msg-sender, .col-xs-5, .col-xs-7, #menuBarDiv, .course-info .text-bold {
+	width: 100%;
+}
+#courses-form .form-group, .filter-bar li > a, .stat-box {
+	margin-bottom: 8px;
+}
+.courses-form a {
+	margin-left: 0;
+}
+.banner-text {
+	padding: 12px 20px;
+}
+.courses-carousel .owl-prev::before, .courses-carousel .owl-next::before {
+	top: -3%;
+}
+.upper-desc {
+	padding: 20px 18px;
+}
+.lower-desc {
+	padding: 20px 6px;
+}
+.ex-large-heading, .xlarge-heading {
+	font-size: 40px;
+}
+.about-inner-img {
+	display: none;
+}
+.section-img, .person-info, .person-img, .msg-time, .msg-sender, .attach-link {
+	float: none;
+}
+.post-text {
+	padding: 20px;
+}
+.filter-bar li > a {
+	width: 95px;
+}
+.section-post .owl-pagination {
+	bottom: 25px;
+	right: 8px;
+}
+.faculty-box:hover .faculty-text {
+	padding-top: 50px;
+}
+.newsletter .col-md-5 {
+	position: relative;
+}
+.testi-slider.mrgt12x, .right-sidebar {
+	margin-top: 20px;
+}
+.sec-position {
+	width: 100%;
+	margin-bottom: 20px;
+	position: relative;
+'
+}
+.testi-slider .owl-pagination {
+	bottom: 0;
+	right: 0;
+}
+.box-inner-border {
+	padding: 50px 10px;
+}
+.testi-box {
+	padding: 0 10px;
+}
+.std-blog-hover a {
+	left: 21%;
+	top: 40%;
+}
+/*home page 2 */
+.homepage-2 header {
+	position: relative;
+}
+.slider-img .img-responsive {
+	max-width: 150%;
+}
+.main-slider-carousel .owl-pagination {
+	top: 8%;
+}
+/*------------*/
+.user-info h2 {
+	font-size: 20px;
+}
+.stat-box {
+	margin-right: 20px;
+}
+.stat-box h1 {
+	font-size: 30px;
+}
+.breadcrumb-banner {
+	position: relative;
+}
+.breadcrumb {
+	padding: 30px;
+}
+.breadcrumb > li > a {
+	padding: 12px 22px;
+}
+.inbox-top-bar {
+	padding: 30px 10px;
+}
+.inbox-right {
+	padding: 10px;
+}
+.list-style {
+	border: none;
+}
+.font-hover {
+	top: 9px;
+}
+#write-msg textarea {
+	padding: 150px 20px 20px;
+}
+.main-office {
+	padding: 30px 12px;
+}
+.option-btn .withdraw, .submit-btns .btn-default.bg-orange {
+	margin-left: 0;
+	margin-top: 5px;
+}
+.topic-name h6, .topbar-icons, .person-pic {
+	float: none;
+}
+.topbar-icons {
+	display: inline-block;
+}
+.popup-topbar {
+	text-align: center;
+}
+.topbar-icons > li > a {
+	padding: 16px;
+	font-size: 12px;
+}
+.topbar-icons .dropdown-menu {
+	top: 150px;
+	left: 0;
+}
+#menuBarDiv a.btn-default {
+	padding: 12px 7px;
+}
+.Editor-editor {
+	padding: 36% 3% 10px;
+}
+.post-area {
+	padding-left: 46%;
+}
+.learning-exp p {
+	padding-left: 20px;
+}
+.article-text, .comment-reply, .course-submission {
+	padding-left: 0;
+}
+.rating-points > li a, .pagination > li > a, .add-buttons a {
+	margin-bottom: 5px;
+}
+.review-vote {
+	width: 32%;
+}
+.learning-nav .nav-pills > li > a {
+	padding: 0 8px;
+}
+.tags span {
+	margin-right: 0;
+}
+.course-option .nav-pills > li:first-child a {
+	padding-left: 16px;
+}
+.course-fields {
+	padding: 40px 4px;
+}
+.design-fields .nav-pills > li > a {
+	border-right: none;
+}
+.design-fields .tab-content {
+	padding: 30px 10px 50px;
+}
+.outline-tab .panel-default > .panel-heading {
+	padding: 20px 16px 20px 10px;
+}
+.outline-tab .panel-body {
+	padding: 30px 10px;
+}
+.submit-fields {
+	padding: 40px 0;
+}
+.event-text.bg-dark-grey, .event-text {
+	padding: 20px;
+}
+.faq .panel-default > .panel-heading {
+	padding: 14px 6px;
+}
+.faq .panel-body {
+	padding: 25px 10px 40px;
+}
+.assig-tabs .tab-content ul li, .assig-content ul li {
+	text-align: center;
+}
+}
