@@ -4,7 +4,7 @@ require_once "chk_login.php";
 
 $objgen		=	new general();
 
-//test 22
+//test 22sdsd
 
 $where = "";
 $row_count = $objgen->get_AllRowscnt("exam_list",$where);
