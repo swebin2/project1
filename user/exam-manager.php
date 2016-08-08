@@ -11,7 +11,7 @@ if($_GET['msg']==1)
   $msg2 = "Exam Created Successfully.";
 }
 
-$usrid = $_SESSION['ma_log_id'];
+    $usrid = $_SESSION['ma_log_id'];
     $userExamSectionArr = $objgen->getUserExamSection($usrid);
     $sectionId = "";
     $totsecQnCount= 0;

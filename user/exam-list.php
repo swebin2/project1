@@ -5,7 +5,36 @@ require_once "chk_login.php";
 $objgen		=	new general();
 		
 $row_count 		= 0;
+$row_count2 		= 0;
+$row_count3 		= 0;
+$row_count4 		= 0;
 $exam_ok		= array();
+
+// Public Exams
+
+$where = " and exam_id=0 and exam_assign='link' and avaibility='always'";
+$row_count2 = $objgen->get_AllRowscnt("exam_list",$where);
+if($row_count2>0)
+{
+  $res_arr2 = $objgen->get_AllRows("exam_list",0,$row_count2,"id desc",$where);
+}
+
+// Public Exams End
+
+// Public Exams Specific
+
+$where = " and exam_id=0 and exam_assign='link' and avaibility='specific' and start_date <= now() and end_date>=now()";
+$row_count3 = $objgen->get_AllRowscnt("exam_list",$where);
+if($row_count3>0)
+{
+  $res_arr3 = $objgen->get_AllRows("exam_list",0,$row_count3,"id desc",$where);
+}
+
+// Public Exams Specific End
+
+
+
+// Private Exams 
 
 $where = " and status='active' and user_id=".$usrid;
 $exam_per = $objgen->get_AllRowscnt("exam_permission",$where);
@@ -18,6 +47,20 @@ if($exam_per>0)
 	{
 		$exam_ok[] = $val['exam_id'];
 	}
+	
+   
+   // Private Exams Specific
+	
+	$where = " and exam_id in ( ".implode(",",$exam_ok).")  and avaibility='specific' and start_date <= now() and end_date>=now()";
+	$row_count4 = $objgen->get_AllRowscnt("exam_list",$where);
+	if($row_count4>0)
+	{
+	  $res_arr4 = $objgen->get_AllRows("exam_list",0,$row_count4,"id desc",$where);
+	}
+
+// Private Exams Specific End
+
+
    
 	$where = " and exam_id in ( ".implode(",",$exam_ok).") and avaibility='always'";
 	$row_count = $objgen->get_AllRowscnt("exam_list",$where);
@@ -27,6 +70,8 @@ if($exam_per>0)
 	}
 
 }
+
+// Private Exams End
 
 ?>
 <!DOCTYPE html>
@@ -51,7 +96,7 @@ if($exam_per>0)
 
   <!-- Start Page Header -->
   <div class="page-header">
-    <h1 class="title">Exams <span class="label label-info"><?=$row_count?></span></h1>
+    <h1 class="title">Exams </h1>
       <ol class="breadcrumb">
         <li><a href="<?=URLUR?>home">Home</a></li>
         <li><a href="javascript:;"> Exams</a></li>
@@ -85,6 +130,67 @@ if($exam_per>0)
                                     ?>
                                     
       <div class="panel panel-widget">
+      
+      
+       <h3>Special Exams <span class="label label-info"><?=$row_count3+$row_count4?></span></h3>
+
+        <div class="panel-body table-responsive">
+
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <td>ID</td>
+                <td>Exam</td>
+                <td>Duration</td>
+                <td>Questions</td>
+                <td>Start</td>
+              </tr>
+            </thead>
+            <tbody>
+            	<?php
+				if($row_count3>0)
+				{
+				 foreach($res_arr3 as $key=>$val)
+				 {
+			  
+                 ?>
+              <tr>
+                <td><?php echo $objgen->check_tag($val['id']); ?></td>
+                <td><?php echo $objgen->check_tag($val['exam_name']); ?></td>
+                <td><?php echo $objgen->check_tag($val['duration']); ?></td>
+                <td><?php echo $objgen->check_tag($val['totno_of_qu']); ?></td>
+                <td><a href="<?=URLUR?>exam-start/?id=<?=$val['id']?>" role="button" class="btn btn-success" ><span class="fa fa-clock-o"></span>&nbsp;&nbsp;Start</a></td>            
+              </tr>
+              <?php
+				 }
+				}
+				?>
+                	<?php
+				if($row_count4>0)
+				{
+				 foreach($res_arr4 as $key=>$val)
+				 {
+			  
+                 ?>
+              <tr>
+                <td><?php echo $objgen->check_tag($val['id']); ?></td>
+                <td><?php echo $objgen->check_tag($val['exam_name']); ?></td>
+                <td><?php echo $objgen->check_tag($val['duration']); ?></td>
+                <td><?php echo $objgen->check_tag($val['totno_of_qu']); ?></td>
+                <td><a href="<?=URLUR?>exam-start/?id=<?=$val['id']?>" role="button" class="btn btn-success" ><span class="fa fa-clock-o"></span>&nbsp;&nbsp;Start</a></td>            
+              </tr>
+              <?php
+				 }
+				}
+				?>
+            </tbody>
+          </table>
+
+        </div>
+        
+        
+      
+      <h3>Available Exams <span class="label label-info"><?=$row_count+$row_count2?></span></h3>
 
         <div class="panel-body table-responsive">
 
@@ -117,10 +223,31 @@ if($exam_per>0)
 				 }
 				}
 				?>
+                <?php
+				if($row_count2>0)
+				{
+				 foreach($res_arr2 as $key=>$val)
+				 {
+											  
+                 ?>
+              <tr>
+                <td><?php echo $objgen->check_tag($val['id']); ?></td>
+                <td><?php echo $objgen->check_tag($val['exam_name']); ?></td>
+                <td><?php echo $objgen->check_tag($val['duration']); ?></td>
+                <td><?php echo $objgen->check_tag($val['totno_of_qu']); ?></td>
+                <td><a href="<?=URLUR?>exam-start/?id=<?=$val['id']?>" role="button" class="btn btn-success" ><span class="fa fa-clock-o"></span>&nbsp;&nbsp;Start</a></td>            
+              </tr>
+              <?php
+				 }
+				}
+				?>
             </tbody>
           </table>
 
         </div>
+        
+        
+        
       </div>
     </div>
 
