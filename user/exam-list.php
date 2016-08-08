@@ -3,14 +3,29 @@ require_once "includes/includepath.php";
 require_once "chk_login.php";
 
 $objgen		=	new general();
+		
+$row_count 		= 0;
+$exam_ok		= array();
 
-//test 22sdsd
-
-$where = "";
-$row_count = $objgen->get_AllRowscnt("exam_list",$where);
-if($row_count>0)
+$where = " and status='active' and user_id=".$usrid;
+$exam_per = $objgen->get_AllRowscnt("exam_permission",$where);
+if($exam_per>0)
 {
-  $res_arr = $objgen->get_AllRows("exam_list",0,$row_count,"id desc",$where);
+  
+   $per_arr = $objgen->get_AllRows("exam_permission",0,$exam_per,"id asc",$where);
+
+	foreach($per_arr as $key=>$val)
+	{
+		$exam_ok[] = $val['exam_id'];
+	}
+   
+	$where = " and exam_id in ( ".implode(",",$exam_ok).") and avaibility='always'";
+	$row_count = $objgen->get_AllRowscnt("exam_list",$where);
+	if($row_count>0)
+	{
+	  $res_arr = $objgen->get_AllRows("exam_list",0,$row_count,"id desc",$where);
+	}
+
 }
 
 ?>

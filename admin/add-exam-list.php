@@ -213,8 +213,8 @@ if($section_count>0)
 if($avaibility=="specific")
  $hideans = "";
  
-if($exam_assign=="link")
- $hideans2 = "hideans";
+/*if($exam_assign=="link")
+ $hideans2 = "hideans";*/
 
 
 ?>
@@ -462,11 +462,11 @@ if($exam_assign=="link")
                                      <div class="form-group">
 									  <label for="input1" class="form-label">Assign this exam to</label><br clear="all" />
                                       <div class="radio radio-info radio-inline">
-									  <input name="exam_assign" id="exam_assign1" type="radio" value="group" onClick="show_group('group')"  <?php if($exam_assign=="group") { ?> checked="checked" <?php } ?> > <label for="exam_assign1">Groups (For registered candidates)</label>
+									  <input name="exam_assign" id="exam_assign1" type="radio" value="group"   <?php if($exam_assign=="group") { ?> checked="checked" <?php } ?> > <label for="exam_assign1">Groups (For registered candidates)</label>
                                       </div>
                                       <br clear="all" />
                                       <div class="radio radio-info radio-inline">
-                                      <input name="exam_assign" id="exam_assign2" type="radio" value="link" onClick="show_group('link')"  <?php if($exam_assign=="link") { ?> checked="checked" <?php } ?> > <label for="exam_assign2">Links (Candidate registration not required)</label>
+                                      <input name="exam_assign" id="exam_assign2" type="radio" value="link"   <?php if($exam_assign=="link") { ?> checked="checked" <?php } ?> > <label for="exam_assign2">Links (Candidate registration not required)</label>
                                       </div>
 									</div>
                                     
@@ -693,7 +693,7 @@ $("#neagive_mark").val('<?=$neagive_mark?>');
   
 });
 	
-function show_group(val)
+/*function show_group(val)
 {
 	if(val=="link")
 	{
@@ -704,7 +704,7 @@ function show_group(val)
 		$('#group_show').show();
 	}
 }
-
+*/
 function show_date(val)
 {
 	if(val=="specific")
