@@ -16,8 +16,10 @@ if($head_url=='exam-list')
   $menu7 = "active";
  if($head_url=='exam-history')
   $menu8 = "active";
-  if($head_url=='exam-analysis')
+ if($head_url=='exam-analysis')
   $menu9 = "active";
+ if($head_url=='edit-profile')
+  $menu10 = "active"
 ?>
 <div class="sidebar clearfix">
 
@@ -76,7 +78,7 @@ if($head_url=='exam-list')
 </ul>
 <ul class="sidebar-panel nav">
    <li class="sidetitle">MORE</li>
- 
+  <li><a href="<?=URLUR?>edit-profile" class="<?=$menu10?>"><span class="icon color13" ><i class="fa fa-edit"></i></span>Edit Profile</a></li>
    <li><a href="<?=URLUR?>reset-password" class="<?=$menu3?>"><span class="icon color8" ><i class="fa fa-key"></i></span>Rest Password</a></li>
    <li><a href="<?=URLUR?>logout" ><span class="icon color9" ><i class="fa fa-sign-out"></i></span>Logout</a></li>
 </ul>

@@ -141,6 +141,7 @@ if($exam_per>0)
               <tr>
                 <td>ID</td>
                 <td>Exam</td>
+                <td>Available (From - To)</td>
                 <td>Duration</td>
                 <td>Questions</td>
                 <td>Start</td>
@@ -157,6 +158,7 @@ if($exam_per>0)
               <tr>
                 <td><?php echo $objgen->check_tag($val['id']); ?></td>
                 <td><?php echo $objgen->check_tag($val['exam_name']); ?></td>
+                <td><?php echo date("j M Y h:i A",strtotime($val['start_date'])); ?><br /><?php echo date("j M Y h:i A",strtotime($val['end_date'])); ?></td>
                 <td><?php echo $objgen->check_tag($val['duration']); ?></td>
                 <td><?php echo $objgen->check_tag($val['totno_of_qu']); ?></td>
                 <td><a href="<?=URLUR?>exam-start/?id=<?=$val['id']?>" role="button" class="btn btn-success" ><span class="fa fa-clock-o"></span>&nbsp;&nbsp;Start</a></td>            
@@ -175,6 +177,7 @@ if($exam_per>0)
               <tr>
                 <td><?php echo $objgen->check_tag($val['id']); ?></td>
                 <td><?php echo $objgen->check_tag($val['exam_name']); ?></td>
+                <td><?php echo date("j M Y h:i A",strtotime($val['start_date'])); ?><br /><?php echo date("j M Y h:i A",strtotime($val['end_date'])); ?></td>
                 <td><?php echo $objgen->check_tag($val['duration']); ?></td>
                 <td><?php echo $objgen->check_tag($val['totno_of_qu']); ?></td>
                 <td><a href="<?=URLUR?>exam-start/?id=<?=$val['id']?>" role="button" class="btn btn-success" ><span class="fa fa-clock-o"></span>&nbsp;&nbsp;Start</a></td>            

@@ -37,9 +37,9 @@ class general
 				return $this->db->getInsertId();
 			}
 			
-		    function extfind($filename) 
+		   function extfind($filename) 
 			{ 
-				$exts = @split("[/\\.]", $filename) ; 
+				$exts = @preg_split("[/\\.]", $filename) ; 
 				$n = count($exts)-1;
 				$end = $exts[$n];
 				$exts = strtolower($this->seoUrl(substr($exts[$n-1],0,20)));
@@ -771,19 +771,19 @@ class general
 					if($unlink!="null")
 					{
 					
-					      if(file_exists(ROOT_SITE."/".$folder."/".$unlink))
-	 						unlink(ROOT_SITE."/".$folder."/".$unlink);
+					      if(file_exists(ROOT_SITE.$folder."/".$unlink))
+	 						@unlink(ROOT_SITE.$folder."/".$unlink);
 							
-						 if(file_exists(ROOT_SITE."/photos/large/".$unlink))
-	 						unlink(ROOT_SITE."/photos/large/".$unlink);
-							
-							
-						 if(file_exists(ROOT_SITE."/photos/medium/".$unlink))
-	 						unlink(ROOT_SITE."/photos/medium/".$unlink);
+						 if(file_exists(ROOT_SITE."photos/large/".$unlink))
+	 						@unlink(ROOT_SITE."photos/large/".$unlink);
 							
 							
-						 if(file_exists(ROOT_SITE."/photos/small/".$unlink))
-	 						unlink(ROOT_SITE."/photos/small/".$unlink);
+						 if(file_exists(ROOT_SITE."photos/medium/".$unlink))
+	 						@unlink(ROOT_SITE."photos/medium/".$unlink);
+							
+							
+						 if(file_exists(ROOT_SITE."photos/small/".$unlink))
+	 						@unlink(ROOT_SITE."photos/small/".$unlink);
 
 					}
 					
@@ -1062,7 +1062,8 @@ function seoUrl($string) {
 }
 
 function getUserExamSection($userId) {
-        $sql = "SELECT DISTINCT b.section_id FROM section_list b WHERE b.exam_list_id IN(SELECT c.exam_id FROM exam_permission c WHERE c.user_id='$userId' AND c.status='active')";
+	
+$sql = "SELECT DISTINCT b.id AS section_id FROM section b WHERE b.exam_id IN(SELECT c.exam_id FROM exam_permission c WHERE c.user_id='$userId' AND c.status='active')";
         $result = $this->get_AllRows_qry($sql);
         return $result;
     }

@@ -13,9 +13,12 @@ if(isset($_GET['id']))
                $_SESSION['exam'][$usrid]['exam_creator']  = 'user';
                $result   = $objgen->get_Onerow("user_exam_list","AND id=".$id);
            }else{
+			   
                $examPermArr = $objgen->get_Onerow("exam_permission"," AND (user_id='$usrid' AND exam_id='$id' AND status='active')", " ");
                $_SESSION['exam'][$usrid]['exam_package'] = $examPermArr['package_id'];
+			   
                $result   = $objgen->get_Onerow("exam_list","AND id=".$id);
+			   
            }
 	   $exam_name    = $objgen->check_tag($result['exam_name']);
 	   $group_id     = $objgen->check_tag($result['group_id']);
@@ -70,7 +73,7 @@ if(isset($_GET['id']))
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?php echo TITLE; ?></title>
-
+  
   <?php require_once "header-script.php"; ?>
   </head>
   <body>

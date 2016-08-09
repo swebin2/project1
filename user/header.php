@@ -80,7 +80,27 @@
     </li>
 
 -->    <li class="dropdown link">
-      <a href="#" data-toggle="dropdown" class="dropdown-toggle profilebox"><img src="<?=URLUR?>img/profileimg.png" alt="img"><b><?=ucfirst($_SESSION['ma_name'])?></b><span class="caret"></span></a>
+      <a href="#" data-toggle="dropdown" class="dropdown-toggle profilebox">
+     <?php
+      $headresult     	= $objgen->get_Onerow("users","AND id=".$usrid);
+	  $headphoto     		= $objgen->check_tag($headresult['photo']);
+	  if($headphoto!="")
+	  {
+	 ?>
+        <img src="<?=URL?>photos/small/<?=$headphoto?>" alt="img">
+     <?php
+	  }
+	  else
+	  {
+	  ?>
+      	<img src="<?=URLUR?>img/profileimg.png" alt="img">
+      <?php
+	  }
+	  ?>
+      
+      <b><?=ucfirst($_SESSION['ma_name'])?> </b>
+      
+      <span class="caret"></span></a>
         <ul class="dropdown-menu dropdown-menu-list dropdown-menu-right">
            <?php
 			if($_SESSION['MYPR_adm_type']=='admin')
@@ -90,6 +110,7 @@
            <?php
   				}
   			?>
+          <li><a href="<?=URLUR?>edit-profile"><i class="fa falist fa-edit"></i>Edit Profile</a></li>
           <li><a href="<?=URLUR?>reset-password"><i class="fa falist fa-wrench"></i>Reset Password</a></li>
           <li class="divider"></li>
           <li><a href="<?=URLUR?>logout"><i class="fa falist fa-power-off"></i> Logout</a></li>
