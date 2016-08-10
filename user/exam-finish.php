@@ -165,11 +165,16 @@ if (isset($_SESSION['exam'][$usrid])) {
     $insertedTempId = $getInsertedTempId['exam_score_id'];
     $updateExamLog = $objgen->upd_Row('user_exam_log', "exam_score_id='$getLastInsertId'", "exam_score_id='$insertedTempId'");
     
-   $exmPkgId = $_SESSION['exam'][$usrid]['exam_package'];
-   $exmCountUpdate = $objgen->upd_Row('exam_permission', "exam_complete=exam_complete+1", "user_id='$usrid' AND package_id='$exmPkgId'");
-   
-   
-   
+	if($result['exam_assign']=='group')
+	{
+					
+    $exmPkgId = $_SESSION['exam'][$usrid]['exam_package'];
+    $exmCountUpdate = $objgen->updateUserExamCount($usrid, $exmPkgId);
+	
+	}
+	
+	
+	
 } else {
     header('Location: ' . URLUR . 'exam-list.php');
 }

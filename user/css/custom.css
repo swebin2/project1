@@ -16,8 +16,8 @@
 .qn_panel ul li{
     list-style: none;
     float: left;
-    width:40px;
-    height:50px;
+    width:30px;
+    height:40px;
     -webkit-border-radius: 10px 10px 200px 200px;
     -moz-border-radius: 10px 10px 200px 20px;
     border-radius: 10px 10px 200px 200px;
@@ -27,15 +27,15 @@
 }
 
 .qn_panel ul li a {
-    width: 40px;
-    height: 50px;
+    width: 30px;
+    height: 40px;
     text-align: center;
     display: inline-block;
     vertical-align: middle;
     line-height: 40px;
     font-weight: bold;
     color: #fff;
-    font-size: 20px;
+    font-size: 15px;
 }
 .qn_panel ul li:hover{
     background-color:#a8a8a8;

@@ -68,7 +68,7 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
 
                 $where = " and exam_group = '" . $group_id . "' and exam='" . $exam_id . "' and section='" . $val['section_id'] . "'";
             }
-          //  echo $where."<br />";
+            
             $qu_count = $objgen->get_AllRowscnt("question", $where);
             if ($qu_count > 0) {
                 $qu_arr = $objgen->get_AllRows("question", 0, $val['no_of_qu'], "rand()", $where);
@@ -83,7 +83,6 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
     $_SESSION['exam'][$usrid]['exam_name'] = $objgen->check_tag($result['exam_name']);
 }
 
-//print_r($qulist_arr);
 //print_r($_SESSION[$usrid]['exam']['id']);
 //print_r($_SESSION['exam'][$usrid]['qid']);
 ?>
@@ -180,7 +179,15 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
         <!-- //////////////////////////////////////////////////////////////////////////// --> 
         <!-- START CONTENT -->
         <div class="content" style="margin:20px;padding-top: 0">
+            <div id="top" style="margin-left: -30px !important;position: static;width: 105%;">
 
+            <!-- Start App Logo -->
+            <div class="applogo">
+              <a class="logo" href="/sumesh/tricky/user/">Tricky Score</a>
+            </div>
+            <!-- End App Logo -->
+
+          </div>
             <!-- //////////////////////////////////////////////////////////////////////////// --> 
             <!-- START CONTAINER -->
             <div class="container-default">
@@ -188,6 +195,7 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
                 <div class="row">
 
                     <div class="col-md-12 col-lg-12">
+                      
                         <div class="col-md-12 col-lg-12">
                             <div class="col-md-8 col-lg-8"><h3><?= $_SESSION['exam'][$usrid]['exam_name'] ?></h3></div>
                             <?php

@@ -1067,5 +1067,21 @@ $sql = "SELECT DISTINCT b.id AS section_id FROM section b WHERE b.exam_id IN(SEL
         $result = $this->get_AllRows_qry($sql);
         return $result;
     }
+	
+	 function updateUserExamCount($usrid,$exmPkgId){
+		 
+        $exmCountUpdate = $this->upd_Row('exam_permission', "exam_complete=exam_complete+1", "user_id='$usrid' AND package_id='$exmPkgId'");
+		
+        $examPermArr = $this->get_AllRows("exam_permission", '0', '1', 'id ASC', " AND (user_id='$usrid' AND exam_id='$id' AND status='active')");
+		
+        $examPermId = $examPermArr[0]['id'];
+        $examPermNumExam = $examPermArr[0]['no_of_exam'];
+        $examPermExamComplete = $examPermArr[0]['exam_complete'];
+		
+        if($examPermExamComplete == $examPermNumExam)
+		{
+            $exmCountUpdate = $this->upd_Row('exam_permission', "status='inactive'", "id='$examPermId'");
+        }
+    }
 }
 ?>

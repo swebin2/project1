@@ -14,11 +14,18 @@ if(isset($_GET['id']))
                $result   = $objgen->get_Onerow("user_exam_list","AND id=".$id);
            }else{
 			   
-               $examPermArr = $objgen->get_Onerow("exam_permission"," AND (user_id='$usrid' AND exam_id='$id' AND status='active')", " ");
-               $_SESSION['exam'][$usrid]['exam_package'] = $examPermArr['package_id'];
-			   
-               $result   = $objgen->get_Onerow("exam_list","AND id=".$id);
-			   
+			    $result   = $objgen->get_Onerow("exam_list","AND id=".$id);
+				
+				if($result['exam_assign']=='group')
+				{
+				  
+               $examPermArr = $objgen->get_AllRows("exam_permission", 0, 1, 'id ASC', " AND (user_id='$usrid' AND exam_id='".$result['exam_id']."' AND status='active')");
+			  // print_r($examPermArr);exit;
+			  // echo $examPermArr[0]['package_id'];
+              $_SESSION['exam'][$usrid]['exam_package'] = $examPermArr[0]['package_id'];
+			  
+				}
+            
            }
 	   $exam_name    = $objgen->check_tag($result['exam_name']);
 	   $group_id     = $objgen->check_tag($result['group_id']);
@@ -73,7 +80,7 @@ if(isset($_GET['id']))
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?php echo TITLE; ?></title>
-  
+
   <?php require_once "header-script.php"; ?>
   </head>
   <body>

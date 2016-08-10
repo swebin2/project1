@@ -59,7 +59,7 @@
           <nav class="footer-nav">
             <ul class="clear-fix">
               <li> <a href="<?=URL?>">Home</a> </li>
-              <li> <a href="#abt">About us</a> </li>
+              <li> <a href="<?=URL?>about-us">About us</a> </li>
               <li> <a href="<?=URL?>contact">Contact us</a> </li>
               <li> <a href="<?=URL?>signup">Sign in</a> </li>
               <li> <a href="<?=URL?>login">Login</a> </li>

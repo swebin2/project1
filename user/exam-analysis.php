@@ -110,7 +110,9 @@ if ($getAllExamsCntByUser > 0) {
 <?php
 $where = " AND user_id='$usrid'";
 $getLastExamByUser = $objgen->get_AllRows('user_exam_score', 0, 1, '`id` DESC', $where);
+
 if (!empty($getLastExamByUser)) {
+    $examScoreId = $getLastExamByUser[0]['id'];
     $getLastExamId = $getLastExamByUser[0]['exam_id'];
     $lastExamDate = $getLastExamByUser[0]['exam_attended_on'];
     if ($getLastExamByUser[0]['exam_created_by'] == 'user') {
@@ -120,10 +122,25 @@ if (!empty($getLastExamByUser)) {
     }
     $getLastExamDetails = $objgen->get_Onerow($examTable, " AND id='$getLastExamId'", 'exam_name');
     $lastExamName = $getLastExamDetails['exam_name'];
-    $lastExamCorrectAnsCnt = $getLastExamByUser[0]['correct_answer_num'];
-    $lastExamWrongAnsCnt = $getLastExamByUser[0]['wrong_answer_num'];
-    $lastExamUnansweredCnt = $getLastExamByUser[0]['unanswered_num'];
-    echo "window.onload = showChartModal('$lastExamName','$lastExamDate','$lastExamCorrectAnsCnt','$lastExamWrongAnsCnt','$lastExamUnansweredCnt');";
+//    $lastExamCorrectAnsCnt = $getLastExamByUser[0]['correct_answer_num'];
+//    $lastExamWrongAnsCnt = $getLastExamByUser[0]['wrong_answer_num'];
+//    $lastExamUnansweredCnt = $getLastExamByUser[0]['unanswered_num'];
+    $getMarkBySectionCnt = $objgen->get_AllRowscnt('user_exam_log', " AND `exam_score_id`='$examScoreId'", '`qn_section_id`');
+    if($getMarkBySectionCnt>0){
+        $getMarkBySection = $objgen->get_AllRows('user_exam_log', 0, $getMarkBySectionCnt, '', " AND `exam_score_id`='$examScoreId'", '`qn_section_id`', '`qn_section_id`,SUM(`exam_mark`) as section_total_mark');
+    }
+
+    foreach ($getMarkBySection as $key => $value) {
+        $sectionMark = $value['section_total_mark'];
+        $sectionMark = (int)$sectionMark;
+        $sectionId = $value['qn_section_id'];
+        $getSectionDetails = $objgen->get_Onerow('section', " AND id='$sectionId'", 'name');
+        $sectionName = $getSectionDetails['name'];
+        $sectionArr1[]= array("$sectionName",$sectionMark);
+
+    }
+    $jsonsectionArr1 = json_encode($sectionArr1);
+    echo "window.onload = showChartModal('$lastExamName','$lastExamDate',$jsonsectionArr1);";
 }
 
 //code for barchart
@@ -164,10 +181,7 @@ if (!empty($getAllExamsByUser)) {
     
 }
 ?>
-            function showChartModal(exm_name, attend_date, correct_ans_cnt, wrong_ans_cnt, unans_cnt) {
-                correct_ans_cnt = parseInt(correct_ans_cnt);
-                wrong_ans_cnt = parseInt(wrong_ans_cnt);
-                unans_cnt = parseInt(unans_cnt);
+            function showChartModal(exm_name, attend_date, section_data) {
                 $("#chartModal").modal('show');
                 // Build the chart
                 $('#chart-container').highcharts({
@@ -198,16 +212,7 @@ if (!empty($getAllExamsByUser)) {
                     series: [{
                             name: 'Attend Percentage',
                             colorByPoint: true,
-                            data: [{
-                                    name: 'correct',
-                                    y: correct_ans_cnt
-                                }, {
-                                    name: 'Unanswered',
-                                    y: unans_cnt
-                                }, {
-                                    name: 'Incorrect',
-                                    y: wrong_ans_cnt
-                                }]
+                            data: section_data
                         }]
                 });
             }

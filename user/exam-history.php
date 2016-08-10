@@ -98,6 +98,7 @@ if ($row_count > 0) {
                                             <td>Exam</td>
                                             <td>Total Questions</td>
                                             <td>Mark</td>
+                                            <td>Attended On</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -124,6 +125,7 @@ if ($row_count > 0) {
                                                     <td><?php echo $objgen->check_tag($getExamDetails['exam_name']); ?></td>
                                                     <td><?php echo $objgen->check_tag($getExamDetails['totno_of_qu']); ?></td>
                                                     <td><?php echo $objgen->check_tag($val['exam_mark']); ?></td>
+                                                    <td><?php echo $objgen->check_tag($val['exam_attended_on']); ?></td>
                                                     <td>
                                                         <a href="#" onclick="showChartModal('<?= $getExamDetails["exam_name"] ?>',<?= $correctAnsCount.','.$wrongAnsCount.','.$unansCount ?>)" role="button" class="fa fa-bar-chart" data-toggle="modal"></a>
                                                     </td>

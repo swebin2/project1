@@ -359,32 +359,19 @@ $objgen		=	new general();
                   <h2 class="ui-title-block ui-title-block_mod-d" style="margin-top:37px;margin-bottom:25px;"><strong>Select your Exam</strong></h2>
                   
                   <!--<div class="ui-subtitle-block ui-subtitle-block_mod-c">Having over 9 million students worldwide and more than 50,000 online courses available.</div>--> 
+                  <?php
+						if($exam_count>0)
+						{
+							foreach($exam_arr as $key=>$val)
+							{
+						?>
+                        <a href="<?=URL?>login"> <button class="btn btn-primary btn-effect" style="margin-bottom:7px;"><?php echo $objgen->check_tag($val['exam_name']); ?></button></a> 
+                        <?php
+							}
+						}
+					    ?>
                   
-                  <a href="#.">
-                  <button class="btn btn-primary btn-effect" style="margin-bottom:7px;">SSC</button>
-                  </a> <a href="#.">
-                  <button class="btn btn-primary btn-effect" style="margin-bottom:7px;">Banking</button>
-                  </a> <a href="#.">
-                  <button class="btn btn-primary btn-effect" style="margin-bottom:7px;">IAS</button>
-                  </a> <a href="#.">
-                  <button class="btn btn-primary btn-effect" style="margin-bottom:7px;">GATE</button>
-                  </a> <a href="#.">
-                  <button class="btn btn-primary btn-effect" style="margin-bottom:7px;">State Level</button>
-                  </a> <a href="#.">
-                  <button class="btn btn-primary btn-effect" style="margin-bottom:7px;">CLAT</button>
-                  </a> <a href="#.">
-                  <button class="btn btn-primary btn-effect" style="margin-bottom:7px;">Railways</button>
-                  </a> <a href="#.">
-                  <button class="btn btn-primary btn-effect" style="margin-bottom:7px;">Insurance</button>
-                  </a> <a href="#.">
-                  <button class="btn btn-primary btn-effect" style="margin-bottom:7px;">CTET</button>
-                  </a> <a href="#.">
-                  <button class="btn btn-primary btn-effect" style="margin-bottom:7px;">NDA</button>
-                  </a> <a href="#.">
-                  <button class="btn btn-primary btn-effect" style="margin-bottom:7px;">CDS</button>
-                  </a> <a href="#.">
-                  <button class="btn btn-primary btn-effect" style="margin-bottom:7px;">IES</button>
-                  </a> </div>
+                 </div>
                 
                 <!-- end wrap-title -->
                 
@@ -431,7 +418,7 @@ Preparing for Exams can be very stressful. <i style="color:#4372C2">The demands 
                   </div>
                   <div class="col-sm-4">
                     <div class="single_why_choose">
-                      <div class="single_why_choose_icon"> <img src="<?=URL?>images/icon2.jpg" alt=""> </div>
+                      <div class="single_why_choose_icon"> <img src="<?=URL?>images/icon2.png" alt=""> </div>
                       <h3>Periodical online exams </h3>
                     </div>
                   </div>

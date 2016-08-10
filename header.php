@@ -1,3 +1,11 @@
+<?php
+$where = "";
+$exam_count = $objgen->get_AllRowscnt("exmas",$where);
+if($exam_count>0)
+{
+  $exam_arr = $objgen->get_AllRows("exmas",0,$exam_count,"exam_name asc",$where);
+}
+?>
 <header class="header" style="border-top: 3px solid #18BB7C;"> 
       
       <!-- end top-header  -->
@@ -15,21 +23,21 @@
                     <li class="dropdown"><a href="<?=URL?>">HOME</a> </li>
                     <li class="dropdown"> <a href="#.">EXAMS</a>
                       <ul role="menu" class="dropdown-menu" style="display: none;">
-                        <li><a href="#.">SSC</a> </li>
-                        <li><a href="#.">Banking</a></li>
-                        <li><a href="#.">IAS</a></li>
-                        <li><a href="#.">GATE</a></li>
-                        <li><a href="#.">State level</a></li>
-                        <li><a href="#.">CLAT</a></li>
-                        <li><a href="#.">Railways</a></li>
-                        <li><a href="#.">Insurance</a></li>
-                        <li><a href="#.">CTET</a></li>
-                        <li><a href="#.">NDA</a></li>
-                        <li><a href="#.">IES</a></li>
-                        <li><a href="#.">CDS</a></li>
+                      <?php
+						if($exam_count>0)
+						{
+							foreach($exam_arr as $key=>$val)
+							{
+						?>
+                        <li><a href="<?=URL?>login"><?php echo $objgen->check_tag($val['exam_name']); ?></a> </li>
+                        <?php
+							}
+						}
+					    ?>
+                  
                       </ul>
                     </li>
-                    <li> <a href="#abt">ABOUT US</a> </li>
+                    <li> <a href="<?=URL?>about-us">ABOUT US</a> </li>
                     <li> <a href="<?=URL?>contact">CONTACT US</a> </li>
                     <li> <a href="<?=URL?>signup">SIGN UP</a> </li>
                     <li><a href="<?=URL?>login">LOGIN</a></li>
