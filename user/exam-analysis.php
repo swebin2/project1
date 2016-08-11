@@ -115,6 +115,7 @@ if (!empty($getLastExamByUser)) {
     $examScoreId = $getLastExamByUser[0]['id'];
     $getLastExamId = $getLastExamByUser[0]['exam_id'];
     $lastExamDate = $getLastExamByUser[0]['exam_attended_on'];
+    $lastExamDate = date('jS F Y h:i A', strtotime($lastExamDate));
     if ($getLastExamByUser[0]['exam_created_by'] == 'user') {
         $examTable = 'user_exam_list';
     } else {
@@ -153,6 +154,7 @@ if (!empty($getAllExamsByUser)) {
         $examId = $value['exam_id'];
         $exam_created_by = $value['exam_created_by'];
         $examDate = $value['exam_attended_on'];
+        $examDate = date('jS F Y h:i A', strtotime($examDate));
         if($exam_created_by=='user'){
             $examTable = 'user_exam_list';
         }else{
@@ -194,7 +196,12 @@ if (!empty($getAllExamsByUser)) {
                         type: 'pie'
                     },
                     title: {
-                        text: 'Exam Status for ' + exm_name + ' attended on ' + attend_date
+                        text: 'Exam Status for ' + exm_name + ' attended on ' + attend_date,
+                        style: {
+                                    fontSize: '13px',
+                                    fontFamily: 'Verdana, sans-serif',
+                                    background: 'red'
+                                }
                     },
                     tooltip: {
                         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -226,7 +233,12 @@ if (!empty($getAllExamsByUser)) {
                         borderRadius: 15
                     },
                     title: {
-                        text: title
+                        text: title,
+                        style: {
+                                    fontSize: '13px',
+                                    fontFamily: 'Verdana, sans-serif',
+                                    background: 'red'
+                                }
                     },
                     subtitle: {
                         text: ''

@@ -23,6 +23,8 @@ if(isset($_POST['Create']))
    $package_no	 	= $objgen->check_input($_POST['package_no']);
    $amount	 		= $objgen->check_input($_POST['amount']);
    $no_of_exam 	    = $objgen->check_input($_POST['no_of_exam']);
+   $period 	    	= $objgen->check_input($_POST['period']);
+   
 	
    $rules		=	array();
    $rules[] 	= "required,amount,Enter the Amount";
@@ -37,7 +39,7 @@ if(isset($_POST['Create']))
    if(empty($errors))
 	{
 		 
-		 $msg = $objgen->ins_Row('exam_package','package_no,exam_id,amount,no_of_exam',"'".$package_no."','".$exam_id."','".$amount."','".$no_of_exam."'");
+		 $msg = $objgen->ins_Row('exam_package','package_no,exam_id,amount,no_of_exam,period',"'".$package_no."','".$exam_id."','".$amount."','".$no_of_exam."','".$period."'");
 		 if($msg=="")
 		 {
 			   header("location:".$add_url."/?msg=1");
@@ -54,6 +56,7 @@ if(isset($_GET['edit']))
 	   $exam_id  		= $objgen->check_tag($result['exam_id']);
 	   $amount    		= $objgen->check_tag($result['amount']);
 	   $no_of_exam      = $objgen->check_tag($result['no_of_exam']);
+	   $period          = $objgen->check_tag($result['period']);
 
 }
 if(isset($_POST['Update']))
@@ -62,6 +65,7 @@ if(isset($_POST['Update']))
    $package_no	 	= $objgen->check_input($_POST['package_no']);
    $amount	 		= $objgen->check_input($_POST['amount']);
    $no_of_exam	    = $objgen->check_input($_POST['no_of_exam']);
+   $period 	    	= $objgen->check_input($_POST['period']);
    
    $rules		=	array();
    $rules[] 	= "required,amount,Enter the Amount";
@@ -76,7 +80,7 @@ if(isset($_POST['Update']))
    if(empty($errors))
 	{
 		 			 
-	  $msg = $objgen->upd_Row('exam_package',"exam_id='".$exam_id."',package_no='".$package_no."',amount='".$amount."',no_of_exam='".$no_of_exam."'","id=".$id);
+	  $msg = $objgen->upd_Row('exam_package',"exam_id='".$exam_id."',package_no='".$package_no."',amount='".$amount."',no_of_exam='".$no_of_exam."',period='".$period."'","id=".$id);
 	  if($msg=="")
 	  {
 		  header("location:".$list_url."/?msg=2&page=".$page);
@@ -229,6 +233,14 @@ if($exam_count>0)
 									  <label for="input1" class="form-label">Amount (INR) *</label>
 										<input type="text" class="form-control" value="<?=$amount?>" name="amount"  required />
 									</div>
+                                    
+                                     <div class="form-group">
+									  <label for="input1" class="form-label">Duration *</label>
+                                      <div class="input-group">
+										<input type="text" class="form-control" value="<?=$period?>" name="period"  required /> <span class="input-group-addon" id="basic-addon1">Days</span>
+                                        </div>
+									</div>
+                                    
                                     
 												
 				   <?php

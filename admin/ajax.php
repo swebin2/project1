@@ -230,8 +230,9 @@ if($module_count>0)
 }
 if($_GET['pid']==4)
 {
-	
-$where = "";
+
+$id = $_GET['id'];	
+$where = " and exam_id=".$id;
 $section_count = $objgen->get_AllRowscnt("section",$where);
 if($section_count>0)
 {
@@ -280,6 +281,80 @@ if($_GET['pid']==5)
 	 $msg = $objgen->upd_Row('exam_list',"totno_of_qu=totno_of_qu-".$no_of_qu,"id=".$exam_list_id);
 	 $msg     = $objgen->del_Row("section_list","id=".$id);
 	
+}
+
+if($_GET['pid']==6)
+{
+	
+$id = $_GET['id'];
+$where = " and group_id=".$id;
+$exam_count = $objgen->get_AllRowscnt("exmas",$where);
+if($exam_count>0)
+{
+  $exam_arr = $objgen->get_AllRows("exmas",0,$exam_count,"exam_name asc",$where);
+}
+
+            $examsec = '<select class="form-control" name="exam_id"  id="exam_id" onChange="sectionlist(this.value)"  >
+											<option value="" selected="selected">Select</option>';
+									
+											if($exam_count>0)
+											{
+											 foreach($exam_arr as $key=>$val)
+											 {
+										
+											$examsec .= '<option value="'.$val['id'].'"';
+											 										 
+											$examsec .= '>'.$objgen->check_tag($val['exam_name']).'</option>';
+										
+											  }
+											}
+											
+							$examsec .= '</select>';
+
+   echo $examsec;
+}
+if($_GET['pid']==7)
+{
+	
+$id = $_GET['id'];	
+$where = " and exam_id=".$id;
+$section_count = $objgen->get_AllRowscnt("section",$where);
+if($section_count>0)
+{
+  $section_arr = $objgen->get_AllRows("section",0,$section_count,"name asc",$where);
+}
+
+?>
+
+<div><div>
+<br clear="all" /><br clear="all" />
+<div class="col-md-4" >
+                                             <input type="text" class="form-control"  name="no_of_qu[]"  placeholder="NO OF QUE."  />
+                                             </div>
+                                              <div class="col-md-6" >
+                                             <select class="form-control" name="section_id[]"   >
+											<option value="" selected="selected">SECTION</option>
+											<?php
+											if($section_count>0)
+											{
+											 foreach($section_arr as $key=>$val)
+											 {
+												  $result  = $objgen->get_Onerow("exmas","AND id=".$val['exam_id']);
+											?>
+											<option value="<?=$val['id']?>" ><?=$objgen->check_tag($val['name'])?> (<?=$objgen->check_tag($result['exam_name'])?>)</option>
+											<?php
+											  }
+											}
+											?>
+										</select>
+                                        
+                                        </div>
+                                        <div class="col-md-2" >
+                                          <a href="javascript:void(0)" class="remove_field"><span class="fa fa-trash"></span></a>
+                                          </div>
+                                          
+</div></div>                                     
+<?php
 }
 ?>
 

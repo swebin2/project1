@@ -196,18 +196,30 @@ if($group_count>0)
   $group_arr = $objgen->get_AllRows("exam_group",0,$group_count,"name asc",$where);
 }
 
-$where = "";
-$exam_count = $objgen->get_AllRowscnt("exmas",$where);
-if($exam_count>0)
-{
-  $exam_arr = $objgen->get_AllRows("exmas",0,$exam_count,"exam_name asc",$where);
-}
+$exam_count = 0;
 
-$where = "";
-$section_count = $objgen->get_AllRowscnt("section",$where);
-if($section_count>0)
+if($group_id!=0)
 {
-  $section_arr = $objgen->get_AllRows("section",0,$section_count,"name asc",$where);
+
+	$where = " and group_id=".$group_id;
+	$exam_count = $objgen->get_AllRowscnt("exmas",$where);
+	if($exam_count>0)
+	{
+	  $exam_arr = $objgen->get_AllRows("exmas",0,$exam_count,"exam_name asc",$where);
+	}
+
+
+	if($exam_id !=0)
+	{
+		$where = " and exam_id=".$exam_id;
+		$section_count = $objgen->get_AllRowscnt("section",$where);
+		if($section_count>0)
+		{
+		  $section_arr = $objgen->get_AllRows("section",0,$section_count,"name asc",$where);
+		}
+	}
+
+
 }
 
 if($avaibility=="specific")
@@ -474,7 +486,7 @@ if($avaibility=="specific")
                                     
                                       <div class="form-group">
 										  <label for="input3"  class="form-label">Group</label>
-										  <select class="form-control" name="group_id"  >
+										  <select class="form-control" name="group_id" onChange="showexam(this.value)"  >
 											<option value="" selected="selected">Select</option>
 											<?php
 											if($group_count>0)
@@ -490,10 +502,10 @@ if($avaibility=="specific")
 										</select>
 										</div>
                                         
-                                     
+                                     <div id="examlist">
 									  <div class="form-group">
 										  <label for="input3"  class="form-label">Exam</label>
-										  <select class="form-control" name="exam_id" id="exam_id"   >
+										  <select class="form-control" name="exam_id" id="exam_id" onChange="sectionlist(this.id)"   >
 											<option value="" selected="selected">Select</option>
 											<?php
 											if($exam_count>0)
@@ -508,6 +520,7 @@ if($avaibility=="specific")
 											?>
 										</select>
 										</div>
+                                      </div>
 								
 									</div>	
                         
@@ -720,11 +733,12 @@ function show_date(val)
 function addmore()
 {
 	
+	var id = $('#exam_id').val();
 	 $.ajax({
 				type: "GET",
 				dataType: "html",
 				url: "<?=URLAD?>ajax.php",
-				data: {pid : 4 },
+				data: {pid : 4, id :id },
 				success: function (result) {
 					
 				$('#sec_show').append(result);
@@ -748,6 +762,37 @@ function rem_edit(id)
 				success: function (result) {
 					
 				$('#sec'+id).hide();
+				
+			}
+		});
+}
+
+function showexam(id)
+{
+	
+		 $.ajax({
+				type: "GET",
+				dataType: "html",
+				url: "<?=URLAD?>ajax.php",
+				data: {pid : 6, id : id },
+				success: function (result) {
+					
+				$('#examlist').html(result);
+				
+			}
+		});
+}
+
+function sectionlist(id)
+{
+	 $.ajax({
+				type: "GET",
+				dataType: "html",
+				url: "<?=URLAD?>ajax.php",
+				data: {pid : 7, id :id },
+				success: function (result) {
+					
+				$('#sec_show').html(result);
 				
 			}
 		});

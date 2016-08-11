@@ -165,6 +165,7 @@ if(isset($_POST['Reset']))
                                                 <th>Package</th>
 												<th>Amount</th>
                                                 <th>No. of Exam</th>
+                                                <th>Duration</th>
                                                 <th>Edit</th>
                                                 <th>Delete</th>
                                             </tr>
@@ -183,6 +184,7 @@ if(isset($_POST['Reset']))
                                                 <td>Package <?php echo $objgen->check_tag($val['package_no']); ?></td>
 												<td><?php echo $objgen->check_tag($val['amount']); ?> INR</td>
                                                 <td><?php echo $objgen->check_tag($val['no_of_exam']); ?></td>
+                                                <td><?php echo $objgen->check_tag($val['period']); ?></td>
                                                 <td><a href="<?=$add_url?>/?edit=<?=$val['id']?>&page=<?=$page?>" role="button" ><span class="fa fa-edit"></span></a></td>
                                                 <td><a href="<?=$list_url?>/?del=<?=$val['id']?>&page=<?=$page?>" role="button" onClick="return confirm('Do you want to delete this Package?')"><span class="fa fa-trash-o"></span></a></td>
                                             </tr>

@@ -11,7 +11,7 @@ if($_GET['msg']==1)
   $msg2 = "Exam Created Successfully.";
 }
 
-    $usrid = $_SESSION['ma_log_id'];
+$usrid = $_SESSION['ma_log_id'];
     $userExamSectionArr = $objgen->getUserExamSection($usrid);
     $sectionId = "";
     $totsecQnCount= 0;
@@ -19,8 +19,6 @@ if($_GET['msg']==1)
         $sectionId      .= $userExamSectionArr[$i]['section_id'].',';
     }
     $sectionId = rtrim($sectionId, ',');
-	
-	//echo $sectionId;
     
     /*
      * for all qn count with all difficulty
@@ -236,17 +234,17 @@ if(isset($_POST['create'])){
                                         </div>
                                         
                                     </div>
-                                    <div class="col-md-3 col-lg-3" style="text-align: center">
-                                        <div class="qn_select_count_container">
+                                    <div class="col-md-3 col-lg-3" style="text-align: center;padding-top: 10px;">
+                                        <div class="qn_select_count_container btn btn-info">
                                             <p>Available</p>
                                             <p id="qn_select_count" class="qn_select_count">0</p>
                                             
                                         </div>
-                                        <div class="exm_mark_container">
+                                        <div class="exm_mark_container btn btn-warning">
                                             <p>Selected*</p>
                                             <p id="section_qn_count" class="qn_select_count">0</p>
                                             <input type="hidden" id="totqncnt" name="totqncnt" value="0">
-                                            <p class="fade_txt">(max: 50)</p>
+                                            
                                         </div>
                                         <div class="chk_timer_container">
                                             <p>Timer</p>

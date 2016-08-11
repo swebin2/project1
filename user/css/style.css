@@ -258,6 +258,7 @@ strong {
 }
 .container-default {
   padding: 0;
+  min-height:600px;
 }
 .container-widget {
   padding: 0;
