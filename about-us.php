@@ -141,13 +141,21 @@ $objgen		=	new general();
             <div class="col-sm-8">
               <h2 class="ui-title-block">About <strong>Us </strong></h2>
               <div class="wrap-subtitle">
-                <div class="ui-subtitle-block ui-subtitle-block_w-line"><p>The world today is way more competitive that before.</p>
+                <div class="ui-subtitle-block ui-subtitle-block_w-line">
+ 
+<p>TrickyScore is a wonderful concept which would help candidates prepare for various competitive examinations.</p>
+ 
+<p>There a many institutes across the nation who provide great coaching to students and help the candidates in securing top jobs. But such institutes have their limitations. Although students are coached thoroughly, they do not have a mechanism to find out where they stand amongst a much larger competition. In short, such candidates may do well amongst their classmates but may not be up to mark with the greater competition.</p>
+ 
+<p>This is where Tricky score comes in. We are team of entrepreneurs and experts in the field of education who have joined hands to provide exam preparation solutions to aspiring candidates taking competitive exams. </p>
 
-<p>Preparing for Exams can be very stressful. The demands increase many folds when it comes to highly competitive exams like entrance exams or recruitment exams. Moreover, when you know that your future hinges on the results it is imperative that you do whatever it takes to be ahead of the competition.</p>
-
-<p>Studying hard and knowing the course material is necessary but not sufficient to guarantee success. In short there are tricks to score high.</p>
-
-<p>TrickyScore will be your key to success in opening doors to a bright future.</p></div>
+<b>Our features:</b><br />
+<p>We provide opportunities to candidates to appear in periodic online exams in a simulated exam environment so that candidates would <p>know where they stand amongst a much wider competition.</p>
+We have an Extensive, Filtered and Analyzed question bank to ensure that candidates are familiar with any question that can come up during actual exams. </p>
+<p>Detailed expert analysis would be provided by us to help candidates understand their areas of weakness and thus help them prepare in a more focused manner.</p>
+<p>Candidates can customize practice papers on subjects and areas that they need to focus on and also choose the number of practice papers in accordance to their needs.</p>
+ 
+<p>Our mission is to help deserving, competent and qualified candidates to secure jobs that they dream of. Thus TrickyScore not only fulfills individual aspirations but also helps in nation building by making sure that best talents get the right jobs.</p>  </div>
               </div>
               
             </div>

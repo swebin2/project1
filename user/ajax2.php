@@ -23,25 +23,25 @@ if ($_POST['pid'] == 1) {
         $ansId[] = $ansPieces[1];
     }
     //to chk array is empty
-    if(is_array($ansId)){
-        $chkansIdArr = array_filter($ansId);    
-    }else{
-       $chkansIdArr =  $ansId;
+    if (is_array($ansId)) {
+        $chkansIdArr = array_filter($ansId);
+    } else {
+        $chkansIdArr = $ansId;
     }
-    
+
     if (!empty($qnId)) {
-        if (!empty($chkansIdArr)){
+        if (!empty($chkansIdArr)) {
             $_SESSION['exam'][$usrid]['exam_qnSts'][$qnId] = '1';
-        }else{
+        } else {
             $_SESSION['exam'][$usrid]['exam_qnSts'][$qnId] = '0';
         }
-        
+
         $_SESSION['exam'][$usrid]['exam_qnAns'][$qnId] = $ansId;
     }
     ?>
     <div class="panel panel-widget">
 
-        <div class="panel-body table-responsive" style="width: 70%;float: left">
+        <div class="panel-body table-responsive" style="width: 78%;float: left">
 
             <?php
             $_SESSION['exam'][$usrid]['exam_first_attempt_sts'] = 0;
@@ -514,111 +514,108 @@ if ($_POST['pid'] == 2) {
         $insrt = $objgen->upd_Row("question_flag", "status='$action'", "id='$tblId'");
     }
 }
-if($_POST['pid']==3){
+if ($_POST['pid'] == 3) {
     $usrid = $_SESSION['ma_log_id'];
-    $exmMode        = $_POST['exm_mode'];
-    $exmQnFilter    = $_POST['exm_qn_filter'];
-    $exmDiffLevel   = $_POST['exm_diff_lvl'];
-    $userId   = $_POST['user_id'];
-    if($exmDiffLevel=='all'){
+    $exmMode = $_POST['exm_mode'];
+    $exmQnFilter = $_POST['exm_qn_filter'];
+    $exmDiffLevel = $_POST['exm_diff_lvl'];
+    $userId = $_POST['user_id'];
+    if ($exmDiffLevel == 'all') {
         $difficultyCond = '';
-    }else{
-        $difficultyCond = "AND difficulty='".ucfirst($exmDiffLevel)."'";
+    } else {
+        $difficultyCond = "AND difficulty='" . ucfirst($exmDiffLevel) . "'";
     }
     ?>
     <div class="qn-section-container">
-        
+
         <?php
         $userExamSectionArr = $objgen->getUserExamSection($usrid);
-        $totsecQnCount= 0;
-        for($i=0;$i<count($userExamSectionArr);$i++){
-            $sectionId      = $userExamSectionArr[$i]['section_id'];
+        $totsecQnCount = 0;
+        for ($i = 0; $i < count($userExamSectionArr); $i++) {
+            $sectionId = $userExamSectionArr[$i]['section_id'];
             $getSectionDetails = $objgen->get_Onerow('section', " AND id='$sectionId'", 'id,name');
-            $sectionName    = $getSectionDetails['name'];
-            if($exmQnFilter=='all'){
-                if($exmDiffLevel=='all'){
-                    $where = ' AND section='.$sectionId;
-                    $sectionQnCount = $objgen->get_AllRowscnt('question',$where);
-                }else{
-                    $where =  "AND section='$sectionId' $difficultyCond";
-                    $sectionQnCount = $objgen->get_AllRowscnt('question',$where);
+            $sectionName = $getSectionDetails['name'];
+            if ($exmQnFilter == 'all') {
+                if ($exmDiffLevel == 'all') {
+                    $where = ' AND section=' . $sectionId;
+                    $sectionQnCount = $objgen->get_AllRowscnt('question', $where);
+                } else {
+                    $where = "AND section='$sectionId' $difficultyCond";
+                    $sectionQnCount = $objgen->get_AllRowscnt('question', $where);
                 }
-            }elseif ($exmQnFilter=='unused'){
+            } elseif ($exmQnFilter == 'unused') {
                 $where = " AND section='$sectionId' AND (qn_attend_status='unanswered' $difficultyCond)";
-                $sectionQnCount = $objgen->get_AllRowscnt('question_userexmlog',$where,'qn_id');
-            }elseif($exmQnFilter=='incorrect'){
+                $sectionQnCount = $objgen->get_AllRowscnt('question_userexmlog', $where, 'qn_id');
+            } elseif ($exmQnFilter == 'incorrect') {
                 $where = " AND section='$sectionId' AND (qn_attend_status='answered' AND (user_ans!=correct_answer) $difficultyCond)";
-                $sectionQnCount = $objgen->get_AllRowscnt('question_userexmlog',$where,'qn_id');
-            }elseif($exmQnFilter=='inun'){
+                $sectionQnCount = $objgen->get_AllRowscnt('question_userexmlog', $where, 'qn_id');
+            } elseif ($exmQnFilter == 'inun') {
                 $where = " AND section='$sectionId' AND (qn_attend_status='unanswered' OR (user_ans!=correct_answer) $difficultyCond)";
-                $sectionQnCount = $objgen->get_AllRowscnt('question_userexmlog',$where,'qn_id');
-            }elseif ($exmQnFilter=='flag') {
+                $sectionQnCount = $objgen->get_AllRowscnt('question_userexmlog', $where, 'qn_id');
+            } elseif ($exmQnFilter == 'flag') {
                 $where = " AND section='$sectionId' AND user_id='$userId' AND status='1' $difficultyCond";
-                $sectionQnCount = $objgen->get_AllRowscnt('user_flag_question',$where);
+                $sectionQnCount = $objgen->get_AllRowscnt('user_flag_question', $where);
             }
             $totsecQnCount += $sectionQnCount;
-
-        ?>
-        <span class="qn-section-col">
-            <input type="checkbox" name="section[]" class="maxqn_enable_cb" value="<?= $sectionId ?>" id="section_<?= $i ?>" onclick="selectChkbx(<?= $sectionQnCount ?>,this.value,$(this))">
-            <label for="section_<?= $i ?>" class="first"><?= $sectionName ?> (<?= $sectionQnCount ?>)</label>
-            <div class="max_qn">
-                <input type="text" class="num_section_qn" onchange="calc_tot_qn(this.value)" onblur="find_total_enterd_qn()" onkeyup="minmax(this.value, 0, <?= $sectionQnCount ?>,'section_qn<?= $sectionId ?>')" id="section_qn<?= $sectionId ?>" name="section_qn[<?= $sectionId ?>]">
-            </div>
-        </span>
-        <?php
+            ?>
+            <span class="qn-section-col">
+                <input type="checkbox" name="section[]" class="maxqn_enable_cb" value="<?= $sectionId ?>" id="section_<?= $i ?>" onclick="selectChkbx(<?= $sectionQnCount ?>, this.value, $(this))">
+                <label for="section_<?= $i ?>" class="first"><?= $sectionName ?> (<?= $sectionQnCount ?>)</label>
+                <div class="max_qn">
+                    <input type="text" class="num_section_qn" onchange="calc_tot_qn(this.value)" onblur="find_total_enterd_qn()" onkeyup="minmax(this.value, 0, <?= $sectionQnCount ?>, 'section_qn<?= $sectionId ?>')" id="section_qn<?= $sectionId ?>" name="section_qn[<?= $sectionId ?>]">
+                </div>
+            </span>
+            <?php
         }
         ?>
     </div>
     <script type="text/javascript">
-            
-            $(document).ready(function () {
-                $('div.max_qn').hide();
-                $('input.maxqn_enable_cb').change(function(){
 
-                   if ($(this).is(':checked')){
-                       $(this).next().next('div.max_qn').show();
-                   }
-                   else{
-                       $(this).next().next('div.max_qn').hide();
-                   }
-               });
-               
-                $('input.onoffswitch-checkbox').change(function(){
+        $(document).ready(function () {
+            $('div.max_qn').hide();
+            $('input.maxqn_enable_cb').change(function () {
 
-                   if ($(this).is(':checked')){
-                       $(this).next().next('div.max_exm_time').show();
-                   }
-                   else{
-                       $(this).next().next('div.max_exm_time').hide();
-                   }
-               });
-               
-               $("#qn_select_count").html(<?= $totsecQnCount ?>);
-                    
+                if ($(this).is(':checked')) {
+                    $(this).next().next('div.max_qn').show();
+                } else {
+                    $(this).next().next('div.max_qn').hide();
+                }
             });
-            
-             </script>
-<?php
+
+            $('input.onoffswitch-checkbox').change(function () {
+
+                if ($(this).is(':checked')) {
+                    $(this).next().next('div.max_exm_time').show();
+                } else {
+                    $(this).next().next('div.max_exm_time').hide();
+                }
+            });
+
+            $("#qn_select_count").html(<?= $totsecQnCount ?>);
+
+        });
+
+    </script>
+    <?php
 }
 
-if($_POST['pid']==4){
+if ($_POST['pid'] == 4) {
     $usrid = $_SESSION['ma_log_id'];
-    $exmDiffLevel   = $_POST['exm_diff_lvl'];
-    $userId   = $_POST['user_id'];
-    if($exmDiffLevel=='all'){
+    $exmDiffLevel = $_POST['exm_diff_lvl'];
+    $userId = $_POST['user_id'];
+    if ($exmDiffLevel == 'all') {
         $difficultyCond = '';
-    }else{
-        $difficultyCond = "AND difficulty='".ucfirst($exmDiffLevel)."'";
+    } else {
+        $difficultyCond = "AND difficulty='" . ucfirst($exmDiffLevel) . "'";
     }
     $userExamSectionArr = $objgen->getUserExamSection($usrid);
     $sectionId = "";
-    $totsecQnCount= 0;
-    for($i=0;$i<count($userExamSectionArr);$i++){
-        $sectionId      .= $userExamSectionArr[$i]['section_id'].',';
+    $totsecQnCount = 0;
+    for ($i = 0; $i < count($userExamSectionArr); $i++) {
+        $sectionId .= $userExamSectionArr[$i]['section_id'] . ',';
     }
     $sectionId = rtrim($sectionId, ',');
-    
+
     /*
      * for all qn count with all difficulty
      */
@@ -628,34 +625,75 @@ if($_POST['pid']==4){
      * for unused qncount with all difficulty
      */
     $where = " AND section IN ($sectionId) AND (qn_attend_status='unanswered' $difficultyCond)";
-    $unansweredQnCount = $objgen->get_AllRowscnt('question_userexmlog',$where,'qn_id');
+    $unansweredQnCount = $objgen->get_AllRowscnt('question_userexmlog', $where, 'qn_id');
     /*
      * for incorrect qncount with all difficulty
      */
     $where = " AND section IN ($sectionId) AND (qn_attend_status='answered' AND (user_ans!=correct_answer) $difficultyCond)";
-    $incorrectQnCount = $objgen->get_AllRowscnt('question_userexmlog',$where,'qn_id');
+    $incorrectQnCount = $objgen->get_AllRowscnt('question_userexmlog', $where, 'qn_id');
     /*
      * for incorrect+unused qncount with all difficulty
      */
     $where = " AND section IN ($sectionId) AND (qn_attend_status='unanswered' OR (user_ans!=correct_answer) $difficultyCond)";
-    $inunQnCount = $objgen->get_AllRowscnt('question_userexmlog',$where,'qn_id');
+    $inunQnCount = $objgen->get_AllRowscnt('question_userexmlog', $where, 'qn_id');
     /*
      * for flagged qn count with all difficulty
      */
     $where = " AND section IN ($sectionId) AND user_id='$userId' AND status='1' $difficultyCond";
-    $flaggedQnCount = $objgen->get_AllRowscnt('user_flag_question',$where);
-    
+    $flaggedQnCount = $objgen->get_AllRowscnt('user_flag_question', $where);
+
     $return["getAllDiffQnCount"] = $getAllDiffQnCount;
     $return["unansweredQnCount"] = $unansweredQnCount;
     $return["incorrectQnCount"] = $incorrectQnCount;
     $return["inunQnCount"] = $inunQnCount;
     $return["flaggedQnCount"] = $flaggedQnCount;
     echo json_encode($return);
-?>
+    ?>
 
-<?php
+    <?php
 }
 
+//exam history details
+if ($_POST['pid'] == 5) {
+    $examScoreId = $_POST['exam_score_id'];
+    $getMarkBySectionCnt = $objgen->get_AllRowscnt('user_exam_log', " AND `exam_score_id`='$examScoreId'", '`qn_section_id`');
+    if ($getMarkBySectionCnt > 0) {
+        $getMarkBySection = $objgen->get_AllRows('user_exam_log', 0, $getMarkBySectionCnt, '', " AND `exam_score_id`='$examScoreId'", '`qn_section_id`', '`qn_section_id`,SUM(`exam_mark`) as section_total_mark');
+    }
+    ?>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <td>Sl. No.</td>
+                <td>Section</td>
+                <td>Mark</td>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if (!empty($getMarkBySection)) {
+                $i=1;
+                foreach ($getMarkBySection as $key1 => $value1) {
+                    $sectionMark = $value1['section_total_mark'];
+                    $sectionMark = (int) $sectionMark;
+                    $sectionId = $value1['qn_section_id'];
+                    $getSectionDetails = $objgen->get_Onerow('section', " AND id='$sectionId'", 'name');
+                    $sectionName = $getSectionDetails['name'];
+                    ?>
+                    <tr>
+                        <td><?php echo $i ?></td>
+                        <td><?php echo $objgen->check_tag($sectionName); ?></td>
+                        <td><?php echo $objgen->check_tag($sectionMark); ?></td>
+                    </tr>
+                    <?php
+                    $i++;
+                }
+            }
+            ?>
+        </tbody>
+    </table>
+    <?php
+}
 ?>
 
 

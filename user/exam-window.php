@@ -219,7 +219,7 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
 
                             <div class="panel panel-widget">
 
-                                <div class="panel-body table-responsive" style="width: 70%;float: left">
+                                <div class="panel-body table-responsive" style="width: 78%;float: left">
 
                                     <?php
                                     if (count($_SESSION['exam'][$usrid]['qid']) > 0) {
@@ -685,7 +685,7 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
 
 
             <!-- Start Footer -->
-            <?php //require_once "footer.php";      ?>
+            <?php require_once "footer.php";      ?>
             <!-- End Footer -->
 
 

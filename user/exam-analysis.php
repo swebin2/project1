@@ -5,7 +5,7 @@ $objgen = new general();
 $where = " AND user_id='$usrid'";
 $getAllExamsCntByUser = $objgen->get_AllRowscnt('user_exam_score', $where);
 if ($getAllExamsCntByUser > 0) {
-    $getAllExamsByUser = $objgen->get_AllRows('user_exam_score', 0, $getAllExamsCntByUser, '`id` DESC', $where);
+    $getAllExamsByUser = $objgen->get_AllRows('user_exam_score', 1, $getAllExamsCntByUser, '`id` DESC', $where);
 }
 
 ?>
@@ -71,8 +71,9 @@ if ($getAllExamsCntByUser > 0) {
                                 if (!empty($getAllExamsByUser)) {
                                     $i = 0;
                                     foreach ($getAllExamsByUser as $key => $value) {
+                                        $examScoreId = $value['id'];
                                         ?>
-                                        <div class="exam_bar_chart_div" id="exam_bar_chart<?= $i ?>"></div>
+                                        <div class="exam_bar_chart_div <?= $examScoreId ?>" id="exam_bar_chart<?= $i ?>"></div>
                                         <?php
                                         $i++;
                                     }
@@ -130,18 +131,21 @@ if (!empty($getLastExamByUser)) {
     if($getMarkBySectionCnt>0){
         $getMarkBySection = $objgen->get_AllRows('user_exam_log', 0, $getMarkBySectionCnt, '', " AND `exam_score_id`='$examScoreId'", '`qn_section_id`', '`qn_section_id`,SUM(`exam_mark`) as section_total_mark');
     }
+    if(!empty($getMarkBySection)){
+        foreach ($getMarkBySection as $key => $value) {
+            $sectionMark = $value['section_total_mark'];
+            $sectionMark = (int)$sectionMark;
+            $sectionId = $value['qn_section_id'];
+            $getSectionDetails = $objgen->get_Onerow('section', " AND id='$sectionId'", 'name');
+            $sectionName = $getSectionDetails['name'];
+            $sectionArr1[]= array("$sectionName",$sectionMark);
 
-    foreach ($getMarkBySection as $key => $value) {
-        $sectionMark = $value['section_total_mark'];
-        $sectionMark = (int)$sectionMark;
-        $sectionId = $value['qn_section_id'];
-        $getSectionDetails = $objgen->get_Onerow('section', " AND id='$sectionId'", 'name');
-        $sectionName = $getSectionDetails['name'];
-        $sectionArr1[]= array("$sectionName",$sectionMark);
-
+        }
     }
-    $jsonsectionArr1 = json_encode($sectionArr1);
-    echo "window.onload = showChartModal('$lastExamName','$lastExamDate',$jsonsectionArr1);";
+    if(!empty($sectionArr1)){
+        $jsonsectionArr1 = json_encode($sectionArr1);
+        echo "window.onload = showChartModal('$lastExamName','$lastExamDate',$jsonsectionArr1);";
+    }
 }
 
 //code for barchart
@@ -166,19 +170,23 @@ if (!empty($getAllExamsByUser)) {
         if($getMarkBySectionCnt>0){
             $getMarkBySection = $objgen->get_AllRows('user_exam_log', 0, $getMarkBySectionCnt, '', " AND `exam_score_id`='$examScoreId'", '`qn_section_id`', '`qn_section_id`,SUM(`exam_mark`) as section_total_mark');
         }
+        if(!empty($getMarkBySection)){
+            foreach ($getMarkBySection as $key1 => $value1) {
+                $sectionMark = $value1['section_total_mark'];
+                $sectionMark = (int)$sectionMark;
+                $sectionId = $value1['qn_section_id'];
+                $getSectionDetails = $objgen->get_Onerow('section', " AND id='$sectionId'", 'name');
+                $sectionName = $getSectionDetails['name'];
+                $sectionArr[]= array("$sectionName",$sectionMark);
 
-        foreach ($getMarkBySection as $key => $value) {
-            $sectionMark = $value['section_total_mark'];
-            $sectionMark = (int)$sectionMark;
-            $sectionId = $value['qn_section_id'];
-            $getSectionDetails = $objgen->get_Onerow('section', " AND id='$sectionId'", 'name');
-            $sectionName = $getSectionDetails['name'];
-            $sectionArr[]= array("$sectionName",$sectionMark);
-            
+            }
         }
-        $jsonsectionArr = json_encode($sectionArr);
-        echo "window.onload = showExmChart('exam_bar_chart".$i."','$examName attended on $examDate',$jsonsectionArr);";
-        $i++;
+        if(!empty($sectionArr)){
+            $jsonsectionArr = json_encode($sectionArr);
+            echo "window.onload = showExmChart('exam_bar_chart".$i."','$examName attended on $examDate',$jsonsectionArr);";
+
+            $i++;
+        }
     }
     
 }
@@ -196,11 +204,12 @@ if (!empty($getAllExamsByUser)) {
                         type: 'pie'
                     },
                     title: {
-                        text: 'Exam Status for ' + exm_name + ' attended on ' + attend_date,
+                        text: '<b>Exam Status for ' + exm_name + ' attended on ' + attend_date+'</b>',
                         style: {
                                     fontSize: '13px',
                                     fontFamily: 'Verdana, sans-serif',
-                                    background: 'red'
+                                    background: 'red',
+                                    color: '#ef4836'
                                 }
                     },
                     tooltip: {
@@ -233,11 +242,12 @@ if (!empty($getAllExamsByUser)) {
                         borderRadius: 15
                     },
                     title: {
-                        text: title,
+                        text: '<b>'+title+'</b>',
                         style: {
                                     fontSize: '13px',
                                     fontFamily: 'Verdana, sans-serif',
-                                    background: 'red'
+                                    background: 'red',
+                                    color: '#ef4836'
                                 }
                     },
                     subtitle: {

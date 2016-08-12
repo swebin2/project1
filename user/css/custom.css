@@ -1,5 +1,5 @@
 .qn_panel{
-    width: 25%;
+    width: 19%;
     background: #EDEDED;
     margin-bottom: 20px;
     margin-right: 20px;
@@ -12,7 +12,10 @@
     -moz-box-shadow: #B3B3B3 13px 13px 13px; 
     box-shadow: #B3B3B3 13px 13px 13px;
 }
-
+.qn_panel ul{
+    padding: 0px 0px 0px 10px;
+    
+}
 .qn_panel ul li{
     list-style: none;
     float: left;
@@ -22,7 +25,7 @@
     -moz-border-radius: 10px 10px 200px 20px;
     border-radius: 10px 10px 200px 200px;*/
     background-color:grey;
-    margin-right: 15px;
+    margin-right: 2px;
     margin-bottom: 10px;
 }
 
@@ -50,6 +53,7 @@
 .qn_color_hint_col{
     width: 100%;
     float: left;
+    margin-bottom: 2px;
 }
 .qn_color_hint{
     float: left;
@@ -57,6 +61,10 @@
     height: 15px;
     margin: 5px;
     border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.qn_hint{
+    font-size: 10px;
 }
 
 .redbg{

@@ -36,10 +36,10 @@ if ($row_count > 0) {
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Exam Chart</h4>
+                <h4 class="modal-title">Exam Details</h4>
               </div>
               <div class="modal-body">
-                  <div id="chart-container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+                  <div id="chart-container">
                       
                   </div>
               </div>
@@ -107,10 +107,13 @@ if ($row_count > 0) {
                                             $i = 0;
                                             foreach ($res_arr as $key => $val) {
                                                 $i++;
+                                                $examScoreId = $val['id'];
                                                 $examId = $val['exam_id'];
                                                 $correctAnsCount = $val['correct_answer_num'];
                                                 $wrongAnsCount = $val['wrong_answer_num'];
                                                 $unansCount = $val['unanswered_num'];
+                                                $examDate = $val['exam_attended_on'];
+                                                $examDate = date('jS F Y h:i A', strtotime($examDate));
                                                 
                                                 if($val['exam_created_by']=='user'){
                                                     $table = 'user_exam_list';
@@ -125,9 +128,9 @@ if ($row_count > 0) {
                                                     <td><?php echo $objgen->check_tag($getExamDetails['exam_name']); ?></td>
                                                     <td><?php echo $objgen->check_tag($getExamDetails['totno_of_qu']); ?></td>
                                                     <td><?php echo $objgen->check_tag($val['exam_mark']); ?></td>
-                                                    <td><?php echo $objgen->check_tag($val['exam_attended_on']); ?></td>
+                                                    <td><?php echo $examDate; ?></td>
                                                     <td>
-                                                        <a href="#" onclick="showChartModal('<?= $getExamDetails["exam_name"] ?>',<?= $correctAnsCount.','.$wrongAnsCount.','.$unansCount ?>)" role="button" class="fa fa-bar-chart" data-toggle="modal"></a>
+                                                        <a href="#" onclick="showModal('<?= $getExamDetails["exam_name"] ?>','<?= $examScoreId ?>')" role="button" class="fa fa-eye" data-toggle="modal"></a>
                                                     </td>
 
                                                 </tr>
@@ -211,6 +214,19 @@ if ($row_count > 0) {
                         }]
                     }]
                 });   
+            }
+            
+            function showModal(exam_name,exam_score_id){
+                $("#chartModal").modal('show');
+                $.ajax({
+                    type: "POST",
+                    dataType: "html",
+                    url: "<?= URLUR ?>ajax2.php",
+                    data: {pid: 5, exam_name: exam_name, exam_score_id: exam_score_id},
+                    success: function (result) {
+                        $('#chart-container').html(result);
+                    }
+                });
             }
         </script>
         <script type="text/javascript" src="<?= URLUR ?>js/datatables/datatables.min.js"></script>
