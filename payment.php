@@ -67,15 +67,18 @@ if(isset($_POST['Paynow']))
 			 $no_exam_att = $no_exam_att_cal+$respack['no_of_exam']; 
 			else
 			 $no_exam_att = $respack['no_of_exam']; */
-			
-			$msg = $objgen->upd_Row('exam_permission',"order_id='".$uniqid."',no_of_exam='no_of_exam+".$respack['no_of_exam']."'","order_id='".$order_id."'");
+		/*	
+			$msg = $objgen->upd_Row('exam_permission',"order_id='".$uniqid."',no_of_exam='no_of_exam+".$respack['no_of_exam']."'","order_id='".$order_id."'");*/
 			
 			
 		//}
 		//else
 		//{
+			$period = $val['period'];
+			$start_date = date('Y-m-d');
+			$end_date = date('Y-m-d', strtotime("+".$period." days"));
 		
-	    $msg = $objgen->ins_Row('exam_permission','user_id,order_id,exam_id,package_id,no_of_exam',"'".$user_id."','".$uniqid."','".$key."','".$val."','".$respack['no_of_exam']."'");
+	    $msg = $objgen->ins_Row('exam_permission','user_id,order_id,exam_id,package_id,no_of_exam,start_date,exp_date',"'".$user_id."','".$uniqid."','".$key."','".$val."','".$respack['no_of_exam']."','".$start_date."','".$end_date."'");
 		
 		//}
 		
@@ -341,10 +344,20 @@ body {
 <!-- end layout-theme --> 
 
 <!-- SCRIPTS --> 
+<script src="<?=URL?>js/jquery-migrate-1.2.1.js"></script> 
 <script src="<?=URL?>js/bootstrap.min.js"></script> 
+<script src="<?=URL?>js/modernizr.custom.js"></script> 
+<script src="<?=URL?>js/waypoints.min.js"></script> 
+<script src="<?=URL?>js/jquery.easing.min.js"></script> 
 
 <!--THEME--> 
+<script src="<?=URL?>js/jquery.isotope.min.js"></script> 
+<script src="<?=URL?>js/jquery.prettyPhoto.js"></script> 
+<script src="<?=URL?>js/cssua.min.js"></script>
+<script src="<?=URL?>js/wow.min.js"></script> 
 <script src="<?=URL?>js/custom.min.js"></script> 
+
+<script src="<?=URL?>js/jquery.jelect.js"></script>
 
 <!--login --> 
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> 

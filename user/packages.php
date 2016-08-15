@@ -141,7 +141,7 @@ header("location:".URL."payment");
           
           </div>
           
-          <div class="panel-footer" style="font-weight:bold;color:#FF9">Purchase Date : <?=date("jS M Y",strtotime($val['per_date']))?></div>
+          <div class="panel-footer" style="font-weight:bold;color:#FF9">Purchase Date : <?=date("jS M Y",strtotime($val['per_date']))?><br />Expiry Date : <?=date("jS M Y",strtotime($val['exp_date']))?></div>
           </div>
           </div>
          <?php
@@ -216,7 +216,8 @@ header("location:".URL."payment");
            Rs. <?=$objgen->check_tag($val1['amount'])?>
             </div>
         <div class="panel-body">
-         <?=$objgen->check_tag($val1['no_of_exam'])?> exams can run
+         <?=$objgen->check_tag($val1['no_of_exam'])?> exams can run, 
+         Duration : <?=$objgen->check_tag($val1['period'])?> Days
         </div>
 
       <!--  <div class="panel-footer">This is Panel Footer</div>-->

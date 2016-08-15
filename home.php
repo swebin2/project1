@@ -44,56 +44,17 @@ $objgen		=	new general();
 
 <!-- Start WOWSlider.com HEAD section -->
 <link rel="stylesheet" type="text/css" href="<?=URL?>css/style_wow.css"/>
-<script type="text/javascript" src="<?=URL?>js/jquery.js"></script>
+<!--<script type="text/javascript" src="<?=URL?>js/jquery.js"></script>-->
 
 <!-- SWITCHER -->
 
-<script src="<?=URL?>js/jquery-1.11.3.min.js"></script>
+<!--<script src="<?=URL?>js/jquery-1.11.3.min.js"></script>-->
 <style>
 #scroll-top {
 	display: none !important;
 }
 </style>
 
-<!-- tooltip -->
-
-<!--<style type="text/css">
-		.tooltip {
-			 color: #FFFFFF; outline: none;
-			cursor: help; text-decoration: none;
-			position: relative;
-		}
-		.tooltip span {
-			margin-left: -999em;
-			position: absolute;
-		}
-		.tooltip:hover span {
-			border-radius: 5px 5px !important; -moz-border-radius: 5px; -webkit-border-radius: 5px; 
-			box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1) !important; -webkit-box-shadow: 5px 5px rgba(0, 0, 0, 0.1); -moz-box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
-			font-family: Calibri, Tahoma, Geneva, sans-serif;
-			position: absolute; left: -5em; top: 3em; z-index: 99;
-			margin-left: 0; width: 250px;
-			color: #000;
-    text-transform: capitalize;
-    font-size: 18px;
-		}
-		.tooltip:hover img {
-			border: 0; margin: -10px 0 0 -55px;
-			float: left; position: absolute;
-		}
-		.tooltip:hover em {
-			font-family: Candara, Tahoma, Geneva, sans-serif; font-size: 1.2em; font-weight: bold;
-			display: block; padding: 0.2em 0 0.6em 0;
-		}
-		.classic { padding: 0.8em 1em; }
-		.custom { padding: 0.5em 0.8em 0.8em 2em; }
-		* html a:hover { background: transparent; }
-		.classic {background: #FFFFAA; border: 1px solid #FFAD33; }
-		.critical { background: #FFCCAA; border: 1px solid #FF3334;	}
-		.help { background: #9FDAEE; border: 1px solid #2BB0D7;	}
-		.info { background: #9FDAEE; border: 1px solid #2BB0D7;	}
-		.warning { background: #FFFFAA; border: 1px solid #FFAD33; }
-		</style>-->
 
 <script src="http://code.jquery.com/jquery-1.12.1.min.js"></script>
 <script src="<?=URL?>js/jquery.tooltipler.js"></script>
@@ -141,7 +102,7 @@ $objgen		=	new general();
     /*  left: 229px !important;top: 2104px !important;*/
 	
 	left: 229px !important;
-	top: 1938px !important;
+	top: 1912px !important;
 	text-align:justify;
 	
 		}
@@ -151,7 +112,7 @@ $objgen		=	new general();
 			top: 2288px !important;
 			*/
 			left: 788px !important;
-			top: 2080px !important;
+			top: 2055px !important;
 			text-align:justify;
 		}
 		#toolTipler2{
@@ -159,7 +120,7 @@ $objgen		=	new general();
 			/*left: 205px !important;
 			top: 2483px !important;*/
 			left: 205px !important;
-			top: 2269px !important;
+			top: 2235px !important;
 			text-align:justify;
 		}
 		</style>

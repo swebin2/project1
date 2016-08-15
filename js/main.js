@@ -785,8 +785,8 @@ function woocommerce_button_add() {
 
 
 $(window).scroll( function(){
-  sticky ();
-  counter ();
+  //sticky ();
+  //counter ();
 })
 
 /**/
@@ -935,7 +935,7 @@ $(document).ready(function() {
   /**/
   /* sticky */
   /**/
-  sticky ();
+//  sticky ();
 
   /**/
   /*scroll top*/
@@ -1250,7 +1250,7 @@ $(document).ready(function() {
   /**/
   /* popup position */
   /**/
-  $(document).on("mouseenter",".event-calendar td, .week-view-wrap td",function(){
+/*  $(document).on("mouseenter",".event-calendar td, .week-view-wrap td",function(){
     var popup = $(this).find(".popup");
     var HeightPopup = popup.height();
 
@@ -1271,16 +1271,10 @@ $(document).ready(function() {
     }
   })
 
-  /**/
-  /* info box */
-  /**/
   $(".info-boxes .close-button").on( 'click', function() {
     $(this).parent().animate({'opacity' : '0'}, 300).slideUp(300);
   });
 
-  /**/
-  /* widget menu */
-  /**/
   $('.widget-navigation li>ul, .widget-pages li>ul').parent().addClass('has-child');
   $('.widget-navigation li>a, .widget-pages li>a').on( 'click', function(e) {
     e.stopPropagation();
@@ -1306,12 +1300,12 @@ $(document).ready(function() {
       $(this).parent().addClass('hover');
     });
   });
-
+*/
 
   /**/
   /*flickr widget*/
   /**/
-  if($('ul#flickr-badge').length) {
+/*  if($('ul#flickr-badge').length) {
     jQuery('ul#flickr-badge').jflickrfeed({
       limit: 6,
       qstrings: {
@@ -1320,37 +1314,37 @@ $(document).ready(function() {
     itemTemplate: '<li><div class="flickr-container"><a href="http://www.flickr.com/photos/56342020@N03"><span><img src="{{image_m}}" alt="{{title}}" /></span></a></div></li>'
     });
   };
-
+*/
   /**/
   /***********   twitter   ********/
   /**/
-  $('.twitter-carousel').tweet({
+/*  $('.twitter-carousel').tweet({
     username: 'Creative_WS',
     count: 8,
     loading_text: 'loading twitter feed...',
     template: "<i class='fa fa-twitter twitt'></i><p><a class='cp-color' href='{user_url}'>@{screen_name}</a>{join}{text}<br>{time}</p>"
-  });
+  });*/
 
   /**/
   /* wrap tweet list for 2 elements */
   /**/
-  $('.twitter-carousel .tweet_list').WrapThis(2, 'li');
+/*  $('.twitter-carousel .tweet_list').WrapThis(2, 'li');
   $('.twitter-carousel .tweet_list').addClass("widget-carousel").addClass("owl-carousel");
-
+*/
   /**/
   /***********   twitter   ********/
   /**/
-  $('.twitter-1').tweet({
+/*  $('.twitter-1').tweet({
     username: 'Creative_WS',
     count: 8,
     loading_text: 'loading twitter feed...',
     template: "<i class='fa fa-twitter twitt'></i><div class='divider-mini'></div><p><a class='cp-color' href='{user_url}'>@{screen_name}</a>{join}{text}<br>{time}</p>"
-  });
+  });*/
 
   /**/
   /* wrap tweet list for 2 elements */
   /**/
-  $('.twitter-1 .tweet_list').addClass("testimonials-carousel").addClass("owl-carousel");;
+ // $('.twitter-1 .tweet_list').addClass("testimonials-carousel").addClass("owl-carousel");;
 
 
 
@@ -1366,7 +1360,7 @@ $(window).resize(function() {
   /**/
   /* sticky */
   /**/
-  sticky ();
+ // sticky ();
 
   /**/
   /* isotop */
@@ -1648,15 +1642,12 @@ function is_mobile (){
   }
 }
 /* \mobile menu */
-if ($(".contact-form").length) {
-  /**/
-  /* contact form */
-  /**/
-
-  /* validate the contact form fields */      
+/*if ($(".contact-form").length) {
+  
+    
   $(".contact-form").each(function(){
 
-    $(this).validate(  /*feedback-form*/{
+    $(this).validate(  {
         onkeyup: false,
         onfocusout: false,
         errorElement: 'p',
@@ -1708,7 +1699,7 @@ if ($(".contact-form").length) {
       });
     })
 
-  /* Ajax, Server response */ 
+  
   var submit_handler =  function (form, wrapper){
 
     var $wrapper = $(wrapper); //this class should be set in HTML code
@@ -1739,6 +1730,8 @@ if ($(".contact-form").length) {
   return false;
   }
 }
+
+*/
 
 function cws_top_social_icon_animation (){
   var shareButtons = jQuery(".header-top-panel  .cws_social_links>*")

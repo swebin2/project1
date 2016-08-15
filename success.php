@@ -277,13 +277,23 @@ body {
 <!-- end layout-theme --> 
 
 <!-- SCRIPTS --> 
+<script src="<?=URL?>js/jquery-migrate-1.2.1.js"></script> 
 <script src="<?=URL?>js/bootstrap.min.js"></script> 
+<script src="<?=URL?>js/modernizr.custom.js"></script> 
+<script src="<?=URL?>js/waypoints.min.js"></script> 
+<script src="<?=URL?>js/jquery.easing.min.js"></script> 
 
 <!--THEME--> 
+<script src="<?=URL?>js/jquery.isotope.min.js"></script> 
+<script src="<?=URL?>js/jquery.prettyPhoto.js"></script> 
+<script src="<?=URL?>js/cssua.min.js"></script>
+<script src="<?=URL?>js/wow.min.js"></script> 
 <script src="<?=URL?>js/custom.min.js"></script> 
 
+<script src="<?=URL?>js/jquery.jelect.js"></script>
+
 <!--login --> 
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> 
+<!--<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
 <script src="<?=URL?>js/index.js"></script>
 </body>
 </html>

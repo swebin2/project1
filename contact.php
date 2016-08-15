@@ -214,8 +214,6 @@ $objgen		=	new general();
 
 
 --> 
-<script src="<?=URL?>js/main.js"></script> 
-<script type="text/javascript" src="<?=URL?>js/wowslider.js"></script> 
-<script type="text/javascript" src="<?=URL?>js/script.js"></script>
+
 </body>
 </html>

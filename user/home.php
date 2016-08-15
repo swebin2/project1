@@ -100,7 +100,7 @@ if($exam_per>0)
           
           </div>
           
-          <div class="panel-footer" style="font-weight:bold;color:#FF9">Purchase Date : <?=date("jS M Y",strtotime($val['per_date']))?></div>
+          <div class="panel-footer" style="font-weight:bold;color:#FF9">Purchase Date : <?=date("jS M Y",strtotime($val['per_date']))?><br />Expiry Date : <?=date("jS M Y",strtotime($val['exp_date']))?></div>
           </div>
           </div>
          <?php

@@ -24,6 +24,22 @@ if(isset($_GET['del']))
    }
 }
 
+if(isset($_POST['delall']))
+{
+	$delarr =  $_POST['check'];
+	foreach($delarr as $key=>$val)
+	{
+	   $msg     = $objgen->del_Row("answer","question_id=".$val);
+       $msg     = $objgen->del_Row("question","id=".$val);	
+	}
+	
+if($msg=="")
+   {
+	header("location:".$list_url."/?msg=3&page=".$page);
+   }
+	 
+}
+
 if(isset($_GET['st']))
 {
 	 $id = $_GET['id'];
@@ -438,11 +454,19 @@ function drop(ev){
             </div>
 
       </div>
-
+      
+    <form class="form-inline" method="post" enctype="multipart/form-data" > 
 	
       <div class="panel panel-default">
 
              <div class="panel-title">
+              <div class="pull-left">
+             
+		
+                <button type="submit" class="btn btn-danger" name="delall" id="delall"><span class="fa fa-trash"></span>&nbsp;Delete </button>
+               
+				</div>
+                
        <div class="pull-right">
 				<button type="buttom" class="btn btn-success" name="Reset" onClick="window.location='<?=$add_url?>'"><span class="fa fa-plus"></span>&nbsp;Add New</button>
 				</div>
@@ -473,6 +497,7 @@ function drop(ev){
                                      <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
+                                                <th>	<input type="checkbox"   id="selectall" ></th>
                                                 <th>QID</th>
                                                 <th>Question</th>
                                                 <th>Type</th>
@@ -572,6 +597,7 @@ function drop(ev){
 		  
 						?>
                                             <tr>
+                                                <td><input name="check[]" type="checkbox" value="<?php echo $val['id']; ?>"  class="case" ></td>
                                                 <td><?php echo $val['id']; ?></td>
                                                 <td><?php echo $objgen->basedecode($val['question']); ?></td>
                                                 <td><?=$qtyp?></td>
@@ -1002,6 +1028,9 @@ function drop(ev){
             </div>
 
       </div>
+      
+      </form>
+      
     </div>
   </div>
 
@@ -1042,5 +1071,29 @@ function listdata()
 				 
 }
 </script>
+<script language="JavaScript">
+$(document).ready(function(){
+    $('#selectall').on('click',function(){
+        if(this.checked){
+            $('.case').each(function(){
+                this.checked = true;
+            });
+        }else{
+             $('.case').each(function(){
+                this.checked = false;
+            });
+        }
+    });
+    
+    $('.case').on('click',function(){
+        if($('.case:checked').length == $('.case').length){
+            $('#selectall').prop('checked',true);
+        }else{
+            $('#selectall').prop('checked',false);
+        }
+    });
+});
+</script>
+
 </body>
 </html>

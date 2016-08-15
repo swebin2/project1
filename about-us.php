@@ -192,20 +192,21 @@ We have an Extensive, Filtered and Analyzed question bank to ensure that candida
 <script src="<?=URL?>js/jquery.easing.min.js"></script> 
 
 <!--THEME--> 
-<script src="<?=URL?>js/jquery.sliderPro.min.js"></script> 
-<script src="<?=URL?>js/owl.carousel.min.js"></script> 
+<!--<script src="<?=URL?>js/jquery.sliderPro.min.js"></script> 
+<script src="<?=URL?>js/owl.carousel.min.js"></script> -->
 <script src="<?=URL?>js/jquery.isotope.min.js"></script> 
 <script src="<?=URL?>js/jquery.prettyPhoto.js"></script> 
-<script src="<?=URL?>js/cssua.min.js"></script> 
+<script src="<?=URL?>js/cssua.min.js"></script>
 <script src="<?=URL?>js/wow.min.js"></script> 
+
 <script src="<?=URL?>js/custom.min.js"></script> 
 
 <!--COLOR SWITCHER --> 
-<script src="<?=URL?>js/scripts.js"></script> 
-<script src="<?=URL?>js/jquery.datetimepicker.js"></script> 
-<script src="<?=URL?>js/jquery.jelect.js"></script> 
-<!--<script src="js/jquery.easypiechart.min.js"></script> 
---> 
+<!--<script src="<?=URL?>js/scripts.js"></script> 
+<script src="<?=URL?>js/jquery.datetimepicker.js"></script>  -->
+<script src="<?=URL?>js/jquery.jelect.js"></script>
+<!--<script src="js/jquery.easypiechart.min.js"></script> --> 
+ 
 
 <!--<script src="js/jquery.min.js"></script>
 <script src="js/main.js"></script>
@@ -215,8 +216,8 @@ We have an Extensive, Filtered and Analyzed question bank to ensure that candida
 
 
 --> 
-<script src="<?=URL?>js/main.js"></script> 
+<!--<script src="<?=URL?>js/main.js"></script> 
 <script type="text/javascript" src="<?=URL?>js/wowslider.js"></script> 
-<script type="text/javascript" src="<?=URL?>js/script.js"></script>
+<script type="text/javascript" src="<?=URL?>js/script.js"></script>-->
 </body>
 </html>
