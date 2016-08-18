@@ -73,7 +73,7 @@ if($_SESSION['MYPR_adm_type']=="vendor")
 	
 	if(count($allow_id)>0)
 	{
-		$where = "and id IN (".implode($allow_id).")";
+		$where = "and id IN (".implode(',',$allow_id).")";
 	}
 	else
 	{

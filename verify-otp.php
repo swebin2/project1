@@ -1,50 +1,42 @@
 <?php
+require_once "chk_login.php";
 $objgen		=	new general();
 
-if($_COOKIE["swebin_user"]!="")
-$email = $_COOKIE["swebin_user"];
-
-if($_COOKIE["swebin_sec"]!="")
-$password = $objgen->decrypt_pass($_COOKIE["swebin_sec"]);
-
-if(isset($_POST['Login']))
+if($_SESSION['attemptchk']=="")
 {
-   $email 		= trim($_POST['email_login']);
-   $password 	= trim($_POST['password_login']);
-   $remember_me = $_POST['remember_me'];
-  
-  if($email!="" && $password!="")
-  {
-	
-	  
-	  $msg = $objgen->chk_Login('users',$email,$password,'','id','email','password','active',0,'*',$remember_me);
-	  if($msg=="")
-	  {
-		
-		//header("location:".URL."payment");
-		
-		 $result   = $objgen->get_Onerow("users","AND id=".$_SESSION['ma_log_id']);
-		 
-		 if($result['otp_verify']=='no')
-		 {
-			header("location:".URL."verify-otp"); 
-		 }
-		 else
-		 {
-		   header("location:".URLUR);
-		 }
-			
-	  }
-	  else
-	  {
-	     $msg = "Invalid Email or Password";  
-	  }
+ $_SESSION['attemptchk'] = 0;
+ $_SESSION['attemptotp'] = 5;
+}
 
-  }
-  else
-  {
-     $msg = "Enter Email or Password";  
-  }
+$result   = $objgen->get_Onerow("users","AND id=".$_SESSION['ma_log_id']);
+$mobile   = $result['mobile'];
+
+if(isset($_POST['Verify']))
+{
+   $otp 		= trim($_POST['otp']);
+   if($result['otp']==$otp && $otp!="")
+   {
+	    $msg = $objgen->upd_Row('users',"otp_verify='yes'","id=".$_SESSION['ma_log_id']);
+		
+		  header("location:".URLUR);
+   }
+   else
+   {
+	    $msg = "Invalid OTP";
+   }
+  
+}
+
+if(isset($_POST['Update']))
+{
+	 $mobile 		= trim($_POST['mobile']);
+	 if($mobile!="")
+	 {
+	   $msg = $objgen->upd_Row('users',"mobile='".$mobile."'","id=".$_SESSION['ma_log_id']);
+	   $_SESSION['attemptotp'] -= 1;
+	   $_SESSION['attemptchk'] += 1;
+	   $msg2 = "Mobile Changed. Verify your OTP";
+	 }
 }
 ?>
 <!DOCTYPE html>
@@ -234,15 +226,13 @@ body {
     
     <div class="wrapper">
       <form class="login" action="" method="post">
-        <p class="title">Log in to Tricky Score with</p>
-        <div class="abc" style="text-align:center;"> <a class="btn btn-primary btn-effect" href="https://www.facebook.com/" target="_blank" style="background-color:#3B5998; box-shadow:0 4px 0 0 #2C4373; border-color:#3B5998; color:#fff; font-size:14px; border-radius:0px;">Facebook</a> <a class="btn btn-primary btn-effect" href="https://plus.google.com/" target="_blank" style="background:#e74b37; box-shadow:0 4px 0 0 #C13726; border-color:#e74b37; color:#fff; font-size:14px; border-radius:0px;">Google</a>
-          <div class="email" style="width:100%;"> <img src="<?=URL?>images/email.png"> </div>
-        </div>
+        <p class="title">Verify OTP</p>
+       
         <?php
                                     if($msg2!="")
                                     {
                                     ?>
-                                    <div class="notification-msg-cont">
+                                    <div class="notification-msg-cont" style="color:#090">
                                        
                                         <b>Alert!</b> <?php echo $msg2; ?>
                                     </div>
@@ -271,7 +261,7 @@ body {
                                     if($msg!="")
                                     {
                                     ?>
-                                   <div class="notification-msg-cont">
+                                   <div class="notification-msg-cont" style="color:#F00">
                                       
                                         <b>Alert!</b> <?php echo $msg; ?>
                                     </div>
@@ -279,24 +269,78 @@ body {
                                     }
                                     ?>
 									
-    <input type="email" placeholder="Username" autofocus name="email_login" required value="<?=$email?>"  />
-    <i class="fa fa-user"></i>
-    <input type="password" placeholder="Password" name="password_login" required value="<?=$password?>" />
+    <input type="text" placeholder="Enter OTP recived on Mobile" autofocus name="otp"  value="<?=$otp?>"  />
     <i class="fa fa-key"></i>
+
+	  <?php
+	if($_SESSION['attemptchk']<5)
+	{
+	?>
+		
+    <br /><a href="javascript:void(0);" onClick="javascript:$('#shmobile').toggle();">Change Mobile or Resent OTP?</a>
+    
+       <?php
+	}
+	?>
 	
-	 <div class="check">
-   <input type="checkbox" name="remember_me" id="remember_me" value="yes" <?php if($_COOKIE["swebin_user"]!="") { ?> checked="checked" <?php } ?> >
-   Remember me
-   </div>
-	
-	
-    <br /><a href="<?=URL?>signup">Create new account?</a> | <a href="<?=URL?>forgot-password">Forgot your password?</a>
-    <button name="Login" type="submit" >
+    <button name="Verify" type="submit" >
       <i class="spinner"></i>
-      <span class="state">Log in</span>
+      <span class="state">Verify</span>
     </button>
+    
+    <?php
+	if($_SESSION['attemptchk']<5)
+	{
+	?>
+    <div id="shmobile" style="display:none">
+        <input type="text" placeholder="Mobile" name="mobile"  id="phone"  value="<?=$mobile?>" />
+        <i class="fa fa-mobile"></i>
+        <div style="color:#F00"><?=$_SESSION['attemptotp']?> attempts remaining</div>
+        
+     <button name="Update" type="submit"  onClick="return validate();">
+        <i class="spinner"></i>
+        <span class="state">Update & Resent</span>
+    </button>
+    
+    </div>
+    <?php
+	}
+	?>
 	
       </form>
+      
+       <script>
+			 
+			   
+			   function validate()
+			   {
+				   var m = $('#phone').val();
+				   
+				   if(m=='')
+					  {
+						alert("Enter the Mobile Number.");
+						 return false;
+					  }
+								   
+				   var isnum = /^\d+$/.test(m);
+				   
+					if(isnum==false)
+					  {
+						alert("Enter digit as Mobile Number.");
+						 return false;
+					  }
+				  
+				  if(m.length!=10)
+				  {
+					alert("Enter 10 digit Mobile Number.");
+					return false;
+				  }
+				  
+				 
+				  
+				 
+			   }
+			   </script> 
 
       </p>
     </div>

@@ -245,15 +245,27 @@ $objgen		=	new general();
               <div class="col-md-8">
                 <div class="section-post" style="padding-top:80px;">
                   <div class="item">
-                    <div class="section-img"> <img src="<?=URL?>images/feature-post2-img.png" class="img-responsive" alt="#" style="height: 384px;width: 324px;" /> </div>
-                    <div class="post-text">
+                    <div class="col-md-6" style="border-right:1px solid #84B637;height:384px;padding:15px;">
+                    
+                     <!--img src="<?=URL?>images/feature-post2-img.png" class="img-responsive" alt="#" style="height: 384px;width: 324px;" />--> <h3 style="color:#FFF">Our Mission</h3>
+                     <p style="color:#ccc;"> Our mission is to help deserving, competent and qualified candidates to secure jobs that they dream of. Thus TrickyScore not only fulfills individual aspirations but also helps in nation building by making sure that best talents get the right jobs.</p> 
+                     
+                     </div>
+                    <div class="post-text" >
+                    
                       <h3 class="text-normal">RRB NTPC ALL INDIA TEST 2016 BY LUMINOS </h3>
                       <h3 class="text" style="font-size:15px;">28 FEB 2016, 10 A.M to 9 P.M</h3>
                       <p style="color:#ccc;">Your content goes here.Your content goes here.Your content goes here.Your content goes here.Your content goes here.Your content goes here.Your content goes here.</p>
                       <a class="btn btn-primary btn-effect" href="#.">Free Registration open</a> </div>
+                      
                   </div>
                   <div class="item">
-                    <div class="section-img"> <img src="<?=URL?>images/feature-post-img.png" class="img-responsive" alt="#" style="height: 384px;width: 324px;" /> </div>
+                    <div class="col-md-6" style="border-right:1px solid #84B637;height:384px;padding:15px;"> <!--img src="<?=URL?>images/feature-post-img.png" class="img-responsive" alt="#" style="height: 384px;width: 324px;" />-->
+                     
+ <h3 style="color:#FFF">We Offer</h3>
+  <p style="color:#ccc;"> You can customize the number of mock tests and the subjects to suit your needs. The question banks at www.trickyscore.com have been analyzed and prepared by a group of experts so as to include more than 1000 of the most possible questions that might come up during the exam.  </p>
+                    
+                     </div>
                     <div class="post-text">
                       <h3 class="text-normal">RRB NTPC ALL INDIA TEST 2016 BY LUMINOS</h3>
                       <h3 class="text" style="font-size:15px;">28 FEB 2016, 10 A.M to 9 P.M</h3>
@@ -261,7 +273,12 @@ $objgen		=	new general();
                       <a class="btn btn-primary btn-effect" href="#.">Free Registration open</a> </div>
                   </div>
                   <div class="item">
-                    <div class="section-img"> <img src="<?=URL?>images/feature-post3-img.png" class="img-responsive" alt="#" style="height: 384px;width: 324px;" /> </div>
+                    <div class="col-md-6" style="border-right:1px solid #84B637;height:384px;padding:15px;"> <!--<img src="<?=URL?>images/feature-post3-img.png" class="img-responsive" alt="#" style="height: 384px;width: 324px;" />--> 
+                    <h3 style="color:#FFF"> We Provide</h3>
+                    
+                   <p style="color:#ccc;">  We provide opportunities to candidates to appear in periodic online exams in a simulated exam environment so that candidates would know where they stand amongst a much wider competition. Regular feedback from the TrickyScore team will also help you to plan and focus your attention as required. </p>
+                    
+                    </div>
                     <div class="post-text">
                       <h3 class="text-normal">RRB NTPC ALL INDIA TEST 2016 BY LUMINOS</h3>
                       <h3 class="text" style="font-size:15px;">28 FEB 2016, 10 A.M to 9 P.M</h3>

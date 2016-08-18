@@ -19,7 +19,7 @@ if ($_SESSION['MYPR_adm_type'] == "vendor") {
     }
 
     if (count($allow_id) > 0) {
-        $where = "and id IN (" . implode($allow_id) . ")";
+        $where = "and id IN (" . implode(',',$allow_id) . ")";
     } else {
         $where = "and id=0";
     }
@@ -165,7 +165,7 @@ if (isset($_POST['Search'])) {
 
 
         <?php require_once "footer-script.php"; ?>
-        <script src="<?= URLUR ?>js/chart.js"></script>
+        <script src="<?=URLUR?>js/chart.js"></script>
         <script type="text/javascript">
 <?php
 if (!empty($usrid)) {
@@ -355,7 +355,7 @@ if (!empty($getAllExamsByUser)) {
     }
     ;
 </script>
-<script type="text/javascript" src="<?= URLUR ?>js/datatables/datatables.min.js"></script>
+<script type="text/javascript" src="<?=URLUR?>js/datatables/datatables.min.js"></script>
 
     </body>
 </html>

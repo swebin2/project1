@@ -67,6 +67,7 @@ if($_SESSION['MYPR_adm_type']=="vendor")
 
 }
 
+
 $pay_count = $objgen->get_AllRowscnt("payments",$where);
 if($pay_count>0)
 {
@@ -75,6 +76,20 @@ if($pay_count>0)
   {
 	   $pay  += $val['amount'];
   }
+}
+
+$where = "";
+
+if($_SESSION['MYPR_adm_type']=="vendor")
+{
+	$exam_id = $_SESSION['MYPR_exam_id'];
+	$where = " and id=".$exam_id;
+}
+
+$exam_count = $objgen->get_AllRowscnt("exmas",$where);
+if($exam_count>0)
+{
+  $exam_arr = $objgen->get_AllRows("exmas",0,$exam_count,"id asc",$where);
 }
 ?>
 <!DOCTYPE html>
@@ -161,6 +176,95 @@ if($pay_count>0)
   </ul>
   </div>
   <!-- End Top Stats -->
+  
+  
+  <div class="panel panel-widget">
+     
+
+      
+      <br clear="all" />
+      
+         <div class="panel-title">
+        Packages
+       </div>
+      
+      	<?php
+				if($exam_count>0)
+				{
+				 foreach($exam_arr as $key=>$val)
+				 {
+											  
+                 ?>
+        <div class="kode-alert alert1">
+      
+       
+                        <label  style="font-size:24px">  <?=$key+1?>. <?=$objgen->check_tag($val['exam_name'])?> </label>
+                    </div>
+          
+          
+      	<?php
+		
+			$where = " and exam_id=".$val['id'];
+			$pkg_count = $objgen->get_AllRowscnt("exam_package",$where);
+			if($pkg_count>0)
+			{
+ 			   $pkg_arr = $objgen->get_AllRows("exam_package",0,$pkg_count,"id asc",$where);
+
+
+				 foreach($pkg_arr as $key1=>$val1)
+				 {
+					 $class = "panel-success";
+					 
+					 if($val1['package_no']==2)
+					 {
+					 	$class = "panel-warning";
+					 }
+					 if($val1['package_no']==3)
+					 {
+					 	$class = "panel-danger";
+					 }
+					 if($val1['package_no']==1)
+					 {
+					 	$class = "panel-success";
+					 }
+					 
+					 $packcpunt = $objgen->get_AllRowscnt("exam_permission"," and package_id='".$val1['id']."' and status='active'");
+											  
+                 ?>
+      <div class="col-md-6 col-lg-4">
+      <div class="panel <?=$class?>">
+
+        <div class="panel-title">
+  
+          Package <?=$objgen->check_tag($val1['package_no'])?></label>
+              
+         
+        </div>
+         <div class="panel-heading">
+           Rs. <?=$objgen->check_tag($val1['amount'])?>
+            </div>
+        <div class="panel-body">
+         <?=$objgen->check_tag($val1['no_of_exam'])?> exams can run, 
+         Duration : <?=$objgen->check_tag($val1['period'])?> Days
+        </div>
+
+        <div class="panel-footer" style="font-weight:bold;color:#FF9" >No of User Subscribed : <?=$packcpunt?></div>
+
+      </div>
+    </div>
+     <?php
+	 
+				 }
+				}
+			?>
+            <br clear="all" />
+            <?php
+				 }
+				}
+				?>
+        
+      </div>
+      
 
 </div>
 <!-- END CONTAINER -->

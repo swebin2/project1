@@ -16,6 +16,8 @@ if(isset($_POST['Register']))
 	$password  		= $_POST['password'];
 	$status  		= "active";
 	$msg = "";
+	
+   $randomString = rand(1000000,100000000);
 
 	
 	$sh_exit = $objgen->chk_Ext("users","email='$email'");
@@ -30,7 +32,7 @@ if(isset($_POST['Register']))
    if($msg=="")
    {
 
-		 $msg = $objgen->ins_Row('users','email,password,status,full_name,mobile',"'".$email."','".$objgen->encrypt_pass($password)."','".$status."','".$full_name."','".$mobile."'");
+		 $msg = $objgen->ins_Row('users','email,password,status,full_name,mobile,otp,otp_verify',"'".$email."','".$objgen->encrypt_pass($password)."','".$status."','".$full_name."','".$mobile."','".$randomString."','no'");
 		 $my_id = $objgen->get_insetId();
 		 $_SESSION['my_id'] = $my_id;
 		 
@@ -76,8 +78,11 @@ if(isset($_POST['Register']))
 					$_SESSION['ma_name']	    =  $full_name ;
 
 					//header("location:".URL."payment");
+					unset($_SESSION['attemptotp']);
+					unset($_SESSION['attemptchk']);
+					header("location:".URL."verify-otp"); 
 					
-					header("location:".URLUR);
+					//header("location:".URLUR);
 
 			
 		 }

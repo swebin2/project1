@@ -56,6 +56,7 @@ if ($uploadOk == 0) {
 			foreach ($Reader as $Row)
 			{
 			
+			$error_flag = 1;
 			
 			if($Row[0]=="")
 			{
@@ -151,14 +152,22 @@ if ($uploadOk == 0) {
 					   else
 					    $status	        =  "active";
 							
-							
-				    $brd_exit = $objgen->chk_Ext("question","question='".$objgen->basedecode($question)."' and exam=$exam");
-					if($brd_exit>0)
+				    if($question=="")
 					{
-						$errors[] = "This quation is already exists.";
+						$errors[] = $Row[0]." - question is empty. Not imported.";
+						$error_flag =2;
+					}
+					else
+					{
+						$brd_exit = $objgen->chk_Ext("question","question='".$objgen->basedecode($question)."' and exam=$exam");
+						if($brd_exit>0)
+						{
+							$errors[] = $Row[0]." - question is already exists. Not imported.";
+							$error_flag =2;
+						}
 					}
 				   
-				    if(empty($errors))
+				    if($error_flag==1)
 					{
 					
 					  $msg = $objgen->ins_Row('question','exam_group,exam,section,subject,module,question_type,question,quest_det,mark,negative_per,difficulty,status,img_status,file_name,direction_id',"'".$exam_group."','".$exam."','".$section."','".$subject."','".$module."','".$question_type."','".$question."','".$quest_det."','".$mark."','".$negative_per."','".$difficulty."','".$status."','".$img_status."','".$file_name."','".$direction_id."'");
@@ -225,7 +234,9 @@ if ($uploadOk == 0) {
    
  if($msg=="")
  {
-	header("location:".$add_url."/?msg=1");
+	//header("location:".$add_url."/?msg=1");
+	
+	 $msg2 = "Questions Imported Successfully.";
  }
    
   // exit;

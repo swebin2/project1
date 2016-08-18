@@ -51,7 +51,7 @@ if($_SESSION['MYPR_adm_type']=="vendor")
 	
 	if(count($allow_id)>0)
 	{
-		$where = "and order_id IN (".implode($allow_id).")";
+		$where = "and order_id IN (".implode(',',$allow_id).")";
 	}
 	else
 	{
@@ -59,6 +59,10 @@ if($_SESSION['MYPR_adm_type']=="vendor")
 	}
 
 }
+
+if(isset($_REQUEST['Search']))
+{
+	
 if(isset($_REQUEST['un']) &&  trim($_REQUEST['un'])!="")
 {
   $un = trim($_REQUEST['un']);
@@ -68,9 +72,28 @@ if(isset($_REQUEST['un']) &&  trim($_REQUEST['un'])!="")
 if(isset($_REQUEST['ut']) &&  trim($_REQUEST['ut'])!="")
 {
   $ut = trim($_REQUEST['ut']);
-  $where .= " and pay_date = '".date("Y-m-d",strtotime($ut))."'";
+  $where .= " and pay_date >= '".date("Y-m-d",strtotime($ut))."'";
 }
 
+if(isset($_REQUEST['ut1']) &&  trim($_REQUEST['ut1'])!="")
+{
+  $ut1 = trim($_REQUEST['ut1']);
+  $where .= " and pay_date <= '".date("Y-m-d",strtotime($ut1))."'";
+}
+
+$row_count = $objgen->get_AllRowscnt("payments",$where);
+if($row_count>0)
+{
+  $res_arr = $objgen->get_AllRows("payments",0,$row_count,"id desc",$where);
+}
+
+
+
+}
+else
+{
+
+//echo $where;
 
 $row_count = $objgen->get_AllRowscnt("payments",$where);
 if($row_count>0)
@@ -82,6 +105,8 @@ if($row_count>0)
   $objPN->setDispType('PG_BOOSTRAP');
   $pages = $objPN->get(array("un" => $un, "ut" => $ut), 1, WEBLINKAD."/".$params[0]."/", "", "active");
   $res_arr = $objgen->get_AllRows("payments",$pagesize*($page-1),$pagesize,"id desc",$where);
+}
+
 }
 
 if(isset($_POST['Reset']))
@@ -145,8 +170,13 @@ if(isset($_POST['Reset']))
                 </div>
 			
 		            <div class="form-group">
-                  <label class="form-label" for="example2">Date</label>
+                  <label class="form-label" for="example2">Date From</label>
                    <input type="text" class="form-control" value="<?=$ut?>" name="ut"  id="ut" />
+                </div>
+                
+                  <div class="form-group">
+                  <label class="form-label" for="example2">Date To</label>
+                   <input type="text" class="form-control" value="<?=$ut1?>" name="ut1"  id="ut1" />
                 </div>
 		
 				
@@ -186,11 +216,13 @@ if(isset($_POST['Reset']))
                                             <tr>
                                                 <th>Order ID</th>
 												<th>User</th>
+                                                <th>Packages</th>
 												<th>Exam</th>
                                                 <th>Pay Req. ID</th>
 												<th>Payment ID</th>
                                                 <th>Pay Status</th>
                                                 <th>Date</th>
+                                                <th>Amount</th>
                                                 <?php
                                                 if($_SESSION['MYPR_adm_type']=="admin")
 												{
@@ -203,19 +235,38 @@ if(isset($_POST['Reset']))
                                         </thead>
                                         <tbody>
 										  	<?php
+											$tot =0;
 										if($row_count>0)
 										{
 										  foreach($res_arr as $key=>$val)
 											  {
+												  $pcknmarr = array();
 											  
                                                      $result     		= $objgen->get_Onerow("users","AND id=".$val['user_id']);
 												
 												$allow_exams = array();	
+												
+												$where = " and order_id='".$val['order_id']."'";
+												$packcpunt = $objgen->get_AllRowscnt("exam_permission",$where);
+												
+												if($packcpunt>0)
+												{
+												  $pakarr = $objgen->get_AllRows("exam_permission",0,$packcpunt,"id asc",$where);
+												  foreach($pakarr as $k=>$v)
+												  {
+													  $pack  = $objgen->get_Onerow("exam_package","AND id=".$v['package_id']);
+													  $exam  = $objgen->get_Onerow("exmas","AND id=".$pack['exam_id']);
+													  
+													  $pcknmarr[] = $objgen->check_tag($exam['exam_name'])." : Package -".$objgen->check_tag($pack['package_no']);
+												  }
+												  
+												}
 											?>
                                             <tr>
                                                 <td><?php echo $objgen->check_tag($val['order_id']); ?>
 												</td>
 												<td><?php echo $objgen->check_tag($result['full_name']); ?></td>
+                                                <td><?=implode("<br />",$pcknmarr);?></td>
 												<td><?php 
 												$where2 = " and order_id=".$val['order_id'];
 												
@@ -248,12 +299,13 @@ if(isset($_POST['Reset']))
 												 }
 												 else
 												 {
-												  echo $objgen->check_tag($val['pay_status']); 
+												  echo '<span class="label label-danger">'.$objgen->check_tag($val['pay_status'])."</span>"; 
 												 }
 												 ?>
 												
 												</td>
 												<td><?php echo date("j M Y",strtotime($val['pay_date'])); ?></td>
+                                                <td><?php echo $objgen->check_tag($val['amount']); ?> INR</td>
                                                  <?php
                                                 if($_SESSION['MYPR_adm_type']=="admin")
 												{
@@ -265,14 +317,35 @@ if(isset($_POST['Reset']))
                                             </tr>
                                           
                                          <?php
+										       $tot += $val['amount'];
 												}
 											}
+											if(isset($_REQUEST['Search']))
+											{
+											
 										 ?>
+                                         <tr style="background-color:#CCC">
+                                         <td colspan="7">&nbsp;</td>
+                                         <td><b>Total</b></td>
+                                         <td><b><?=$tot?> INR</b></td>
+                                           <?php
+                                                if($_SESSION['MYPR_adm_type']=="admin")
+												{
+													?>
+                                              <td>&nbsp;</td>
+                                               <?php
+                                         }
+                                         ?> 
+                                         </tr>
+                                         <?php
+                                         }
+                                         ?>
+                                         
                                         </tbody>
                                        
                                     </table>
 									<?php
-									if($row_count > $pagesize) 
+									if(($row_count > $pagesize) && !isset($_REQUEST['Search'])) 
 									{
 									?>
 									<div class="row pull-right">
@@ -329,7 +402,12 @@ Bootstrap Date Range Picker
 <!-- Basic Single Date Picker -->
 <script type="text/javascript">
 $(document).ready(function() {
-  $('#ut').daterangepicker({ singleDatePicker: true,  showDropdowns: true,     format: 'DD/MM/YYYY' }, function(start, end, label) {
+  $('#ut').daterangepicker({ singleDatePicker: true,  showDropdowns: true,     format: 'DD-MM-YYYY' }, function(start, end, label) {
+    console.log(start.toISOString(), end.toISOString(), label);
+  });
+});
+$(document).ready(function() {
+  $('#ut1').daterangepicker({ singleDatePicker: true,  showDropdowns: true,     format: 'DD-MM-YYYY' }, function(start, end, label) {
     console.log(start.toISOString(), end.toISOString(), label);
   });
 });

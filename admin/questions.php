@@ -13,6 +13,9 @@ $objPN		= 	new page(1);
 $pagesize	=	20;
 $page	 	= isset($_REQUEST['page'])	?	$_REQUEST['page']	:	"1";
 
+$currpage = $page-1;
+$serial = ($currpage * $pagesize) + 1;
+
 if(isset($_GET['del']))
 {
    $id= $_GET['del'];
@@ -498,7 +501,7 @@ function drop(ev){
                                         <thead>
                                             <tr>
                                                 <th>	<input type="checkbox"   id="selectall" ></th>
-                                                <th>QID</th>
+                                                <th>Sl.No</th>
                                                 <th>Question</th>
                                                 <th>Type</th>
 												<th>Group</th>
@@ -521,6 +524,8 @@ function drop(ev){
 										{
 										  foreach($res_arr as $key=>$val)
 											  {
+												  
+												    $s_num = $serial++;
 											  
                                                   $result   = $objgen->get_Onerow("exam_group","AND id=".$val['exam_group']);
 												  $result2   = $objgen->get_Onerow("exmas","AND id=".$val['exam']);
@@ -598,8 +603,8 @@ function drop(ev){
 						?>
                                             <tr>
                                                 <td><input name="check[]" type="checkbox" value="<?php echo $val['id']; ?>"  class="case" ></td>
-                                                <td><?php echo $val['id']; ?></td>
-                                                <td><?php echo $objgen->basedecode($val['question']); ?></td>
+                                                <td><?php echo $s_num; ?></td>
+                                                <td><b><?php echo $val['id']; ?>.</b>&nbsp;											<?php echo $objgen->basedecode($val['question']); ?></td>
                                                 <td><?=$qtyp?></td>
 												<td><?php echo $objgen->check_tag($result['name']); ?></td>
 												<td><?php echo $objgen->check_tag($result2['exam_name']); ?></td>

@@ -20,7 +20,7 @@ if ($_SESSION['MYPR_adm_type'] == "vendor") {
     }
 
     if (count($allow_id) > 0) {
-        $where = "and id IN (" . implode($allow_id) . ")";
+        $where = "and id IN (" . implode(',',$allow_id) . ")";
     } else {
         $where = "and id=0";
     }
@@ -281,7 +281,7 @@ if (isset($_POST['Search'])) {
                 $.ajax({
                     type: "POST",
                     dataType: "html",
-                    url: "<?= URLUR ?>ajax2.php",
+                    url: "<?=URLUR?>ajax2.php",
                     data: {pid: 5, exam_name: exam_name, exam_score_id: exam_score_id},
                     success: function (result) {
                         $('#chart-container').html(result);
@@ -289,7 +289,7 @@ if (isset($_POST['Search'])) {
                 });
             }
         </script>
-        <script type="text/javascript" src="<?= URLUR ?>js/datatables/datatables.min.js"></script>
+        <script type="text/javascript" src="<?=URLUR?>js/datatables/datatables.min.js"></script>
 
     </body>
 </html>
