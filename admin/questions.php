@@ -471,7 +471,7 @@ function drop(ev){
 				</div>
                 
        <div class="pull-right">
-				<button type="buttom" class="btn btn-success" name="Reset" onClick="window.location='<?=$add_url?>'"><span class="fa fa-plus"></span>&nbsp;Add New</button>
+				<button type="button" class="btn btn-success" name="Reset" onClick="window.location='<?=$add_url?>'"><span class="fa fa-plus"></span>&nbsp;Add New</button>
 				</div>
          
         </div>
@@ -877,7 +877,7 @@ function drop(ev){
                                      <div class="col-md-1" style="margin:5px;">
 									<?=$alphas[$key3]?>&nbsp;&nbsp;
                                     </div>
-                                    <div class="col-md-3"  style="margin:5px;" >
+                                    <div class="col-md-4"  style="margin:5px;" >
                                			<div class="dragdrop2"  ondragstart="drag(event)" name="<?=$corrans[$key3]?>" draggable="true"  id="drg<?=$key3?>"   >
                                         <div style="position:absolute;padding:5px;">
 							   				<?=$val3?>
@@ -887,7 +887,7 @@ function drop(ev){
                                 <div class="col-md-1" style="margin:5px;">
                                 	<i class='fa fa-long-arrow-right'></i>
                                 </div>
-                               <div class="col-md-3" style="margin:5px;">
+                               <div class="col-md-4" style="margin:5px;">
                                
                                         <div class="dragdrop"  ondrop="drop(event)" ondragover="allowDrop(event)" id="<?=$pair2[$m]?>" >
                                         <div style="position:absolute;padding:5px;">
@@ -896,7 +896,7 @@ function drop(ev){
                                          </div>
                                                     
                                   </div>
-                                  <div class="col-md-3"  style="margin:5px;" >
+                                  <div class="col-md-2"  style="margin:5px;" >
                                <b>Correct Ans :</b>&nbsp;<?=$corrans[$key3]?>
                                </div>
                                

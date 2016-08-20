@@ -14,9 +14,9 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
     $_SESSION['exam'][$usrid]['qid'] = array();
 
     $id = $_SESSION['exam'][$usrid]['id'];
-    if($_SESSION['exam'][$usrid]['exam_creator']=='user'){
+    if ($_SESSION['exam'][$usrid]['exam_creator'] == 'user') {
         $result = $objgen->get_Onerow("user_exam_list", "AND id=" . $id);
-    }else{
+    } else {
         $result = $objgen->get_Onerow("exam_list", "AND id=" . $id);
     }
     $exam_name = $objgen->check_tag($result['exam_name']);
@@ -26,8 +26,8 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
 //    $_SESSION['exam'][$usrid]['exam_duration'] = $duration;
     $neagive_mark = $objgen->check_tag($result['neagive_mark']);
     $avaibility = $objgen->check_tag($result['avaibility']);
-    if($duration=='Untimed'){
-        if(empty($_SESSION['exam'][$usrid]['exm_strat_time'])){
+    if ($duration == 'Untimed') {
+        if (empty($_SESSION['exam'][$usrid]['exm_strat_time'])) {
             $date = new DateTime();
             $_SESSION['exam'][$usrid]['exm_strat_time'] = $date->getTimestamp();
         }
@@ -46,18 +46,18 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
     $link_add = $objgen->check_tag($result['link_add']);
 
     $totno_of_qu = $objgen->check_tag($result['totno_of_qu']);
-    
-    if($_SESSION['exam'][$usrid]['exam_creator']=='user'){
+
+    if ($_SESSION['exam'][$usrid]['exam_creator'] == 'user') {
         $where = " and user_exam_list_id=" . $id;
         $secli_count = $objgen->get_AllRowscnt("user_section_list", $where);
-    }else{
+    } else {
         $where = " and exam_list_id=" . $id;
         $secli_count = $objgen->get_AllRowscnt("section_list", $where);
     }
     if ($secli_count > 0) {
-        if($_SESSION['exam'][$usrid]['exam_creator']=='user'){
+        if ($_SESSION['exam'][$usrid]['exam_creator'] == 'user') {
             $secli_arr = $objgen->get_AllRows("user_section_list", 0, $secli_count, "id asc", $where);
-        }else{
+        } else {
             $secli_arr = $objgen->get_AllRows("section_list", 0, $secli_count, "id asc", $where);
         }
 
@@ -68,7 +68,7 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
 
                 $where = " and exam_group = '" . $group_id . "' and exam='" . $exam_id . "' and section='" . $val['section_id'] . "'";
             }
-            
+
             $qu_count = $objgen->get_AllRowscnt("question", $where);
             if ($qu_count > 0) {
                 $qu_arr = $objgen->get_AllRows("question", 0, $val['no_of_qu'], "rand()", $where);
@@ -100,11 +100,13 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
         <link href="<?= URLUR ?>css/fieldChooser.css" rel="stylesheet">
         <link href="<?= URLUR ?>css/custom.css" rel="stylesheet">
         <link href="<?= URLUR ?>css/qn_flag.css" rel="stylesheet">
-        
+        <link rel="stylesheet" href="<?= URLUR ?>api/font-awsome/css/font-awesome.min.css">
+
 
         <script src="js/jquery.cookie.js"></script>
         <script src="js/jquery-ui.js"></script>
-        <script src="js/dragnmatch.js"></script>
+        <script type="text/javascript" src="http://www.wfimc.org/public/js/yui/3.3.0/build/yui/yui.js"></script>
+<!--        <script src="js/dragnmatch.js"></script>
         <script>
             $(document).ready(function () {
                 var $sourceFields = $("#sourceFields");
@@ -125,7 +127,7 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
                 });
             });
 
-        </script>
+        </script>-->
         <style>
             .rcorners1{
                 background-color: #eff0f1;
@@ -181,13 +183,13 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
         <div class="content" style="margin:20px;padding-top: 0">
             <div id="top" style="margin-left: -30px !important;position: static;width: 105%;">
 
-            <!-- Start App Logo -->
-            <div class="applogo">
-              <a class="logo" href="/sumesh/tricky/user/">Tricky Score</a>
-            </div>
-            <!-- End App Logo -->
+                <!-- Start App Logo -->
+                <div class="applogo">
+                    <a class="logo" href="/sumesh/tricky/user/">Tricky Score</a>
+                </div>
+                <!-- End App Logo -->
 
-          </div>
+            </div>
             <!-- //////////////////////////////////////////////////////////////////////////// --> 
             <!-- START CONTAINER -->
             <div class="container-default">
@@ -195,7 +197,7 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
                 <div class="row">
 
                     <div class="col-md-12 col-lg-12">
-                      
+
                         <div class="col-md-12 col-lg-12">
                             <div class="col-md-8 col-lg-8"><h3><?= $_SESSION['exam'][$usrid]['exam_name'] ?></h3></div>
                             <?php
@@ -423,8 +425,8 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
                                                     $answermatch = array();
                                                     $pair = array();
                                                     $pair2 = array();
-                                                    $corrans = array(); 
-                                                    
+                                                    $corrans = array();
+
                                                     foreach ($res_arr2 as $key2 => $val2) {
 
 
@@ -484,7 +486,7 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
                                                     $answermatch = array();
                                                     $pair = array();
                                                     $pair2 = array();
-                                                    $corrans = array(); 
+                                                    $corrans = array();
                                                     
                                                     foreach ($res_arr2 as $key2 => $val2) {
 
@@ -500,11 +502,11 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
                                                         }
                                                     }
 
-                                                    //print_r($pair2);
+//                                                    print_r($pair2);
 
                                                     @shuffle($pair2);
 
-                                                    //print_r($pair2);
+//                                                    print_r($pair2);
                                                     $m = 0;
 //                                                    foreach ($pair as $key3 => $val3) {
                                                     ?>
@@ -541,28 +543,122 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
 //                                                        $m++;
 //                                                    }
                                                     ?>
-                                                    <link href="css/fieldChooser.css" rel="stylesheet">
-                                                    <div id="fieldChooser" tabIndex="1">
-                                                        <div id="sourceFields">
-                                                            <div id="1">First name</div>
-                                                            <div id="2">Last name</div>
-                                                            <div id="3">Home</div>
-                                                            <div id="4">Work</div>
+                                                    <div id="workarea">
+                                                        <div style="width: 165px;float: left">
+                                                            <div class="player">1</div>
+                                                            <div class="player">2</div>
+                                                            <div class="player">3</div>
+                                                            <div class="player">4</div>
+                                                            <div class="player">5</div>
+                                                            <div class="player">6</div>
                                                         </div>
-                                                        <div id="destinationFields">
-                                                            <div class="destiField">
-                                                                
+                                                        <div class="col-lg-offset-2" style="width: 165px;float: left">
+                                                            <div class="slot">
+                                                                <span class="hidden-xs fa fa-arrow-circle-right" style="font-size:140%;float: left"></span>Drop Here
                                                             </div>
-                                                        </div>
-                                                        <div id="staticFields" class="fc-field-list fc-static-fields" style="float: left">
+                                                            <div class="slot">
+                                                                <span class="hidden-xs fa fa-arrow-circle-right" style="font-size:140%;float: left"></span>Drop Here
+                                                            </div>
+                                                            <div class="slot">
+                                                                <span class="hidden-xs fa fa-arrow-circle-right" style="font-size:140%;float: left"></span>Drop Here
+                                                            </div>
+                                                            <div class="slot">
+                                                                <span class="hidden-xs fa fa-arrow-circle-right" style="font-size:140%;float: left"></span>Drop Here
+                                                            </div>
+                                                            <div class="slot">
+                                                                <span class="hidden-xs fa fa-arrow-circle-right" style="font-size:140%;float: left"></span>Drop Here
+                                                            </div>
+                                                            <div class="slot">
+                                                                <span class="hidden-xs fa fa-arrow-circle-right" style="font-size:140%;float: left"></span>Drop Here
+                                                            </div>
 
-                                                            <div class="fc-field">First name Field</div>
-                                                            <div class="fc-field">Last name Field</div>
-                                                            <div class="fc-field">Home Field</div>
-                                                            <div class="fc-field">Work Field</div>
                                                         </div>
+                                                        <div style="width: 165px;float: left">
+                                                            <div class="slot2">1</div>
+                                                            <div class="slot2">3</div>
+                                                            <div class="slot2">4</div>
+                                                            <div class="slot2">5</div>
+                                                            <div class="slot2">6</div>
+                                                            <div class="slot2">2</div>
+                                                        </div>
+
+
                                                     </div>
                                                     <input type="hidden" id="dm_ans" name="ans" value="">
+                                                    <script>
+                                                        var config = {filter: 'raw'};
+                                                        config.filter = 'raw';
+                                                        YUI(config).use('dd-drop', 'dd-proxy', 'dd-constrain', function (Y) {
+
+                                                            var slots = Y.one('#workarea').all('.slot');
+                                                            Y.each(slots, function (v, k) {
+                                                                var id = v.get('id'), groups = ['two'];
+                                                                //        switch (id) {
+                                                                //            case 't1':
+                                                                //            case 't2':
+                                                                //                groups = ['one'];
+                                                                //                break;
+                                                                //        }
+                                                                var drop = new Y.DD.Drop({
+                                                                    node: v,
+                                                                    groups: groups
+                                                                });
+                                                            });
+
+                                                            var players = Y.one('#workarea').all('.player');
+                                                            Y.each(players, function (v, k) {
+                                                                var id = v.get('id'), groups = ['one', 'two'];
+                                                                //        switch (id) {
+                                                                //            case 'pt1':
+                                                                //            case 'pt2':
+                                                                //                groups = ['one'];
+                                                                //                break;
+                                                                //            case 'pb1':
+                                                                //            case 'pb2':
+                                                                //                groups = ['two'];
+                                                                //                break;
+                                                                //        }
+                                                                var drag = new Y.DD.Drag({
+                                                                    node: v,
+                                                                    groups: groups,
+                                                                    dragMode: 'intersect'
+                                                                }).plug(Y.Plugin.DDProxy, {
+                                                                    moveOnEnd: false
+                                                                }).plug(Y.Plugin.DDConstrained, {
+                                                                    constrain2node: '#workarea'
+                                                                });
+                                                                drag.on('drag:start', function () {
+                                                                    var p = this.get('dragNode'),
+                                                                            n = this.get('node');
+                                                                    n.setStyle('opacity', .25);
+                                                                    if (!this._playerStart) {
+                                                                        this._playerStart = this.nodeXY;
+                                                                    }
+                                                                    p.set('innerHTML', n.get('innerHTML'));
+                                                                    p.setStyles({
+                                                                        backgroundColor: n.getStyle('backgroundColor'),
+                                                                        color: n.getStyle('color'),
+                                                                        opacity: .65
+                                                                    });
+                                                                });
+                                                                drag.on('drag:end', function () {
+                                                                    var n = this.get('node');
+                                                                    n.setStyle('opacity', '1');
+                                                                });
+                                                                drag.on('drag:drophit', function (e) {
+                                                                    var xy = e.drop.get('node').getXY();
+                                                                    this.get('node').setXY(xy, Y.UA.ie);
+                                                                });
+                                                                drag.on('drag:dropmiss', function (e) {
+                                                                    if (this._playerStart) {
+                                                                        this.get('node').setXY(this._playerStart, Y.UA.ie);
+                                                                        this._playerStart = null;
+                                                                    }
+                                                                });
+                                                            });
+                                                        });
+                                                    </script>
+                                                    
                                                 </form>
                                                 <?php
                                             }
@@ -597,25 +693,25 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
                                 <div class="qn_panel">
                                     <ul>
                                         <?php
-                                        for($i=0;$i<count($_SESSION['exam'][$usrid]['qid']);$i++){
-                                            if(!empty($_SESSION['exam'][$usrid]['exam_qnSts'])){
+                                        for ($i = 0; $i < count($_SESSION['exam'][$usrid]['qid']); $i++) {
+                                            if (!empty($_SESSION['exam'][$usrid]['exam_qnSts'])) {
                                                 if (array_key_exists($_SESSION['exam'][$usrid]['qid'][$i], $_SESSION['exam'][$usrid]['exam_qnSts'])) {
 
-                                                    if($_SESSION['exam'][$usrid]['exam_qnSts'][$_SESSION['exam'][$usrid]['qid'][$i]]==0){
+                                                    if ($_SESSION['exam'][$usrid]['exam_qnSts'][$_SESSION['exam'][$usrid]['qid'][$i]] == 0) {
                                                         $style = "background: red";
-                                                    }else{
+                                                    } else {
                                                         $style = "background: green";
                                                     }
-                                                }else{
+                                                } else {
                                                     $style = '';
                                                 }
                                             }
-                                        ?>
-                                        <li style="<?= $style ?>"><a href="javascript:void(0)" onclick="examqn(<?= $i ?>)"><?= $i+1 ?></a></li>
-                                        <?php
+                                            ?>
+                                            <li style="<?= $style ?>"><a href="javascript:void(0)" onclick="examqn(<?= $i ?>)"><?= $i + 1 ?></a></li>
+                                            <?php
                                         }
                                         ?>
-                                        
+
                                     </ul>
                                     <div class="qn_color_hint_container">
                                         <p class="qn_color_hint_col"><span class="qn_color_hint redbg"></span> <span class="qn_hint">Unanswered Question</span></p>
@@ -624,17 +720,17 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <br clear="all" />
                             <div align="right">
-                                                                
+
                                 <div style="float: left;margin-right: 50px">
                                     <?php
                                     $chkFlag = $objgen->chk_Ext("question_flag", "user_id='$usrid' AND que_id='$questionId' AND status=1");
-                                    if($chkFlag>0){
+                                    if ($chkFlag > 0) {
                                         $checked = 'checked';
-                                    }else{
-                                        $checked='';
+                                    } else {
+                                        $checked = '';
                                     }
                                     ?>
                                     Flag &nbsp
@@ -685,7 +781,7 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
 
 
             <!-- Start Footer -->
-            <?php require_once "footer.php";      ?>
+            <?php require_once "footer.php"; ?>
             <!-- End Footer -->
 
 
@@ -697,38 +793,38 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
 
         <script src="js/jquery.countdown.js"></script>
         <script>
-            <?php
-            if($duration!='Untimed'){
-            ?>
-                                    var timer_start_time = parseInt($.cookie('timer_start_time'));
-                                    var addSeconds = (60 *<?= $time_seconds ?>) * 1000;
-                                    var countdown_time = timer_start_time + addSeconds;
-                                    $('#clock').countdown(countdown_time, {elapse: true})
-                                            .on('update.countdown', function (event) {
-                                                var $this = $(this);
+<?php
+if ($duration != 'Untimed') {
+    ?>
+                                        var timer_start_time = parseInt($.cookie('timer_start_time'));
+                                        var addSeconds = (60 *<?= $time_seconds ?>) * 1000;
+                                        var countdown_time = timer_start_time + addSeconds;
+                                        $('#clock').countdown(countdown_time, {elapse: true})
+                                                .on('update.countdown', function (event) {
+                                                    var $this = $(this);
 
-                                                if (event.elapsed) {
-                                                    window.location.replace("<?= URLUR . "exam-finish" ?>");
-                                                } else {
-                                                    $this.html(event.strftime('<div id="clockdiv"><div>    <span class="hours">%H</span>    <div class="smalltext">Hours</div>  </div>  <div>    <span class="minutes">%M</span>    <div class="smalltext">Minutes</div>  </div>  <div>    <span class="seconds">%S</span>    <div class="smalltext">Seconds</div>  </div></div>'));
-                                                }
-                                            });
-                                       <?php
-            }else{
-                                       ?>
-                                    var fiveSeconds =  new Date().getTime();
-                                    $('#clock').countdown(fiveSeconds, {elapse: true})
-                                        .on('update.countdown', function(event) {
-                                            var $this = $(this);
-                                            if (event.elapsed) {
-                                            $this.html(event.strftime('<div id="clockdiv"><div>    <span class="hours">%H</span>    <div class="smalltext">Hours</div>  </div>  <div>    <span class="minutes">%M</span>    <div class="smalltext">Minutes</div>  </div>  <div>    <span class="seconds">%S</span>    <div class="smalltext">Seconds</div>  </div></div>'));
-                                            } else {
-                                            
-                                            }
-                                    });
-                                    <?php
-            }
-                                    ?>
+                                                    if (event.elapsed) {
+                                                        window.location.replace("<?= URLUR . "exam-finish" ?>");
+                                                    } else {
+                                                        $this.html(event.strftime('<div id="clockdiv"><div>    <span class="hours">%H</span>    <div class="smalltext">Hours</div>  </div>  <div>    <span class="minutes">%M</span>    <div class="smalltext">Minutes</div>  </div>  <div>    <span class="seconds">%S</span>    <div class="smalltext">Seconds</div>  </div></div>'));
+                                                    }
+                                                });
+    <?php
+} else {
+    ?>
+                                        var fiveSeconds = new Date().getTime();
+                                        $('#clock').countdown(fiveSeconds, {elapse: true})
+                                                .on('update.countdown', function (event) {
+                                                    var $this = $(this);
+                                                    if (event.elapsed) {
+                                                        $this.html(event.strftime('<div id="clockdiv"><div>    <span class="hours">%H</span>    <div class="smalltext">Hours</div>  </div>  <div>    <span class="minutes">%M</span>    <div class="smalltext">Minutes</div>  </div>  <div>    <span class="seconds">%S</span>    <div class="smalltext">Seconds</div>  </div></div>'));
+                                                    } else {
+
+                                                    }
+                                                });
+    <?php
+}
+?>
                                     function examqn(k)
                                     {
                                         var str = $("form").serialize();
@@ -737,7 +833,7 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
                                             type: "POST",
                                             dataType: "html",
                                             url: "<?= URLUR ?>ajax2.php",
-                                            data: {pid: 1, action: 'qnum', user_id: <?= $usrid ?>, str: str,key: k},
+                                            data: {pid: 1, action: 'qnum', user_id: <?= $usrid ?>, str: str, key: k},
                                             success: function (result) {
 
                                                 $('#ajax_div1').html(result);
@@ -811,7 +907,7 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
                                             type: "POST",
                                             dataType: "html",
                                             url: "<?= URLUR ?>ajax2.php",
-                                            data: {pid: 2, user_id: <?= $usrid ?>, qn_id: qn_id,action: flagval},
+                                            data: {pid: 2, user_id: <?= $usrid ?>, qn_id: qn_id, action: flagval},
                                             success: function (result) {
 
                                             }

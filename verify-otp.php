@@ -33,6 +33,18 @@ if(isset($_POST['Update']))
 	 if($mobile!="")
 	 {
 	   $msg = $objgen->upd_Row('users',"mobile='".$mobile."'","id=".$_SESSION['ma_log_id']);
+	   
+	   $otp   = $result['otp'];
+	   
+	   $smscontent =  urlencode("Trickyscore OTP : ".$otp);
+				
+		$smsurl = 'http://sms.xeoinfotech.com/httpapi/httpapi?token=7a82967d6b5b3e8e30dbcfca4c26aef9&sender=TRICKY&number='.$mobile.'&route=2&type=1&sms='.$smscontent;
+			
+				  $ch = curl_init();
+						curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+						curl_setopt($ch, CURLOPT_URL,$smsurl);
+						curl_exec($ch);
+						
 	   $_SESSION['attemptotp'] -= 1;
 	   $_SESSION['attemptchk'] += 1;
 	   $msg2 = "Mobile Changed. Verify your OTP";
@@ -269,7 +281,7 @@ body {
                                     }
                                     ?>
 									
-    <input type="text" placeholder="Enter OTP recived on Mobile" autofocus name="otp"  value="<?=$otp?>"  />
+    <input type="text" placeholder="Enter OTP recived on Mobile" autofocus name="otp"  />
     <i class="fa fa-key"></i>
 
 	  <?php

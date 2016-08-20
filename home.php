@@ -245,45 +245,58 @@ $objgen		=	new general();
               <div class="col-md-8">
                 <div class="section-post" style="padding-top:80px;">
                   <div class="item">
-                    <div class="col-md-6" style="border-right:1px solid #84B637;height:384px;padding:15px;">
+                  <!--style="border-right:1px solid #84B637;height:382px;padding:15px;"-->
+                    <div class="col-md-6" >
                     
-                     <!--img src="<?=URL?>images/feature-post2-img.png" class="img-responsive" alt="#" style="height: 384px;width: 324px;" />--> <h3 style="color:#FFF">Our Mission</h3>
-                     <p style="color:#ccc;"> Our mission is to help deserving, competent and qualified candidates to secure jobs that they dream of. Thus TrickyScore not only fulfills individual aspirations but also helps in nation building by making sure that best talents get the right jobs.</p> 
+                     <img src="<?=URL?>images/mission.png" class="img-responsive" alt="#" style="height: 384px;width: 324px;" /><!-- <h3 style="color:#FFF">Our Mission</h3>
+                  
+                     <p style="color:#ccc;"> Our mission is to help deserving, competent and qualified candidates to secure jobs that they dream of. Thus TrickyScore not only fulfills individual aspirations but also helps in nation building by making sure that best talents get the right jobs.</p> -->
                      
                      </div>
                     <div class="post-text" >
                     
-                      <h3 class="text-normal">RRB NTPC ALL INDIA TEST 2016 BY LUMINOS </h3>
-                      <h3 class="text" style="font-size:15px;">28 FEB 2016, 10 A.M to 9 P.M</h3>
-                      <p style="color:#ccc;">Your content goes here.Your content goes here.Your content goes here.Your content goes here.Your content goes here.Your content goes here.Your content goes here.</p>
-                      <a class="btn btn-primary btn-effect" href="#.">Free Registration open</a> </div>
+                      <h3 class="text-normal">Prepare for an Exam  </h3>
+                         <p style="color:#ccc;">Once you decide on the exam that you are to attend, your
+ destination is clear. The next Step is to understand the 
+route to success and plan you travel accordingly. Here are 
+few points to ensure that to plan effectively?.<br /><b style="text-decoration:underline" >Syllabus :</b>   First step is to understand the syllabus to its full. Competitive exam ....
+</p>
+                      <a class="btn btn-primary btn-effect" href="<?=URL?>prepare-for-an-exam">More Tricks</a> </div>
                       
                   </div>
                   <div class="item">
-                    <div class="col-md-6" style="border-right:1px solid #84B637;height:384px;padding:15px;"> <!--img src="<?=URL?>images/feature-post-img.png" class="img-responsive" alt="#" style="height: 384px;width: 324px;" />-->
+                    <div class="col-md-6" > <img src="<?=URL?>images/offer.png" class="img-responsive" alt="#" style="height: 384px;width: 324px;" />
                      
- <h3 style="color:#FFF">We Offer</h3>
-  <p style="color:#ccc;"> You can customize the number of mock tests and the subjects to suit your needs. The question banks at www.trickyscore.com have been analyzed and prepared by a group of experts so as to include more than 1000 of the most possible questions that might come up during the exam.  </p>
+<!-- <h3 style="color:#FFF">We Offer</h3>
+  <p style="color:#ccc;"> You can customize the number of mock tests and the subjects to suit your needs. The question banks at www.trickyscore.com have been analyzed and prepared by a group of experts so as to include more than 1000 of the most possible questions that might come up during the exam.  </p>-->
                     
                      </div>
                     <div class="post-text">
-                      <h3 class="text-normal">RRB NTPC ALL INDIA TEST 2016 BY LUMINOS</h3>
-                      <h3 class="text" style="font-size:15px;">28 FEB 2016, 10 A.M to 9 P.M</h3>
-                      <p style="color:#ccc;">Your content goes here.Your content goes here.Your content goes here.Your content goes here.Your content goes here.Your content goes here.Your content goes here.</p>
-                      <a class="btn btn-primary btn-effect" href="#.">Free Registration open</a> </div>
+                      <h3 class="text-normal">Studying for an Exam </h3>
+                          <p style="color:#ccc;">No amount Planning and preparation can guarantee success unless you
+ tenaciously execute the plan to its fullness.  Read further for a few tips 
+to make best use of your study time. Realistic plan: Make an outline to structure your study plan. You will need to make a 
+realistic study plan based on what test you are taking, and the amount of 
+time....</p>
+                      <a class="btn btn-primary btn-effect" href="<?=URL?>studying-for-an-exam">More Tricks</a> </div>
                   </div>
                   <div class="item">
-                    <div class="col-md-6" style="border-right:1px solid #84B637;height:384px;padding:15px;"> <!--<img src="<?=URL?>images/feature-post3-img.png" class="img-responsive" alt="#" style="height: 384px;width: 324px;" />--> 
-                    <h3 style="color:#FFF"> We Provide</h3>
+                    <div class="col-md-6" > <img src="<?=URL?>images/advantages.png" class="img-responsive" alt="#" style="height: 384px;width: 324px;" /> 
+               <!--     <h3 style="color:#FFF"> We Provide</h3>
                     
-                   <p style="color:#ccc;">  We provide opportunities to candidates to appear in periodic online exams in a simulated exam environment so that candidates would know where they stand amongst a much wider competition. Regular feedback from the TrickyScore team will also help you to plan and focus your attention as required. </p>
+                   <p style="color:#ccc;">  We provide opportunities to candidates to appear in periodic online exams in a simulated exam environment so that candidates would know where they stand amongst a much wider competition. Regular feedback from the TrickyScore team will also help you to plan and focus your attention as required. </p>-->
                     
                     </div>
                     <div class="post-text">
-                      <h3 class="text-normal">RRB NTPC ALL INDIA TEST 2016 BY LUMINOS</h3>
-                      <h3 class="text" style="font-size:15px;">28 FEB 2016, 10 A.M to 9 P.M</h3>
-                      <p style="color:#ccc;">Your content goes here.Your content goes here.Your content goes here.Your content goes here.Your content goes here.Your content goes here.Your content goes here.</p>
-                      <a class="btn btn-primary btn-effect" href="#.">Free Registration open</a> </div>
+                      <h3 class="text-normal">Exam attending Tricks  </h3>
+                      <p style="color:#ccc;">After meticulous planning and studying hard it is important that you 
+deliver on the actual exam. Read on for a few tricks that can boost your 
+performance. The Day of Exam: You should plan the day of exam well in advance. Plan on 
+how and when you need to reach the examination center. Ensure you have a 
+list of things that you might need for the exams...
+
+</p>
+                      <a class="btn btn-primary btn-effect" href="<?=URL?>exam-attending-tricks">More Tricks</a> </div>
                   </div>
                 </div>
               </div>

@@ -1,5 +1,5 @@
 <footer>
-      <div class="grid-row">
+      <!--<div class="grid-row">
         <div class="grid-col-row clear-fix">
           <section class="grid-col grid-col-4 footer-about" style="padding: 40px 18px 0px;">
             <h2 class="corner-radius">About Us</h2>
@@ -52,8 +52,8 @@
             </form>
           </section>
         </div>
-      </div>
-      <div class="footer-bottom">
+      </div>-->
+      <div class="footer-bottom" style="margin-top:0px;">
         <div class="grid-row clear-fix">
           <div class="copyright">TrickyScore 2016 .Created by <a href="http://smartwebin.com/" target="_blank">Smart Web In</a></div>
           <nav class="footer-nav">
