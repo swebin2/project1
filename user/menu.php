@@ -28,7 +28,7 @@ if($head_url=='exam-list')
   <li><a href="<?=URLUR?>home" class="<?=$menu1?>"><span class="icon color5" ><i class="fa fa-home"></i></span>Dashboard<!--<span class="label label-default">2</span>--></a></li>
  	<li><a href="<?=URLUR?>packages" class="<?=$menu4?>"><span class="icon color10" ><i class="fa fa-shopping-cart"></i></span>Buy Packages</a></li>
 	<li><a href="<?=URLUR?>exam-list" class="<?=$menu5?>"><span class="icon color7" ><i class="fa fa-clock-o"></i></span>Exams</a></li>
-    <li><a href="<?=URLUR?>exam-manager" class="<?=$menu6?>"><span class="icon color11" ><i class="fa fa-bar-chart"></i></span>Exam Manager</a></li>
+    <li><a href="<?=URLUR?>exam-config" class="<?=$menu6?>"><span class="icon color11" ><i class="fa fa-bar-chart"></i></span>Exam Manager</a></li>
     <li><a href="<?=URLUR?>exam-list-user" class="<?=$menu7?>"><span class="icon color12" ><i class="fa fa-save"></i></span>Saved Exams</a></li>
     <li><a href="<?=URLUR?>exam-history" class="<?=$menu8?>"><span class="icon color13" ><i class="fa fa-th"></i></span>Exam History</a></li>
       <li><a href="<?=URLUR?>exam-analysis" class="<?=$menu9?>"><span class="icon color14" ><i class="fa fa-bar-chart"></i></span>Exam Analysis</a></li> 
@@ -79,7 +79,7 @@ if($head_url=='exam-list')
 <ul class="sidebar-panel nav">
    <li class="sidetitle">MORE</li>
   <li><a href="<?=URLUR?>edit-profile" class="<?=$menu10?>"><span class="icon color13" ><i class="fa fa-edit"></i></span>Edit Profile</a></li>
-   <li><a href="<?=URLUR?>reset-password" class="<?=$menu3?>"><span class="icon color8" ><i class="fa fa-key"></i></span>Rest Password</a></li>
+   <li><a href="<?=URLUR?>reset-password" class="<?=$menu3?>"><span class="icon color8" ><i class="fa fa-key"></i></span>Reset Password</a></li>
    <li><a href="<?=URLUR?>logout" ><span class="icon color9" ><i class="fa fa-sign-out"></i></span>Logout</a></li>
 </ul>
 

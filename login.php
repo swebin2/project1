@@ -1,4 +1,7 @@
 <?php
+//define('FACEBOOK_SDK_V4_SRC_DIR', __DIR__ . '/Facebook/');
+//require_once 'Facebook/autoload.php';
+
 $objgen		=	new general();
 
 if($_COOKIE["swebin_user"]!="")
@@ -215,87 +218,6 @@ body {
 <script src="<?=URL?>js/prefixfree.min.js"></script>
 </head>
 <body>
-<script>
-  // This is called with the results from from FB.getLoginStatus().
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
-      testAPI();
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    } else {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
-    }
-  }
-
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-  
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '666041090229631',
-	  cookie     : true,  // enable cookies to allow the server to access 
-                        // the session
-      xfbml      : true,  // parse social plugins on this page
-      version    : 'v2.7'
-    });
-	
-	// Now that we've initialized the JavaScript SDK, we call 
-  // FB.getLoginStatus().  This function gets the state of the
-  // person visiting this page and can return one of three states to
-  // the callback you provide.  They can be:
-  //
-  // 1. Logged into your app ('connected')
-  // 2. Logged into Facebook, but not your app ('not_authorized')
-  // 3. Not logged into Facebook and can't tell if they are logged into
-  //    your app or not.
-  //
-  // These three cases are handled in the callback function.
-
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
-  
-  };
-
-  // Load the SDK asynchronously
-  
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-   
-   // Here we run a very simple test of the Graph API after login is
-  // successful.  See statusChangeCallback() for when this call is made.
-  function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
-    });
-  }
-</script>
 <!-- Loader -->
 <div id="page-preloader" style="display: none;"><span class="spinner"></span></div>
 <!-- Loader end -->
@@ -315,21 +237,26 @@ body {
     <div class="wrapper">
       <form class="login" action="" method="post">
         <p class="title">Log in to Tricky Score with</p>
-        <div class="abc" style="text-align:center;"> 
-        
-        <!--
-  Below we include the Login Button social plugin. This button uses
-  the JavaScript SDK to present a graphical Login button that triggers
-  the FB.login() function when clicked.
--->
+        <div class="abc" style="text-align:center;">
+        <?php
+		require_once 'Facebook/autoload.php';
+			$fb = new Facebook\Facebook([
+	  'app_id' => '666041090229631', // Replace {app-id} with your app id
+	  'app_secret' => '2a00fb5635334f4ab004f1a6217ced5f',
+	  'default_graph_version' => 'v2.5',
+	  ]);
 
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
+		$helper = $fb->getRedirectLoginHelper();
+		
+		$permissions = ['email']; // Optional permissions
+		$loginUrl = $helper->getLoginUrl('http://trickyscore.com/fb-callback.php', $permissions);
+		
+		//$loginUrl = $helper->getLoginUrl(array('redirect_uri' => $_SERVER['SCRIPT_URI']), $permissions);
 
-<div id="status">
-</div>
+
+	  ?> 
         
-        <a class="btn btn-primary btn-effect" href="https://www.facebook.com/" target="_blank" style="background-color:#3B5998; box-shadow:0 4px 0 0 #2C4373; border-color:#3B5998; color:#fff; font-size:14px; border-radius:0px;">Facebook</a> <a class="btn btn-primary btn-effect" href="https://plus.google.com/" target="_blank" style="background:#e74b37; box-shadow:0 4px 0 0 #C13726; border-color:#e74b37; color:#fff; font-size:14px; border-radius:0px;">Google</a>
+        <a class="btn btn-primary btn-effect" href="<?=htmlspecialchars($loginUrl)?>"  style="background-color:#3B5998; box-shadow:0 4px 0 0 #2C4373; border-color:#3B5998; color:#fff; font-size:14px; border-radius:0px;">Facebook</a> <a class="btn btn-primary btn-effect" href="https://plus.google.com/" target="_blank" style="background:#e74b37; box-shadow:0 4px 0 0 #C13726; border-color:#e74b37; color:#fff; font-size:14px; border-radius:0px;">Google</a>
           <div class="email" style="width:100%;"> <img src="<?=URL?>images/email.png"> </div>
         </div>
         <?php

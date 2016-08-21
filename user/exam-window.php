@@ -491,10 +491,9 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
                                                     foreach ($res_arr2 as $key2 => $val2) {
 
                                                         $ans = $objgen->basedecode($val2['answer']);
-
-                                                        $ansty = $objgen->get_Onerow("answer", "AND question_id=" . $val['id'] . " and  	curr_order_id =" . $val2['match_id']);
+                                                        $ansty = $objgen->get_Onerow("answer", "AND question_id=" . $result['id'] . " and  curr_order_id =" . $val2['match_id']);
                                                         $corrans[$key2] = $objgen->basedecode($ansty['answer']);
-
+                                                     
                                                         if (!in_array($ans, $corrans)) {
                                                             $pair[$key2] = $ans;
                                                         } else {
@@ -502,15 +501,16 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
                                                         }
                                                     }
 
+//                                                    print_r($pair);
 //                                                    print_r($pair2);
 
                                                     @shuffle($pair2);
 
 //                                                    print_r($pair2);
                                                     $m = 0;
-//                                                    foreach ($pair as $key3 => $val3) {
+                                                    foreach ($pair as $key3 => $val3) {
                                                     ?>
-                                                    <!--                                                        <div class="row" >
+                                                                                                            <div class="row" >
                                                                                                                 <div class="form-group" style="clear:both"> 
                                                     
                                                                                                                     <div class="col-md-1" style="margin:5px;">
@@ -530,7 +530,7 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
                                                     
                                                                                                                         <div class="dragdrop"  ondrop="drop(event)" ondragover="allowDrop(event)" id="<?= $pair2[$m] ?>" >
                                                                                                                             <div style="position:absolute;padding:5px;">
-                                                    <?= $pair2[$m] ?>
+                                                    <?= $pair2[$m]; ?>
                                                                                                                             </div>
                                                                                                                         </div>
                                                     
@@ -538,10 +538,10 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
                                                     
                                                     
                                                                                                                 </div>
-                                                                                                            </div>-->
+                                                                                                            </div>
                                                     <?php
-//                                                        $m++;
-//                                                    }
+                                                        $m++;
+                                                    }
                                                     ?>
                                                     <div id="workarea">
                                                         <div style="width: 165px;float: left">

@@ -163,7 +163,7 @@ if($head_url=='manage-exam' || $head_url=='add-exam-list')
   }
   ?>
   
-   <li><a href="<?=URLAD?>reset-password" class="<?=$menu3?>"><span class="icon color8" ><i class="fa fa-key"></i></span>Rest Password</a></li>
+   <li><a href="<?=URLAD?>reset-password" class="<?=$menu3?>"><span class="icon color8" ><i class="fa fa-key"></i></span>Reset Password</a></li>
    <li><a href="<?=URLAD?>logout" ><span class="icon color9" ><i class="fa fa-sign-out"></i></span>Logout</a></li>
 </ul>
 

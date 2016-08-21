@@ -11,14 +11,25 @@ if($_GET['msg']==1)
   $msg2 = "Exam Created Successfully.";
 }
 
-$usrid = $_SESSION['ma_log_id'];
-    $userExamSectionArr = $objgen->getUserExamSection($usrid);
+    $usrid = $_SESSION['ma_log_id'];
+    $getExamId = $_GET['exam_id'];
+    if(!empty($getExamId)){
+        $getSectionByExamCnt = $objgen->get_AllRowscnt('section'," AND exam_id='$getExamId'");
+        if($getSectionByExamCnt>0){
+            $userExamSectionArr = $objgen->get_AllRows('section', 0, $getSectionByExamCnt, '', " AND exam_id='$getExamId'", '', 'id AS section_id');
+        }
+
+    }else{
+        $userExamSectionArr = $objgen->getUserExamSection($usrid);
+    }
+    
     $sectionId = "";
     $totsecQnCount= 0;
     for($i=0;$i<count($userExamSectionArr);$i++){
         $sectionId      .= $userExamSectionArr[$i]['section_id'].',';
     }
     $sectionId = rtrim($sectionId, ',');
+    
     
     /*
      * for all qn count with all difficulty
@@ -205,7 +216,7 @@ if(isset($_POST['create'])){
                                         <div id="ajx_section_load">
                                             <div class="qn-section-container">
                                                 <?php
-                                                $userExamSectionArr = $objgen->getUserExamSection($usrid);
+//                                                $userExamSectionArr = $objgen->getUserExamSection($usrid);
                                                 $totsecQnCount= 0;
                                                 for($i=0;$i<count($userExamSectionArr);$i++){
                                                     $sectionId      = $userExamSectionArr[$i]['section_id'];
@@ -406,7 +417,7 @@ if(isset($_POST['create'])){
                     type: "POST",
                     dataType: "html",
                     url: "<?= URLUR ?>ajax2.php",
-                    data: {pid: 3, exm_qn_filter: exm_qn_filter,exm_mode: exm_mode,exm_diff_lvl: exm_diff_lvl,user_id: <?= $usrid ?>},
+                    data: {pid: 3, exm_qn_filter: exm_qn_filter,exm_mode: exm_mode,exm_diff_lvl: exm_diff_lvl,user_id: <?= $usrid ?>,exam_id:<?= $getExamId ?>},
                     success: function (result) {
                         $('#ajx_section_load').html(result);
                     }
@@ -418,7 +429,7 @@ if(isset($_POST['create'])){
                     type: "POST",
                     dataType: "json",
                     url: "<?= URLUR ?>ajax2.php",
-                    data: {pid: 4, exm_diff_lvl: exm_diff_lvl,user_id: <?= $usrid ?>},
+                    data: {pid: 4, exm_diff_lvl: exm_diff_lvl,user_id: <?= $usrid ?>,exam_id:<?= $getExamId ?>},
                     success: function (result) {
                         $('#allDiffQnCount').html(result["getAllDiffQnCount"]);
                         $('#unansweredQnCount').html(result["unansweredQnCount"]);

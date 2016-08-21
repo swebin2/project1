@@ -85,7 +85,7 @@ $where = "";
 if(isset($_REQUEST['un']) &&  trim($_REQUEST['un'])!="")
 {
   $un = trim($_REQUEST['un']);
-  $where .= " and (question like '%".$un."%' or quest_det like '%".$un."%')";
+  $where .= " and (question ='".$objgen->baseencode($un)."' or quest_det ='".$objgen->baseencode($un)."')";
 }
 
 if(isset($_REQUEST['exam_group']) &&  trim($_REQUEST['exam_group'])!="")
@@ -123,7 +123,7 @@ if($row_count>0)
   $objPN->setCurrPage($page);
   $objPN->setDispType('PG_BOOSTRAP');
   $pages = $objPN->get(array("un" => $un,"exam_group" => $exam_group,"exam" => $exam,"section" => $section,"subject" => $subject,"module" => $module), 1, WEBLINKAD."/".$params[0]."/", "", "active");
-  $res_arr = $objgen->get_AllRows("question",$pagesize*($page-1),$pagesize,"id desc",$where);
+  $res_arr = $objgen->get_AllRows("question",$pagesize*($page-1),$pagesize,"id asc",$where);
 }
 
 if(isset($_POST['Reset']))
@@ -450,6 +450,7 @@ function drop(ev){
                                             </span>
 								
 										</div>
+                                        <br clear="all" />
 				<button type="submit" class="btn btn-default" name="Search"><span class="fa fa-search"></span>&nbsp;Search</button>
 				<button type="submit" class="btn btn-info" name="Reset"><span class="fa fa-eraser"></span>&nbsp;Reset</button>
 			
@@ -604,7 +605,7 @@ function drop(ev){
                                             <tr>
                                                 <td><input name="check[]" type="checkbox" value="<?php echo $val['id']; ?>"  class="case" ></td>
                                                 <td><?php echo $s_num; ?></td>
-                                                <td><b><?php echo $val['id']; ?>.</b>&nbsp;											<?php echo $objgen->basedecode($val['question']); ?></td>
+                                                <td><!--<b><?php echo $val['id']; ?>.</b>&nbsp;		-->									<?php echo $objgen->basedecode($val['question']); ?></td>
                                                 <td><?=$qtyp?></td>
 												<td><?php echo $objgen->check_tag($result['name']); ?></td>
 												<td><?php echo $objgen->check_tag($result2['exam_name']); ?></td>

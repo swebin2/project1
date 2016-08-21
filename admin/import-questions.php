@@ -130,7 +130,7 @@ if ($uploadOk == 0) {
 					   $module	     	= $result5['id'];
 					  
 					   $question	    = $objgen->baseencode($Row[7]);
-					   $quest_det	    = $objgen->check_input($Row[20]);
+					   $quest_det	    = $objgen->baseencode($Row[20]);
 					   $mark	        = $objgen->check_input($Row[21]);
 					   $negative_per	= $objgen->check_input($Row[27]);
 					   $difficulty	    = $objgen->check_input($Row[23]);
