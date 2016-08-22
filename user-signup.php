@@ -4,16 +4,19 @@ require_once "phpmailer/class.phpmailer.php";
 $objval	=   new validate();
 $objgen		=	new general();
 
+$result = $objgen->get_Onerow("users","AND id='".$_SESSION['ma_log_id']."'");
+
+$email 	    =  $result['email'];
+$full_name  =  $result['full_name'];
+$mobile     =  $result['mobile'];
+
 if(isset($_POST['Register']))
 {
     $email  	    = $objgen->check_input($_POST['email']);
 	$full_name  	= $objgen->check_input($_POST['full_name']);
 	$mobile  		= $objgen->check_input($_POST['mobile']);
-	$password_conf  = $objgen->check_input($_POST['password_conf']);
 	
-	$year  			= $_POST['year'];
 
-	$password  		= $_POST['password'];
 	$status  		= "active";
 	$msg = "";
 	
@@ -32,9 +35,10 @@ if(isset($_POST['Register']))
    if($msg=="")
    {
 
-		 $msg = $objgen->ins_Row('users','email,password,status,full_name,mobile,otp,otp_verify',"'".$email."','".$objgen->encrypt_pass($password)."','".$status."','".$full_name."','".$mobile."','".$randomString."','no'");
-		 $my_id = $objgen->get_insetId();
-		 $_SESSION['my_id'] = $my_id;
+		 
+		 $msg = $objgen->upd_Row('users',"email='".$email."',status='".$status."',full_name='".$full_name."',mobile='".$mobile."',otp='".$randomString."',otp_verify='no'","id=".$_SESSION['ma_log_id']);
+		 
+		 $_SESSION['my_id'] = $_SESSION['ma_log_id'];
 		 
 		 if($msg=="")
 		 {
@@ -91,9 +95,9 @@ if(isset($_POST['Register']))
 					$msg2 = "Registartion Process Completed.";
 					 
 					 
-					$_SESSION['ma_log_id']		=  $my_id;
+					$_SESSION['ma_log_id']		=  $_SESSION['my_id'];
 					$_SESSION['ma_usr_name']	=  $email;
-					$_SESSION['ma_name']	    =  $full_name ;
+					$_SESSION['ma_name']	    =  $full_name;
 
 					//header("location:".URL."payment");
 					unset($_SESSION['attemptotp']);
@@ -101,8 +105,6 @@ if(isset($_POST['Register']))
 					header("location:".URL."verify-otp"); 
 					
 					//header("location:".URLUR);
-
-			
 		 }
 	}
 }
@@ -295,15 +297,15 @@ body {
     
     <div class="wrapper">
       <form class="login" action="" method="post" >
-        <p class="title">Register with us</p>
-        <div class="abc" style="text-align:center;"> <a class="btn btn-primary btn-effect" href="https://www.facebook.com/" target="_blank" style="background-color:#3B5998; box-shadow:0 4px 0 0 #2C4373; border-color:#3B5998; color:#fff; font-size:14px; border-radius:0px;">Facebook</a> <a class="btn btn-primary btn-effect" href="https://plus.google.com/" target="_blank" style="background:#e74b37; box-shadow:0 4px 0 0 #C13726; border-color:#e74b37; color:#fff; font-size:14px; border-radius:0px;">Google</a>
+        <p class="title">Update Data</p>
+        <!--<div class="abc" style="text-align:center;"> <a class="btn btn-primary btn-effect" href="https://www.facebook.com/" target="_blank" style="background-color:#3B5998; box-shadow:0 4px 0 0 #2C4373; border-color:#3B5998; color:#fff; font-size:14px; border-radius:0px;">Facebook</a> <a class="btn btn-primary btn-effect" href="https://plus.google.com/" target="_blank" style="background:#e74b37; box-shadow:0 4px 0 0 #C13726; border-color:#e74b37; color:#fff; font-size:14px; border-radius:0px;">Google</a>
           <div class="email" style="width:100%;"> <img src="<?=URL?>images/email.png"> </div>
-        </div>
+        </div>-->
       <?php
                                     if($msg2!="")
                                     {
                                     ?>
-                                    <div class="notification-msg-cont">
+                                    <div class="notification-msg-cont" style="color:#090">
                                        
                                         <b>Alert!</b> <?php echo $msg2; ?>
                                     </div>
@@ -332,7 +334,7 @@ body {
                                     if($msg!="")
                                     {
                                     ?>
-                                   <div class="notification-msg-cont">
+                                   <div class="notification-msg-cont"  style="color:#F00">
                                       
                                         <b>Alert!</b> <?php echo $msg; ?>
                                     </div>
@@ -340,25 +342,18 @@ body {
                                     }
                                     ?>
 									
-    <input type="text" placeholder="Full Name" autofocus name="full_name" required />
+    <input type="text" placeholder="Enter Full Name" autofocus name="full_name" required value="<?=$full_name?>" style="color:#000" />
     <i class="fa fa-user"></i>
    
-    <input type="text" placeholder="Mobile Number" autofocus name="mobile" id="phone" required  />
+    <input type="text" placeholder="Enter Mobile Number" autofocus name="mobile" id="phone" required  value="<?=$mobile?>" style="color:#000" />
     <i class="fa fa-mobile"></i>
     
-    <input type="email" placeholder="Email id" autofocus name="email" required  />
+    <input type="email" placeholder="Enter Email id" autofocus name="email" required  value="<?=$email?>" style="color:#000" />
     <i class="fa fa-envelope"></i>
     
-     <input type="password" placeholder="Password" name="password" id="password" required   />
-    <i class="fa fa-key"></i>
-    
-    <input type="password" placeholder="Confirm Password" name="password" id="password_conf" required  />
-    <i class="fa fa-key"></i>
-    
-    Already have account? <a href="<?=URL?>login">Login</a>
     <button name="Register" type="submit" onClick="return validate();">
       <i class="spinner"></i>
-      <span class="state">Register</span>
+      <span class="state">Update</span>
     </button>
       </form>
       <script>
@@ -368,21 +363,7 @@ body {
 			   {
 				   var m = $('#phone').val();
 				   
-				    var p1 = $('#password').val();
-				  var p2 = $('#password_conf').val();
-				  
-				   if(p1.length<8)
-				  {
-					alert("Enter 8 char password");
-					return false;
-				  }
-				  
-				  if(p1!=p2)
-				  {
-					alert("Password did not match.");
-					return false;
-				  }
-				   
+								   
 				   var isnum = /^\d+$/.test(m);
 				   
 					if(isnum==false)

@@ -1,6 +1,7 @@
 <?php
 require_once "includes/includepath.php";
 require_once "phpmailer/class.phpmailer.php";
+
 $objval	=   new validate();
 $objgen		=	new general();
 
@@ -11,7 +12,6 @@ if(isset($_POST['Register']))
 	$mobile  		= $objgen->check_input($_POST['mobile']);
 	$password_conf  = $objgen->check_input($_POST['password_conf']);
 	
-	$year  			= $_POST['year'];
 
 	$password  		= $_POST['password'];
 	$status  		= "active";
@@ -312,7 +312,28 @@ body {
     <div class="wrapper">
       <form class="login" action="" method="post" >
         <p class="title">Register with us</p>
-        <div class="abc" style="text-align:center;"> <a class="btn btn-primary btn-effect" href="https://www.facebook.com/" target="_blank" style="background-color:#3B5998; box-shadow:0 4px 0 0 #2C4373; border-color:#3B5998; color:#fff; font-size:14px; border-radius:0px;">Facebook</a> <a class="btn btn-primary btn-effect" href="https://plus.google.com/" target="_blank" style="background:#e74b37; box-shadow:0 4px 0 0 #C13726; border-color:#e74b37; color:#fff; font-size:14px; border-radius:0px;">Google</a>
+         <?php
+		require_once 'Facebook/autoload.php';
+			$fb = new Facebook\Facebook([
+	  'app_id' => '666041090229631', // Replace {app-id} with your app id
+	  'app_secret' => '2a00fb5635334f4ab004f1a6217ced5f',
+	  'default_graph_version' => 'v2.5',
+	  ]);
+
+		$helper = $fb->getRedirectLoginHelper();
+		
+		$permissions = ['email']; // Optional permissions
+		$loginUrl = $helper->getLoginUrl('http://trickyscore.com/fb-callback.php', $permissions);
+		
+		//$loginUrl = $helper->getLoginUrl(array('redirect_uri' => $_SERVER['SCRIPT_URI']), $permissions);
+		
+	//	$_SESSION['curr_url'] = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";  
+	  ?> 
+      
+        <div class="abc" style="text-align:center;"> <a class="btn btn-primary btn-effect" href="<?=htmlspecialchars($loginUrl)?>"  style="background-color:#3B5998; box-shadow:0 4px 0 0 #2C4373; border-color:#3B5998; color:#fff; font-size:14px; border-radius:0px;">Facebook</a>     <?php
+		  require_once("google-callback.php");
+		?>
+				
           <div class="email" style="width:100%;"> <img src="<?=URL?>images/email.png"> </div>
         </div>
       <?php
@@ -356,19 +377,19 @@ body {
                                     }
                                     ?>
 									
-    <input type="text" placeholder="Full Name" autofocus name="full_name" required />
+    <input type="text" placeholder="Full Name" autofocus name="full_name" required value="<?=$full_name?>"  />
     <i class="fa fa-user"></i>
    
-    <input type="text" placeholder="Mobile Number" autofocus name="mobile" id="phone" required  />
+    <input type="text" placeholder="Mobile Number" autofocus name="mobile" id="phone" required  value="<?=$mobile?>"  />
     <i class="fa fa-mobile"></i>
     
-    <input type="email" placeholder="Email id" autofocus name="email" required  />
+    <input type="email" placeholder="Email id" autofocus name="email" required  value="<?=$email?>"  />
     <i class="fa fa-envelope"></i>
     
-     <input type="password" placeholder="Password" name="password" id="password" required   />
+     <input type="password" placeholder="Password" name="password" id="password" required  value="<?=$password?>"   />
     <i class="fa fa-key"></i>
     
-    <input type="password" placeholder="Confirm Password" name="password" id="password_conf" required  />
+    <input type="password" placeholder="Confirm Password" name="password" id="password_conf" required  value="<?=$password_conf?>"  />
     <i class="fa fa-key"></i>
     
     Already have account? <a href="<?=URL?>login">Login</a>

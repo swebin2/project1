@@ -28,11 +28,11 @@
 
 	define("WEBLINKAD","http://".$_SERVER["HTTP_HOST"].FOLDER_PATH."/admin");
 
-	define("FROMMAIL", "info@phpwebsites.in");
+	define("FROMMAIL", "info@trickyscore.com");
 
 	define("FROMNAME", "Admin"); 
 
-	define("ADMINMAIL", "sumeshtg@gmail.com");
+	define("ADMINMAIL", "trickyscore@gmail.com");
 
 	define("ADMINNAME", "Admin"); 
 

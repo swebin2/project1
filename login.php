@@ -1,7 +1,5 @@
 <?php
 //define('FACEBOOK_SDK_V4_SRC_DIR', __DIR__ . '/Facebook/');
-//require_once 'Facebook/autoload.php';
-
 $objgen		=	new general();
 
 if($_COOKIE["swebin_user"]!="")
@@ -252,11 +250,18 @@ body {
 		$loginUrl = $helper->getLoginUrl('http://trickyscore.com/fb-callback.php', $permissions);
 		
 		//$loginUrl = $helper->getLoginUrl(array('redirect_uri' => $_SERVER['SCRIPT_URI']), $permissions);
-
-
+		
+	//	$_SESSION['curr_url'] = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";  
 	  ?> 
         
-        <a class="btn btn-primary btn-effect" href="<?=htmlspecialchars($loginUrl)?>"  style="background-color:#3B5998; box-shadow:0 4px 0 0 #2C4373; border-color:#3B5998; color:#fff; font-size:14px; border-radius:0px;">Facebook</a> <a class="btn btn-primary btn-effect" href="https://plus.google.com/" target="_blank" style="background:#e74b37; box-shadow:0 4px 0 0 #C13726; border-color:#e74b37; color:#fff; font-size:14px; border-radius:0px;">Google</a>
+        <a class="btn btn-primary btn-effect" href="<?=htmlspecialchars($loginUrl)?>"  style="background-color:#3B5998; box-shadow:0 4px 0 0 #2C4373; border-color:#3B5998; color:#fff; font-size:14px; border-radius:0px;">Facebook</a>
+         <?php
+		  require_once("google-callback.php");
+		?>
+				
+         
+         
+         
           <div class="email" style="width:100%;"> <img src="<?=URL?>images/email.png"> </div>
         </div>
         <?php
