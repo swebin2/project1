@@ -6,13 +6,14 @@ $pagehead = "Exam";
 $list_url = URLUR."manage-exam";
 $add_url  = URLUR."exam-manager";
 $add_url2  = URLUR."exam-start";
+
 if($_GET['msg']==1)
 {
   $msg2 = "Exam Created Successfully.";
 }
 
     $usrid = $_SESSION['ma_log_id'];
-    $getExamId = $_GET['exam_id'];
+    $getExamId = $_POST['exam_id'];
     if(!empty($getExamId)){
         $getSectionByExamCnt = $objgen->get_AllRowscnt('section'," AND exam_id='$getExamId'");
         if($getSectionByExamCnt>0){

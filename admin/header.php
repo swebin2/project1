@@ -80,7 +80,7 @@
     </li>
 
 -->    <li class="dropdown link">
-      <a href="#" data-toggle="dropdown" class="dropdown-toggle profilebox"><img src="<?=URLAD?>img/profileimg.png" alt="img"><b><?=ucfirst($_SESSION['MYPR_adm_username'])?></b><span class="caret"></span></a>
+      <a href="#" data-toggle="dropdown" class="dropdown-toggle profilebox"><img src="<?=URLAD?>img/profileimg.jpg" alt="img"><b><?=ucfirst($_SESSION['MYPR_adm_username'])?></b><span class="caret"></span></a>
         <ul class="dropdown-menu dropdown-menu-list dropdown-menu-right">
            <?php
 			if($_SESSION['MYPR_adm_type']=='admin')

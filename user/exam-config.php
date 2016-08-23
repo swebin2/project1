@@ -12,9 +12,9 @@ if($_GET['msg']==1)
 }
 
 $usrid = $_SESSION['ma_log_id'];
-$getAllExamsCount = $objgen->get_AllRowscnt('exmas');
+$getAllExamsCount = $objgen->get_AllRowscnt('exmas'," AND id IN (SELECT exam_id FROM `exam_permission` WHERE user_id='$usrid')");
 if($getAllExamsCount>0){
-    $getAllExams = $objgen->get_AllRows('exmas');
+    $getAllExams = $objgen->get_AllRows('exmas',0,$getAllExamsCount,''," AND id IN (SELECT exam_id FROM `exam_permission` WHERE user_id='$usrid')");
 }
 if(isset($_POST['create'])){
     $date = date("Y-m-d");
@@ -175,6 +175,7 @@ if(isset($_POST['create'])){
 
 <?php require_once "footer-script.php"; ?>
         <script type="text/javascript" src="<?= URLUR ?>js/datatables/datatables.min.js"></script>
+        <script type="text/javascript" src="<?= URLUR ?>js/jquery.redirect.js"></script>
         <script type="text/javascript">
             function chk_exm_gen_action(exm_gen_mode){
                 if(exm_gen_mode=='system'){
@@ -185,13 +186,15 @@ if(isset($_POST['create'])){
                         data: {pid: 6},
                         success: function (result) {
                             $('#exm_gen_act').html('');
+                             $('label.first').css('color', '#000');
                             $('input[name=exm_gen_mode]').attr('disabled',true);
                             $('#dyn_field').html(result);
                         }
                     });
                 }else if(exm_gen_mode=='manual'){
                     exam_id = $('#exam').val();
-                    window.location = 'exam-manager/?exam_id=' + exam_id;
+//                    window.location = 'exam-manager/?exam_id=' + exam_id;
+                    $.redirect('exam-manager', {'exam_id': exam_id});
                 }
             }
         </script>

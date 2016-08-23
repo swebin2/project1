@@ -507,79 +507,42 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
                                                     @shuffle($pair2);
 
 //                                                    print_r($pair2);
-                                                    $m = 0;
-                                                    foreach ($pair as $key3 => $val3) {
-                                                    ?>
-                                                                                                            <div class="row" >
-                                                                                                                <div class="form-group" style="clear:both"> 
-                                                    
-                                                                                                                    <div class="col-md-1" style="margin:5px;">
-                                                    <?= $alphas[$key3] ?>&nbsp;&nbsp;
-                                                                                                                    </div>
-                                                                                                                    <div class="col-md-3"  style="margin:5px;" >
-                                                                                                                        <div class="dragdrop2"  ondragstart="drag(event)" name="<?= $corrans[$key3] ?>" draggable="true"  id="drg<?= $key3 ?>"   >
-                                                                                                                            <div style="position:absolute;padding:5px;">
-                                                    <?= $val3 ?>
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                    </div>
-                                                                                                                    <div class="col-md-1" style="margin:5px;">
-                                                                                                                        <i class='fa fa-long-arrow-right'></i>
-                                                                                                                    </div>
-                                                                                                                    <div class="col-md-3" style="margin:5px;">
-                                                    
-                                                                                                                        <div class="dragdrop"  ondrop="drop(event)" ondragover="allowDrop(event)" id="<?= $pair2[$m] ?>" >
-                                                                                                                            <div style="position:absolute;padding:5px;">
-                                                    <?= $pair2[$m]; ?>
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                    
-                                                                                                                    </div>
-                                                    
-                                                    
-                                                                                                                </div>
-                                                                                                            </div>
-                                                    <?php
-                                                        $m++;
-                                                    }
                                                     ?>
                                                     <div id="workarea">
                                                         <div style="width: 165px;float: left">
-                                                            <div class="player">1</div>
-                                                            <div class="player">2</div>
-                                                            <div class="player">3</div>
-                                                            <div class="player">4</div>
-                                                            <div class="player">5</div>
-                                                            <div class="player">6</div>
+                                                            <?php
+                                                            
+                                                            foreach ($pair as $key3 => $val3) {
+                                                            ?>
+                                                            <div class="player"><?= $val3 ?></div>
+                                                            <?php
+                                                            }
+                                                            ?>
                                                         </div>
                                                         <div class="col-lg-offset-2" style="width: 165px;float: left">
+                                                            <?php
+                                                            
+                                                            foreach ($pair as $key3 => $val3) {
+                                                            ?>
                                                             <div class="slot">
                                                                 <span class="hidden-xs fa fa-arrow-circle-right" style="font-size:140%;float: left"></span>Drop Here
                                                             </div>
-                                                            <div class="slot">
-                                                                <span class="hidden-xs fa fa-arrow-circle-right" style="font-size:140%;float: left"></span>Drop Here
-                                                            </div>
-                                                            <div class="slot">
-                                                                <span class="hidden-xs fa fa-arrow-circle-right" style="font-size:140%;float: left"></span>Drop Here
-                                                            </div>
-                                                            <div class="slot">
-                                                                <span class="hidden-xs fa fa-arrow-circle-right" style="font-size:140%;float: left"></span>Drop Here
-                                                            </div>
-                                                            <div class="slot">
-                                                                <span class="hidden-xs fa fa-arrow-circle-right" style="font-size:140%;float: left"></span>Drop Here
-                                                            </div>
-                                                            <div class="slot">
-                                                                <span class="hidden-xs fa fa-arrow-circle-right" style="font-size:140%;float: left"></span>Drop Here
-                                                            </div>
+                                                            <?php
+                                                            }
+                                                            ?>
 
                                                         </div>
                                                         <div style="width: 165px;float: left">
-                                                            <div class="slot2">1</div>
-                                                            <div class="slot2">3</div>
-                                                            <div class="slot2">4</div>
-                                                            <div class="slot2">5</div>
-                                                            <div class="slot2">6</div>
-                                                            <div class="slot2">2</div>
+                                                            <?php
+                                                            $m = 0;
+                                                            foreach ($pair as $key3 => $val3) {
+                                                            ?>
+                                                            <div class="slot2"><?= $pair2[$m]; ?></div>
+                                                            <?php
+                                                            $m++;
+                                                            }
+                                                            ?>
+                                                            
                                                         </div>
 
 

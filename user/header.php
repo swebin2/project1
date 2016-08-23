@@ -93,7 +93,7 @@
 	  else
 	  {
 	  ?>
-      	<img src="<?=URLUR?>img/profileimg.png" alt="img">
+      	<img src="<?=URLUR?>img/profileimg.jpg" alt="img">
       <?php
 	  }
 	  ?>
