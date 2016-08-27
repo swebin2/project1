@@ -12,9 +12,11 @@ if($_GET['msg']==1)
 }
 
 $usrid = $_SESSION['ma_log_id'];
-$getAllExamsCount = $objgen->get_AllRowscnt('exmas'," AND id IN (SELECT exam_id FROM `exam_permission` WHERE user_id='$usrid')");
+$getAvailUserPackageCount = $objgen->get_AllRowscnt('exam_permission'," AND user_id='$usrid' AND status='active'");
+
+$getAllExamsCount = $objgen->get_AllRowscnt('exmas'," AND id IN (SELECT exam_id FROM `exam_permission` WHERE user_id='$usrid' AND status='active')");
 if($getAllExamsCount>0){
-    $getAllExams = $objgen->get_AllRows('exmas',0,$getAllExamsCount,''," AND id IN (SELECT exam_id FROM `exam_permission` WHERE user_id='$usrid')");
+    $getAllExams = $objgen->get_AllRows('exmas',0,$getAllExamsCount,''," AND id IN (SELECT exam_id FROM `exam_permission` WHERE user_id='$usrid' AND status='active')");
 }
 if(isset($_POST['create'])){
     $date = date("Y-m-d");
@@ -104,6 +106,9 @@ if(isset($_POST['create'])){
                                     <?php
                                     }
                                     ?>
+                                <?php
+                                if($getAvailUserPackageCount>0){
+                                ?>
                                 <form method="post" name="frm" action="">
                                     <div class="col-md-12 col-lg-12">
 
@@ -147,6 +152,14 @@ if(isset($_POST['create'])){
                                         <div id="dyn_field"></div>
                                     </div>
                                 </form>
+                                <?php
+                                }else{
+                                    echo '<div class="alert alert-success alert-dismissable">
+                                        <i class="fa fa-check"></i>
+                                        <b>Alert!</b> There is no active package is available for you. Please buy a package and continue...
+                                    </div>';
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>

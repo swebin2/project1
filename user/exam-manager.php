@@ -14,6 +14,9 @@ if($_GET['msg']==1)
 
     $usrid = $_SESSION['ma_log_id'];
     $getExamId = $_POST['exam_id'];
+    if(empty($getExamId)){
+        header("location: exam-config");
+    }
     if(!empty($getExamId)){
         $getSectionByExamCnt = $objgen->get_AllRowscnt('section'," AND exam_id='$getExamId'");
         if($getSectionByExamCnt>0){

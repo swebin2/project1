@@ -97,6 +97,9 @@ if ($row_count > 0) {
                                             <td>Sl. No.</td>
                                             <td>Exam</td>
                                             <td>Total Questions</td>
+                                            <td>Correct Answers</td>
+                                            <td>Wrong Answers</td>
+                                            <td>Unattended Questions</td>
                                             <td>Mark</td>
                                             <td>Attended On</td>
                                         </tr>
@@ -127,6 +130,9 @@ if ($row_count > 0) {
                                                     <td><?php echo $i ?></td>
                                                     <td><?php echo $objgen->check_tag($getExamDetails['exam_name']); ?></td>
                                                     <td><?php echo $objgen->check_tag($getExamDetails['totno_of_qu']); ?></td>
+                                                    <td><?php echo $objgen->check_tag($correctAnsCount); ?></td>
+                                                    <td><?php echo $objgen->check_tag($wrongAnsCount); ?></td>
+                                                    <td><?php echo $objgen->check_tag($unansCount); ?></td>
                                                     <td><?php echo $objgen->check_tag($val['exam_mark']); ?></td>
                                                     <td><?php echo $examDate; ?></td>
                                                     <td>

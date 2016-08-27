@@ -1,9 +1,16 @@
 <?php
 require_once "includes/includepath.php";
 require_once "chk_login.php";
+
 $objgen		=	new general();
 
-$usrid = $_SESSION['ma_log_id'];
+$where = " AND id NOT IN(SELECT exam_id FROM `user_exam_score` WHERE user_id='$usrid' GROUP BY exam_id)";
+$row_count = $objgen->get_AllRowscnt("exam_list",$where);
+if($row_count>0)
+{
+  $res_arr = $objgen->get_AllRows("exam_list",0,$row_count,"id desc",$where);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,10 +34,10 @@ $usrid = $_SESSION['ma_log_id'];
 
   <!-- Start Page Header -->
   <div class="page-header">
-    <h1 class="title">Saved Exams <span class="label label-info"><?=$row_count?></span></h1>
+    <h1 class="title">Exams <span class="label label-info"><?=$row_count?></span></h1>
       <ol class="breadcrumb">
         <li><a href="<?=URLUR?>home">Home</a></li>
-        <li><a href="javascript:;">Saved Exams</a></li>
+        <li><a href="javascript:;"> Exams</a></li>
       </ol>
 
 
@@ -60,18 +67,7 @@ $usrid = $_SESSION['ma_log_id'];
                                     }
                                     ?>
                                     
-                                    
-          
-         <div class="panel-title">
-         Saved Exams 
-        </div>
-        
-                <div class="panel panel-widget">
-      
-        
-      
-     
-
+      <div class="panel panel-widget">
 
         <div class="panel-body table-responsive">
 
@@ -86,42 +82,31 @@ $usrid = $_SESSION['ma_log_id'];
               </tr>
             </thead>
             <tbody>
-			       <?php
-                    $where = " and user_id='".$usrid."'";
-					$pub_count = $objgen->get_AllRowscnt("user_exam_list",$where);
-					if($pub_count>0)
-					{
-						 $pub_arr = $objgen->get_AllRows("user_exam_list",0,$pub_count,"id desc",$where);
-				
-					foreach($pub_arr as $key=>$val)
-					{
-			    ?>
-                 <tr>
+            	<?php
+				if($row_count>0)
+				{
+				 foreach($res_arr as $key=>$val)
+				 {
+											  
+                 ?>
+              <tr>
                 <td><?php echo $objgen->check_tag($val['id']); ?></td>
                 <td><?php echo $objgen->check_tag($val['exam_name']); ?></td>
                 <td><?php echo $objgen->check_tag($val['duration']); ?></td>
                 <td><?php echo $objgen->check_tag($val['totno_of_qu']); ?></td>
-                <td><a href="<?=URLUR?>exam-start/?id=<?=$val['id']?>&cat=user" role="button" class="btn btn-success" ><span class="fa fa-clock-o"></span>&nbsp;&nbsp;Start</a></td>            
+                <td><a href="<?=URLUR?>exam-start/?id=<?=$val['id']?>" role="button" class="btn btn-success" ><span class="fa fa-clock-o"></span>&nbsp;&nbsp;Start</a></td>            
               </tr>
-                 <?php
-					}
-					
-					}
+              <?php
+				 }
+				}else{
+                                    echo '<tr><td colspan="5" align="center"><b>Sorry..There is no exams available now</b></td></tr>';
+                                }
 				?>
-                </tbody>
-             </table>
-             </div>
-             </div>
-       
-                                  
-       
- 
-                                     
-       
-           
-      
-      
-      
+            </tbody>
+          </table>
+
+        </div>
+      </div>
     </div>
 
 

@@ -634,15 +634,17 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
 
 
                                         <?php
-                                        if ($result['quest_det'] != "") {
-                                            ?> 
-                                            <div style="clear:both"></div>
-                                            <hr />
-                                            <div class="rcorners1" style="clear:both" >
-                                                <b> Explanation :</b> <?php echo $objgen->basedecode($result['quest_det']); ?>
-                                            </div>
-                                            <br />
-                                            <?php
+                                        if($result['quest_det']=='yes'){
+                                            if ($result['quest_det'] != "") {
+                                                ?> 
+                                                <div style="clear:both"></div>
+                                                <hr />
+                                                <div class="rcorners1" style="clear:both" >
+                                                    <b> Explanation :</b> <?php echo $objgen->basedecode($result['quest_det']); ?>
+                                                </div>
+                                                <br />
+                                                <?php
+                                            }
                                         }
                                         ?>
                                         <?php
