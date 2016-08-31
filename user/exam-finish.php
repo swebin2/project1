@@ -183,6 +183,7 @@ if (isset($_SESSION['exam'][$usrid])) {
     $full_name = $userFullName;
     $email = $userEmail;
     $mobile = $userMobile;
+    
 
     $smscontent = urlencode("Thanks for your interest in TrickyScore. Your Trickyscore Exam Score : " . $score);
 
@@ -199,9 +200,9 @@ if (isset($_SESSION['exam'][$usrid])) {
     $message = 'Dear ' . $full_name . ',<br /><br />
 
 			Thank you for choosing www.trickyscore.com as a tool and practice partner to further your career/ your son’s/daughter’s career.<br />
-			We are happy to announce the results of the exams held on mm/dd/yyyy.<br />
-			<score>
-			To view your performance score & analysis click here Or log on to www.trickyscore.com.<br />
+			We are happy to announce the results of the exams held on '.$examAttendedOn.'.<br />
+			'.$score.'<br />
+			To view your performance score & analysis click here Or log on to <a href="http://www.trickyscore.com">www.trickyscore.com</a>.<br />
 			Thank you once again.<br /><br />
 			
 			With regards,<br />

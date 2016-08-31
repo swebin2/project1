@@ -218,15 +218,15 @@ if(isset($_POST['Reset']))
 												<th>User</th>
                                                 <th>Packages</th>
 												<th>Exam</th>
-                                                <th>Pay Req. ID</th>
-												<th>Payment ID</th>
-                                                <th>Pay Status</th>
+                                                <th>Payment Deatils</th>
+			                                    <th>Pay Status</th>
                                                 <th>Date</th>
                                                 <th>Amount</th>
                                                 <?php
                                                 if($_SESSION['MYPR_adm_type']=="admin")
 												{
 													?>
+                                                 <th>User ID</th>
                                                 <th>Delete</th>
                                                 <?php
 												}
@@ -289,8 +289,8 @@ if(isset($_POST['Reset']))
 												echo implode(",",$allow_exams); 
 												
 												?></td>
-                                                <td><?php echo $objgen->check_tag($val['payment_request_id']); ?></td>
-												<td><?php echo $objgen->check_tag($val['payment_id']); ?></td>
+                                                <td>Pay Req. ID : <?php echo $objgen->check_tag($val['payment_request_id']); ?><br />
+												Payment ID : <?php echo $objgen->check_tag($val['payment_id']); ?></td>
 												<td>
 												<?php
 												if($val['pay_status']=="Completed")
@@ -310,6 +310,7 @@ if(isset($_POST['Reset']))
                                                 if($_SESSION['MYPR_adm_type']=="admin")
 												{
 													?>
+                                                    <td><?php echo $objgen->check_tag($result['id']); ?></td>
                                                 <td><a href="<?=$list_url?>/?del=<?=$val['id']?>&page=<?=$page?>" role="button" onClick="return confirm('Do you want to delete this Order?')"><span class="fa fa-trash-o"></span></a></td>
                                                 <?php
 												}

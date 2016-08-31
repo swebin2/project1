@@ -107,6 +107,8 @@ if ($getAllExamsCntByUser > 0) {
 
         <?php require_once "footer-script.php"; ?>
         <script src="<?= URLUR ?>js/chart.js"></script>
+        <!--<script src="<?= URLUR ?>js/no-data-to-display.js">-->
+        <script src="https://code.highcharts.com/modules/no-data-to-display.js"></script>
         <script type="text/javascript">
 <?php
 $where = " AND user_id='$usrid'";
@@ -143,8 +145,18 @@ if (!empty($getLastExamByUser)) {
         }
     }
     if(!empty($sectionArr1)){
+        $totalMark = array_sum( array_map(
+                 function($element){
+                     return $element['1'];
+                 }, 
+                $sectionArr1));
+                 if($totalMark==0){
+                     $jsonsectionArr1 = '';
+                 }else{
+                    $jsonsectionArr1 = ','.json_encode($sectionArr1);
+                 }
         $jsonsectionArr1 = json_encode($sectionArr1);
-        echo "window.onload = showChartModal('$lastExamName','$lastExamDate',$jsonsectionArr1);";
+        echo "window.onload = showChartModal('$lastExamName','$lastExamDate'$jsonsectionArr1);";
     }
 }
 
@@ -182,8 +194,17 @@ if (!empty($getAllExamsByUser)) {
             }
         }
         if(!empty($sectionArr)){
-            $jsonsectionArr = json_encode($sectionArr);
-            echo "window.onload = showExmChart('exam_bar_chart".$i."','$examName attended on $examDate',$jsonsectionArr);";
+            $totalMark = array_sum( array_map(
+                 function($element){
+                     return $element['1'];
+                 }, 
+                $sectionArr));
+                 if($totalMark==0){
+                     $jsonsectionArr = '';
+                 }else{
+                    $jsonsectionArr = ','.json_encode($sectionArr);
+                 }
+            echo "window.onload = showExmChart('exam_bar_chart".$i."','$examName attended on $examDate'$jsonsectionArr);";
 
             $i++;
         }
@@ -235,6 +256,10 @@ if (!empty($getAllExamsByUser)) {
 
             //bar chart function
             function showExmChart(div_id, title,sectionData) {
+                if (typeof sectionData == "undefined"){
+                    sectionData = '';
+                }
+//                alert(sectionData);
                 $('#' + div_id).highcharts({
                     chart: {
                         type: 'column',

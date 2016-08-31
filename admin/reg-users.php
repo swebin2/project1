@@ -216,6 +216,7 @@ if(isset($_POST['Reset']))
                                                 if($_SESSION['MYPR_adm_type']=="admin")
 												{
 													?>
+                                                <th>User ID</th>
                                                 <th>Change Status</th>
                                                 <th>Delete</th>
                                                 <?php
@@ -264,6 +265,7 @@ if(isset($_POST['Reset']))
                                                 if($_SESSION['MYPR_adm_type']=="admin")
 												{
 													?>
+                                                <td><?php echo $objgen->check_tag($val['id']); ?></td>
                                                 <td>
 												<?php
 												if($val['status']=='active')
