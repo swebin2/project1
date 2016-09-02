@@ -33,14 +33,21 @@ if ($user_count > 0) {
 }
 
 
-if (isset($_POST['Search'])) {
+if (isset($_POST['Search']) || isset($_GET['user'])) {
 
-    $usrid = $_POST['user'];
+    $usrid = $_REQUEST['user'];
 
-    $where = " AND user_id='$usrid'";
-    $row_count = $objgen->get_AllRowscnt("user_exam_score", $where);
+
+    $where2 = " AND user_id='$usrid'";
+	
+	if ($_SESSION['MYPR_adm_type'] == "vendor") 
+	{
+	 $where2 .=	 " AND exam_id='$exam_id'";
+	}
+	
+    $row_count = $objgen->get_AllRowscnt("user_exam_score", $where2);
     if ($row_count > 0) {
-        $res_arr = $objgen->get_AllRows("user_exam_score", 0, $row_count, "id desc", $where);
+        $res_arr = $objgen->get_AllRows("user_exam_score", 0, $row_count, "id desc", $where2);
     }
 }
 ?>
@@ -158,7 +165,11 @@ if (isset($_POST['Search'])) {
                                             <td>Sl. No.</td>
                                             <td>Exam</td>
                                             <td>Total Questions</td>
+                                            <td>Correct Answers</td>
+                                            <td>Wrong Answers</td>
+                                            <td>Unattended Questions</td>
                                             <td>Mark</td>
+                                            <td>Attended On</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -174,10 +185,10 @@ if (isset($_POST['Search'])) {
                                                 $unansCount = $val['unanswered_num'];
                                                 $examDate = $val['exam_attended_on'];
                                                 $examDate = date('jS F Y h:i A', strtotime($examDate));
-
-                                                if ($val['exam_created_by'] == 'user') {
+                                                
+                                                if($val['exam_created_by']=='user'){
                                                     $table = 'user_exam_list';
-                                                } else {
+                                                }else{
                                                     $table = 'exam_list';
                                                 }
                                                 $where = " AND id='$examId'";
@@ -187,10 +198,13 @@ if (isset($_POST['Search'])) {
                                                     <td><?php echo $i ?></td>
                                                     <td><?php echo $objgen->check_tag($getExamDetails['exam_name']); ?></td>
                                                     <td><?php echo $objgen->check_tag($getExamDetails['totno_of_qu']); ?></td>
+                                                    <td><?php echo $objgen->check_tag($correctAnsCount); ?></td>
+                                                    <td><?php echo $objgen->check_tag($wrongAnsCount); ?></td>
+                                                    <td><?php echo $objgen->check_tag($unansCount); ?></td>
                                                     <td><?php echo $objgen->check_tag($val['exam_mark']); ?></td>
                                                     <td><?php echo $examDate; ?></td>
                                                     <td>
-                                                        <a href="#" onclick="showModal('<?= $getExamDetails["exam_name"] ?>', '<?= $examScoreId ?>')" role="button" class="fa fa-eye" data-toggle="modal"></a>
+                                                        <a href="#" onclick="showModal('<?= $getExamDetails["exam_name"] ?>','<?= $examScoreId ?>')" role="button" class="fa fa-eye" data-toggle="modal"></a>
                                                     </td>
 
                                                 </tr>

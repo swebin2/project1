@@ -16,10 +16,35 @@ $page	 	= isset($_REQUEST['page'])	?	$_REQUEST['page']	:	"1";
 if(isset($_GET['del']))
 {
    $id= $_GET['del'];
-   $msg     = $objgen->del_Row("admin","admin_id=".$id);
-    if($msg=="")
+   
+     $allow_id = array();
+	 $exam_id = $_GET['eid'];
+	 
+	$where2 = " and exam_id=".$exam_id;
+	$per_count = $objgen->get_AllRowscnt("exam_permission",$where2);
+	if($per_count>0)
+	{
+	    $per_arr = $objgen->get_AllRows("exam_permission",0,$per_count,"id asc",$where2,"user_id");
+		foreach($per_arr as $k=>$v)
+		{
+			$allow_id[] = $v['user_id'];
+		}
+	}
+	
+	if(count($allow_id)>0)
+	{
+		$msg = "Students are mapped to vendor, cannot delete.";
+	}
+
+   if($msg=="")
    {
-	header("location:".$list_url."/?msg=3&page=".$page);
+	   $msg     = $objgen->del_Row("admin","admin_id=".$id);
+		if($msg=="")
+	   {
+		header("location:".$list_url."/?msg=3&page=".$page);
+	   }
+	   
+   
    }
 }
 
@@ -189,6 +214,19 @@ if(isset($_POST['Reset']))
                                     <?php
                                     }
                                     ?>
+                                    	 <?php
+                                    if($msg!="")
+                                    {
+                                    ?>
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <i class="fa fa-ban"></i>
+                                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                        <b>Alert!</b> <?php echo $msg; ?>
+                                    </div>
+                                 
+                                    <?php
+                                    }
+                                    ?>
                                     <table id="example1" class="table table-bordered">
                                         <thead>
                                             <tr>
@@ -230,7 +268,7 @@ if(isset($_POST['Reset']))
 												}
 												?>
 												</td>
-                                                <td><a href="<?=$list_url?>/?del=<?=$val['admin_id']?>&page=<?=$page?>" role="button" onClick="return confirm('Do you want to delete this User?')"><span class="fa fa-trash-o"></span></a></td>
+                                                <td><a href="<?=$list_url?>/?del=<?=$val['admin_id']?>&eid=<?=$val['exam_id']?>&page=<?=$page?>" role="button" onClick="return confirm('Do you want to delete this User?')"><span class="fa fa-trash-o"></span></a></td>
                                             </tr>
                                           
                                          <?php

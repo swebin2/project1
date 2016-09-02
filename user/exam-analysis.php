@@ -155,7 +155,7 @@ if (!empty($getLastExamByUser)) {
                  }else{
                     $jsonsectionArr1 = ','.json_encode($sectionArr1);
                  }
-        $jsonsectionArr1 = json_encode($sectionArr1);
+//        $jsonsectionArr1 = json_encode($sectionArr1);
         echo "window.onload = showChartModal('$lastExamName','$lastExamDate'$jsonsectionArr1);";
     }
 }
@@ -213,6 +213,7 @@ if (!empty($getAllExamsByUser)) {
 }
 ?>
             function showChartModal(exm_name, attend_date, section_data) {
+                //alert(attend_date);
                 $("#chartModal").modal('show');
                 // Build the chart
                 $('#chart-container').highcharts({

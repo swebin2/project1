@@ -30,7 +30,7 @@ if(isset($_POST['Change']))
 	   $msg = $objgen->match_Pass($pass,$conf_pass);
 	   if($msg=="")
 	   {
-		 $msg = $objgen->chng_password('admin','password',$_POST,'admin_id',$_SESSION['MYPR_adm_id']);
+		 $msg = $objgen->chng_password('users','password',$_POST,'id',$_SESSION['ma_log_id']);
 		 if($msg=="")
 		 {
 		   $msg2 = "Password Changed Successfully.";

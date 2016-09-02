@@ -22,6 +22,7 @@ if(isset($_POST['Create']))
    $username   	    = $objgen->check_input($_POST['username']);
    $user_type   	= $objgen->check_input3($_POST['user_type']);
    $password   	    = trim($_POST['password']);
+   $conf_password   = trim($_POST['conf_password']);
    $exam_id   	    = $objgen->check_input($_POST['exam_id']);
 	
    $rules		=	array();
@@ -39,8 +40,10 @@ if(isset($_POST['Create']))
 	{
 		$errors[] = "This user is already exists.";
 	}
+	
+	$msg = $objgen->match_Pass($password,$conf_password);
 
-   if(empty($errors))
+   if(empty($errors) && $msg=="")
 	{
 		 
 		 $msg = $objgen->ins_Row('admin','username,password,user_type,exam_id',"'".$username."','".$objgen->encrypt_pass($password)."','".$user_type."','".$exam_id."'");
@@ -59,6 +62,7 @@ if(isset($_GET['edit']))
 	   $username     	= $objgen->check_tag($result['username']);
        $user_type     	= $objgen->check_tag($result['user_type']);
 	   $password    	= $objgen->decrypt_pass($result['password']);
+	   $conf_password   = $objgen->decrypt_pass($result['password']);
 	   $exam_id   	    = $objgen->check_tag($result['exam_id']);
 
 
@@ -68,6 +72,7 @@ if(isset($_POST['Update']))
    $username   	    = $objgen->check_input($_POST['username']);
    $user_type   	= $objgen->check_input3($_POST['user_type']);
    $password   	    = trim($_POST['password']);
+    $conf_password   = trim($_POST['conf_password']);
     $exam_id   	    = $objgen->check_input($_POST['exam_id']);
 	
 	$brd_exit = $objgen->chk_Ext("admin","username='$username' and admin_id<>".$id);
@@ -85,8 +90,9 @@ if(isset($_POST['Update']))
    }
    $rules[] 	= "required,password,Enter the Password";
    $errors  	= $objval->validateFields($_POST, $rules);
-
-   if(empty($errors))
+  
+   	$msg = $objgen->match_Pass($password,$conf_password);
+   if(empty($errors) && $msg=="")
 	{
 		 			 
 	  $msg = $objgen->upd_Row('admin',"username='".$username."',password='".$objgen->encrypt_pass($password)."',user_type='".$user_type."',exam_id='".$exam_id."'","admin_id=".$id);
@@ -210,6 +216,11 @@ if($exam_count>0)
                 <div class="form-group">
                   <label for="input2" class="form-label">Password *</label>
                      <input type="password" class="form-control"  name="password" id="exampleInputPassword1" value="<?=$password?>" required  maxlength="20" />
+                </div>
+                
+                 <div class="form-group">
+                  <label for="input3"  class="form-label">Confirm Password *</label>
+                 <input type="password" class="form-control"  name="conf_password"  value="<?=$conf_password?>" required  maxlength="20" />
                 </div>
                 <div class="form-group">
                   <label for="input3"  class="form-label">User Type *</label>

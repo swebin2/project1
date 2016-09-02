@@ -5,6 +5,7 @@ $objgen		=	new general();
 
 $pagehead = "Registered Users";
 $list_url = URLAD."reg-users";
+$view_url = URLAD."view-exam-history";
 
 
 $objPN		= 	new page(1);
@@ -261,7 +262,7 @@ if(isset($_POST['Reset']))
 												  											  
 												  ?>
 												</td>
-                                                <td><a href="<?=$view_url?>/?id=<?=$val['id']?>&page=<?=$page?>" role="button" ><span class="fa fa-search"></span></a></td> <?php
+                                                <td><a href="<?=$view_url?>/?user=<?=$val['id']?>&page=<?=$page?>" role="button" ><span class="fa fa-search"></span></a></td> <?php
                                                 if($_SESSION['MYPR_adm_type']=="admin")
 												{
 													?>

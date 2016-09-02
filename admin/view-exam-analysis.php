@@ -166,6 +166,7 @@ if (isset($_POST['Search'])) {
 
         <?php require_once "footer-script.php"; ?>
         <script src="<?=URLUR?>js/chart.js"></script>
+        <script src="https://code.highcharts.com/modules/no-data-to-display.js"></script>
         <script type="text/javascript">
 <?php
 if (!empty($usrid)) {
@@ -211,8 +212,8 @@ if (!empty($usrid)) {
                  }else{
                     $jsonsectionArr1 = ','.json_encode($sectionArr1);
                  }
-            $jsonsectionArr1 = json_encode($sectionArr1);
-            echo "window.onload = showChartModal('$lastExamName','$lastExamDate',$jsonsectionArr1);";
+//            $jsonsectionArr1 = json_encode($sectionArr1);
+            echo "window.onload = showChartModal('$lastExamName','$lastExamDate'$jsonsectionArr1);";
         }
     }
 }
@@ -260,8 +261,8 @@ if (!empty($getAllExamsByUser)) {
                  }else{
                     $jsonsectionArr = ','.json_encode($sectionArr);
                  }
-            $jsonsectionArr = json_encode($sectionArr);
-            echo "window.onload = showExmChart('exam_bar_chart" . $i . "','$examName attended on $examDate',$jsonsectionArr);";
+//            $jsonsectionArr = json_encode($sectionArr);
+            echo "window.onload = showExmChart('exam_bar_chart" . $i . "','$examName attended on $examDate'$jsonsectionArr);";
             $i++;
         }
     }

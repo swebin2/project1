@@ -1,4 +1,5 @@
 <?php
+require_once "includes/includepath.php";
 require_once "chk_login.php";
 $objgen		=	new general();
 //echo $objgen->decrypt_pass("de8EsXT2Oxeb+MnBX3JCEQHwRfBDnqey6pDXMDLg0h4=");
@@ -9,7 +10,7 @@ $where 		 = "";
 
 if($_SESSION['MYPR_adm_type']=="vendor")
 {
-	$allow_id = array();
+	 $allow_id = array();
 	 $exam_id = $_SESSION['MYPR_exam_id'];
 	 
 	$where2 = " and exam_id=".$exam_id;
@@ -25,7 +26,7 @@ if($_SESSION['MYPR_adm_type']=="vendor")
 	
 	if(count($allow_id)>0)
 	{
-		$where = "and id IN (".implode($allow_id).")";
+		$where = "and id IN (".implode(',',$allow_id).")";
 	}
 	else
 	{
@@ -58,7 +59,7 @@ if($_SESSION['MYPR_adm_type']=="vendor")
 	
 	if(count($allow_id)>0)
 	{
-		$where = "and order_id IN (".implode($allow_id).")";
+		$where = "and order_id IN (".implode(',',$allow_id).")";
 	}
 	else
 	{

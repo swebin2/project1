@@ -389,7 +389,7 @@ class general
 				
 				$password	    =	$this->encrypt_pass(trim($POST['new_pwd']));
 				$old_password	=	$this->encrypt_pass(trim($POST['old_pwd']));
-				$sql1	= "SELECT $col_pass FROM $table WHERE $col_pass='$old_password' AND $col_id=$id";
+				echo $sql1	= "SELECT $col_pass FROM $table WHERE $col_pass='$old_password' AND $col_id=$id";
 				$res1	=  $this->db->numberOfRecords($sql1);
 				if($res1==0)
 				{
