@@ -68,6 +68,11 @@ if(isset($_POST['create'])){
     $exam_name = 'exam_'.$usrid.$date.rand(1, 1000);
     if($_POST['onoffswitch']=='on'){
         $exam_duration = $objgen->check_input($_POST['duration']);
+        if($exam_duration=''){
+            $exam_duration = 'Untimed';
+        }else{
+            $exam_duration= $exam_duration;
+        }
     }  else {
         $exam_duration = 'Untimed';
     }
@@ -78,7 +83,8 @@ if(isset($_POST['create'])){
     }else{
         $explanationStatus = 'no';
     }
-    $msg = $objgen->ins_Row('user_exam_list','user_id,exam_name,duration,totno_of_qu,explanation,created_date',"'".$usrid."','".$exam_name."','".$exam_duration."','".$exam_totnumqns."','".$explanationStatus."','".$date."'");
+    
+    $msg = $objgen->ins_Row('user_exam_list','user_id,exam_name,duration,totno_of_qu,explanation,created_mode,created_date',"'".$usrid."','".$exam_name."','".$exam_duration."','".$exam_totnumqns."','".$explanationStatus."','manual','".$date."'");
     $insrt = $objgen->get_insetId();
     if($insrt){
         foreach ($_POST['section'] as $key => $value) {
@@ -272,65 +278,11 @@ if(isset($_POST['create'])){
                                                 <div class="max_exm_time">
                                                     <select id="duration" name="duration" class="form-control">
                                                         <option value="">Select</option>
-                                                        <option value="00:01">00:01</option>
-                                                        <option value="00:02">00:02</option>
-                                                        <option value="00:03">00:03</option>
-                                                        <option value="00:04">00:04</option>
                                                         <option value="00:05">00:05</option>
-                                                        <option value="00:06">00:06</option>
-                                                        <option value="00:07">00:07</option>
-                                                        <option value="00:08">00:08</option>
-                                                        <option value="00:09">00:09</option>
                                                         <option value="00:10">00:10</option>
-                                                        <option value="00:11">00:11</option>
-                                                        <option value="00:12">00:12</option>
-                                                        <option value="00:13">00:13</option>
-                                                        <option value="00:14">00:14</option>
                                                         <option value="00:15">00:15</option>
-                                                        <option value="00:16">00:16</option>
-                                                        <option value="00:17">00:17</option>
-                                                        <option value="00:18">00:18</option>
-                                                        <option value="00:19">00:19</option>
-                                                        <option value="00:20">00:20</option>
-                                                        <option value="00:21">00:21</option>
-                                                        <option value="00:22">00:22</option>
-                                                        <option value="00:23">00:23</option>
-                                                        <option value="00:24">00:24</option>
-                                                        <option value="00:25">00:25</option>
-                                                        <option value="00:26">00:26</option>
-                                                        <option value="00:2">00:27</option>
-                                                        <option value="00:28">00:28</option>
-                                                        <option value="00:29">00:29</option>
                                                         <option value="00:30">00:30</option>
-                                                        <option value="00:31">00:31</option>
-                                                        <option value="00:32">00:32</option>
-                                                        <option value="00:33">00:33</option>
-                                                        <option value="00:34">00:34</option>
-                                                        <option value="00:35">00:35</option>
-                                                        <option value="00:36">00:36</option>
-                                                        <option value="00:37">00:37</option>
-                                                        <option value="00:38">00:38</option>
-                                                        <option value="00:39">00:39</option>
-                                                        <option value="00:40">00:40</option>
-                                                        <option value="00:41">00:41</option>
-                                                        <option value="00:42">00:42</option>
-                                                        <option value="00:43">00:43</option>
-                                                        <option value="00:44">00:44</option>
                                                         <option value="00:45">00:45</option>
-                                                        <option value="00:46">00:46</option>
-                                                        <option value="00:47">00:47</option>
-                                                        <option value="00:48">00:48</option>
-                                                        <option value="00:49">00:49</option>
-                                                        <option value="00:50">00:50</option>
-                                                        <option value="00:51">00:51</option>
-                                                        <option value="00:52">00:52</option>
-                                                        <option value="00:53">00:53</option>
-                                                        <option value="00:54">00:54</option>
-                                                        <option value="00:55">00:55</option>
-                                                        <option value="00:56">00:56</option>
-                                                        <option value="00:57">00:57</option>
-                                                        <option value="00:58">00:58</option>
-                                                        <option value="00:59">00:59</option>
                                                         <option value="01:00">01:00</option>
                                                         <option value="01:15">01:15</option>
                                                         <option value="01:30">01:30</option>
@@ -342,7 +294,8 @@ if(isset($_POST['create'])){
                                                         <option value="03:00">03:00</option>
                                                         <option value="03:15">03:15</option>
                                                         <option value="03:30">03:30</option>
-                                                        <option value="Untimed">Untimed</option>
+
+                                                        <!--<option value="Untimed">Untimed</option>-->
                                                    </select>
                                                 </div>
                                             </div>

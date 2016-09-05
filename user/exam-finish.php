@@ -21,7 +21,11 @@ function is_array_empty($arr) {
 
 if (isset($_SESSION['exam'][$usrid])) {
     $examId = $_SESSION['exam'][$usrid]['id'];
-    $result = $objgen->get_Onerow("exam_list", "AND id=" . $examId);
+    if ($_SESSION['exam'][$usrid]['exam_creator'] == 'user') {
+        $result = $objgen->get_Onerow("user_exam_list", "AND id=" . $examId);
+    } else {
+        $result = $objgen->get_Onerow("exam_list", "AND id=" . $examId);
+    }
 
     $exam_name = $objgen->check_tag($result['exam_name']);
     $totno_of_qu = $objgen->check_tag($result['totno_of_qu']);
@@ -201,7 +205,7 @@ if (isset($_SESSION['exam'][$usrid])) {
 
 			Thank you for choosing www.trickyscore.com as a tool and practice partner to further your career/ your son’s/daughter’s career.<br />
 			We are happy to announce the results of the exams held on '.$examAttendedOn.'.<br />
-			'.$score.'<br />
+			<'.$score.'>
 			To view your performance score & analysis click here Or log on to <a href="http://www.trickyscore.com">www.trickyscore.com</a>.<br />
 			Thank you once again.<br /><br />
 			

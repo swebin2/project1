@@ -4,7 +4,7 @@ require_once "chk_login.php";
 
 $objgen		=	new general();
 
-$where = " AND user_id='$usrid'";
+$where = " AND user_id='$usrid' AND created_mode!='system'";
 $row_count = $objgen->get_AllRowscnt("user_exam_list",$where);
 if($row_count>0)
 {

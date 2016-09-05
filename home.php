@@ -155,7 +155,7 @@ $objgen		=	new general();
     border-bottom-right-radius: 10px;
     -ms-border-bottom-right-radius: 10px;
     -moz-border-bottom-right-radius: 10px;
-    -webkit-border-bottom-right-radius: 10px; padding:30px; ">"Lets Start Preparation"</div>
+    -webkit-border-bottom-right-radius: 10px; padding:30px; ">"Prepare for PSC Exam"</div>
                 <a class="main-slider__btn btn btn-warning btn-effect" href="#.">Join Today</a> </div>
             </div>
           </div>
@@ -170,7 +170,7 @@ $objgen		=	new general();
     border-bottom-right-radius: 10px;
     -ms-border-bottom-right-radius: 10px;
     -moz-border-bottom-right-radius: 10px;
-    -webkit-border-bottom-right-radius: 10px;  text-transform: capitalize;">"Face the Challenge"</div>
+    -webkit-border-bottom-right-radius: 10px;  text-transform: capitalize;">"Free Trail Exams"</div>
                 <a class="main-slider__btn btn btn-warning btn-effect" href="#.">Join Today</a> </div>
             </div>
           </div>
@@ -185,7 +185,7 @@ $objgen		=	new general();
     border-bottom-right-radius: 10px;
     -ms-border-bottom-right-radius: 10px;
     -moz-border-bottom-right-radius: 10px;
-    -webkit-border-bottom-right-radius: 10px; text-transform: capitalize;">"Win The Race"</div>
+    -webkit-border-bottom-right-radius: 10px; text-transform: capitalize;">"Unlimted Mock Exams"</div>
                 <a class="main-slider__btn btn btn-warning btn-effect" href="#.">Join Today</a> </div>
             </div>
           </div>

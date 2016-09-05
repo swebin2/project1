@@ -30,7 +30,7 @@ if(isset($_POST['create'])){
     $exam_totnumqns = $objgen->check_input($_POST['no_of_qu']);
     $qnAvg = $exam_totnumqns/$getSectionByExamCnt;
     $explanationStatus = 'no';
-    $msg = $objgen->ins_Row('user_exam_list','user_id,exam_name,duration,totno_of_qu,explanation,created_date',"'".$usrid."','".$exam_name."','".$exam_duration."','".$exam_totnumqns."','".$explanationStatus."','".$date."'");
+    $msg = $objgen->ins_Row('user_exam_list','user_id,exam_name,duration,totno_of_qu,explanation,created_mode,created_date',"'".$usrid."','".$exam_name."','".$exam_duration."','".$exam_totnumqns."','".$explanationStatus."','system','".$date."'");
     $insrt = $objgen->get_insetId();
     $totAssignedQns = 0;
     for($i=0;$i<$getSectionByExamCnt;$i++){
