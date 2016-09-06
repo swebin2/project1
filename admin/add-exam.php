@@ -21,7 +21,8 @@ if(isset($_POST['Create']))
    
    $exam_name	 = $objgen->check_input($_POST['exam_name']);
    $group_id	 = $objgen->check_input($_POST['group_id']);
-   $code   	    = $objgen->check_input($_POST['code']);
+   $code   	     = $objgen->check_input($_POST['code']);
+   $short_name   = $objgen->check_input($_POST['short_name']);
 	
    $rules		=	array();
    $rules[] 	= "required,exam_name,Enter the Exam";
@@ -36,7 +37,7 @@ if(isset($_POST['Create']))
    if(empty($errors))
 	{
 		 
-		 $msg = $objgen->ins_Row('exmas','exam_name,group_id,code',"'".$exam_name."','".$group_id."','".$code."'");
+		 $msg = $objgen->ins_Row('exmas','exam_name,short_name,group_id,code',"'".$exam_name."','".$short_name."','".$group_id."','".$code."'");
 		 if($msg=="")
 		 {
 			   header("location:".$add_url."/?msg=1");
@@ -50,6 +51,7 @@ if(isset($_GET['edit']))
        $id = $_GET['edit'];
 	   $result   = $objgen->get_Onerow("exmas","AND id=".$id);
 	   $exam_name    = $objgen->check_tag($result['exam_name']);
+	   $short_name    = $objgen->check_tag($result['short_name']);
 	   $group_id     = $objgen->check_tag($result['group_id']);
 	   $code         = $objgen->check_tag($result['code']);
 	
@@ -60,6 +62,7 @@ if(isset($_POST['Update']))
    $exam_name	 = $objgen->check_input($_POST['exam_name']);
    $group_id	 = $objgen->check_input($_POST['group_id']);
    $code   	     = $objgen->check_input($_POST['code']);
+   $short_name   = $objgen->check_input($_POST['short_name']);
 	
    $rules		=	array();
    $rules[] 	= "required,exam_name,Enter the Exam";
@@ -73,7 +76,7 @@ if(isset($_POST['Update']))
    if(empty($errors))
 	{
 		 			 
-	  $msg = $objgen->upd_Row('exmas',"exam_name='".$exam_name."',group_id='".$group_id."',code='".$code."'","id=".$id);
+	  $msg = $objgen->upd_Row('exmas',"exam_name='".$exam_name."',short_name='".$short_name."',group_id='".$group_id."',code='".$code."'","id=".$id);
 	  if($msg=="")
 	  {
 		  header("location:".$list_url."/?msg=2&page=".$page);
@@ -190,6 +193,10 @@ if($group_count>0)
 									<div class="form-group">
 									  <label for="input1" class="form-label">Exam *</label>
 										<input type="text" class="form-control" value="<?=$exam_name?>" name="exam_name"  required />
+									</div>
+                                    <div class="form-group">
+									  <label for="input1" class="form-label">Shot Name *</label>
+										<input type="text" class="form-control" value="<?=$short_name?>" name="short_name"  required />
 									</div>
                                     <div class="form-group">
 									  <label for="input1" class="form-label">Code *</label>

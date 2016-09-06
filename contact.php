@@ -1,5 +1,65 @@
 ﻿<?php
 $objgen		=	new general();
+
+ 
+if(isset($_POST['Send']))
+{
+
+		$full_name  = $_POST['full_name'];
+		$subject    = $_POST['subject'];
+		$comments   = $_POST['message'];
+		
+		$to = ADMINMAIL;
+		
+		$subject = "Enquiry from ".SITE_NAME.' : '.$subject;
+		
+		
+		if($subject!="")
+		{
+		
+		$message = '<table border="0" align="left" cellpadding="0" cellspacing="0">
+        <tr>
+          <td align="left" colspan="2"><img src="'.WEBLINK.'/images/logo.png" /></td>
+        </tr>
+		 <tr>
+          <td align="left" colspan="2">&nbsp;</td>
+        </tr>
+		<tr>
+          <td width="160" align="left" valign="middle">Full Name: </td>
+          <td width="220" align="left" valign="top">'.$full_name.'</td>
+        </tr>
+        <tr>
+          <td align="left" valign="middle">Subject: </td>
+          <td align="left" valign="top">'.$subject.'</td>
+        </tr>
+        <tr>
+          <td align="left" valign="top">Message: </td>
+          <td align="left" valign="top">'.$comments.'</td>
+        </tr>
+        <tr>
+          <td colspan="2" align="left" style="line-height:20px;;">&nbsp;</td>
+        </tr>
+      </table>';
+		
+		
+		// To send HTML mail, the Content-type header must be set
+		$headers  = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		
+		// Additional headers
+		$headers .= 'From:'. FROMMAIL . "\r\n" .
+					'Reply-To:'. FROMMAIL . "\r\n" .
+					'X-Mailer: PHP/' . phpversion();
+					
+	  // print_r($message);exit;
+		
+		// Mail it
+		mail($to, $subject, $message, $headers);
+		$msg2 = "Message sent successfully";
+		
+		}
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -144,17 +204,29 @@ $objgen		=	new general();
                 <div class="ui-subtitle-block ui-subtitle-block_w-line">If you have some feedback or want to ask any questions</div>
               </div>
               <!-- end wrap-title -->
-              <form class="form-contact ui-form" action="#" method="post">
+                <?php
+														if($msg2!="")
+														{
+														?>
+														<div class="" style="color:#F00">
+															
+														 <?php echo $msg2; ?>
+														</div>
+													 
+														<?php
+														}
+														?>
+              <form class="form-contact ui-form" action="" method="post">
                 <div class="row">
                   <div class="col-md-6">
-                    <input class="form-control" type="text" placeholder="Full Name" required>
+                    <input class="form-control" type="text" placeholder="Full Name" required name="full_name" >
                   </div>
                   <div class="col-md-6">
-                    <input class="form-control" type="text" placeholder="Subject">
+                    <input class="form-control" type="text" placeholder="Subject" required name="subject" >
                   </div>
                   <div class="col-xs-12">
-                    <textarea class="form-control" required rows="11"></textarea>
-                    <button class="btn btn-primary btn-effect">SEND NOW</button>
+                    <textarea class="form-control" required rows="11" required name="message"></textarea>
+                    <button class="btn btn-primary btn-effect" type="submit" name="Send">SEND NOW</button>
                   </div>
                 </div>
               </form>

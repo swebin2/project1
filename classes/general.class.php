@@ -1063,7 +1063,7 @@ function seoUrl($string) {
 
 function getUserExamSection($userId) {
 	
-$sql = "SELECT DISTINCT b.id AS section_id FROM section b WHERE b.exam_id IN(SELECT c.exam_id FROM exam_permission c WHERE c.user_id='$userId' AND c.status='active')";
+ $sql = "SELECT DISTINCT b.id AS section_id FROM section b WHERE b.exam_id IN(SELECT c.exam_id FROM exam_permission c WHERE c.user_id='$userId' AND c.status='active')";
         $result = $this->get_AllRows_qry($sql);
         return $result;
     }

@@ -25,13 +25,14 @@ if(isset($_POST['create'])){
     if($getSectionByExamCnt>0){
         $getSectionByExam = $objgen->get_AllRows('section', 0, $getSectionByExamCnt, '', " AND exam_id='$examId'", '', 'id');
     }
-    $exam_name = 'exam_'.$usrid.$date.rand(1, 1000);
     $exam_duration = $objgen->check_input($_POST['duration']);
     $exam_totnumqns = $objgen->check_input($_POST['no_of_qu']);
     $qnAvg = $exam_totnumqns/$getSectionByExamCnt;
     $explanationStatus = 'no';
-    $msg = $objgen->ins_Row('user_exam_list','user_id,exam_name,duration,totno_of_qu,explanation,created_mode,created_date',"'".$usrid."','".$exam_name."','".$exam_duration."','".$exam_totnumqns."','".$explanationStatus."','system','".$date."'");
+    $msg = $objgen->ins_Row('user_exam_list','user_id,duration,totno_of_qu,explanation,created_mode,status,created_date',"'".$usrid."','".$exam_duration."','".$exam_totnumqns."','".$explanationStatus."','system','active','".$date."'");
     $insrt = $objgen->get_insetId();
+    $exam_name = 'sg-exam-'.$usrid.'-'.$insrt;
+    $updateExmName = $objgen->upd_Row('user_exam_list', "exam_name='$exam_name'", "id='$insrt'");
     $totAssignedQns = 0;
     for($i=0;$i<$getSectionByExamCnt;$i++){
         $sectionId = $getSectionByExam[$i]['id'];
@@ -154,7 +155,7 @@ if(isset($_POST['create'])){
                                 </form>
                                 <?php
                                 }else{
-                                    echo '<div class="alert alert-success alert-dismissable">
+                                    echo '<div class="alert alert-danger alert-dismissable">
                                         <i class="fa fa-check"></i>
                                         <b>Alert!</b> There is no active package is available for you. Please buy a package and continue...
                                     </div>';
@@ -192,18 +193,31 @@ if(isset($_POST['create'])){
         <script type="text/javascript">
             function chk_exm_gen_action(exm_gen_mode){
                 if(exm_gen_mode=='system'){
-                    $.ajax({
-                        type: "POST",
-                        dataType: "html",
-                        url: "<?= URLUR ?>ajax2.php",
-                        data: {pid: 6},
-                        success: function (result) {
-                            $('#exm_gen_act').html('');
-                             $('label.first').css('color', '#000');
-                            $('input[name=exm_gen_mode]').attr('disabled',true);
-                            $('#dyn_field').html(result);
+                    <?php
+                        $chkSystemGenExamExist = $objgen->chk_Ext("user_exam_list", " user_id='$usrid' AND created_mode='system' AND status='active'", 'id');
+                        if($chkSystemGenExamExist>0){
+                            $examExistsStatus = 1;
+                        }else{
+                            $examExistsStatus = 0;
                         }
-                    });
+                    ?>
+                    var exam_exists_status = <?= $examExistsStatus ?>;
+                    if(exam_exists_status==1){
+                        alert("System Generated Exam is already exists. You can not create multiple system generated exam.");
+                    }else{
+                        $.ajax({
+                            type: "POST",
+                            dataType: "html",
+                            url: "<?= URLUR ?>ajax2.php",
+                            data: {pid: 6},
+                            success: function (result) {
+                                $('#exm_gen_act').html('');
+                                 $('label.first').css('color', '#000');
+                                $('input[name=exm_gen_mode]').attr('disabled',true);
+                                $('#dyn_field').html(result);
+                            }
+                        });
+                    }
                 }else if(exm_gen_mode=='manual'){
                     exam_id = $('#exam').val();
 //                    window.location = 'exam-manager/?exam_id=' + exam_id;

@@ -156,7 +156,7 @@ $objgen		=	new general();
     -ms-border-bottom-right-radius: 10px;
     -moz-border-bottom-right-radius: 10px;
     -webkit-border-bottom-right-radius: 10px; padding:30px; ">"Prepare for PSC Exam"</div>
-                <a class="main-slider__btn btn btn-warning btn-effect" href="#.">Join Today</a> </div>
+                <a class="main-slider__btn btn btn-warning btn-effect" href="<?=URL?>signup">Join Today</a> </div>
             </div>
           </div>
           <div class="sp-slide"> <img class="sp-image" src="<?=URL?>images/slider.jpg"
@@ -171,7 +171,7 @@ $objgen		=	new general();
     -ms-border-bottom-right-radius: 10px;
     -moz-border-bottom-right-radius: 10px;
     -webkit-border-bottom-right-radius: 10px;  text-transform: capitalize;">"Free Trail Exams"</div>
-                <a class="main-slider__btn btn btn-warning btn-effect" href="#.">Join Today</a> </div>
+                <a class="main-slider__btn btn btn-warning btn-effect" href="<?=URL?>signup">Join Today</a> </div>
             </div>
           </div>
           <div class="sp-slide"> <img class="sp-image" src="<?=URL?>images/2.jpg"
@@ -179,14 +179,14 @@ $objgen		=	new general();
 					data-retina="<?=URL?>images/slider2.jpg" alt="img"/>
             <div class="item-wrap sp-layer  sp-padding" data-horizontal="200" data-vertical="30"
 					data-show-transition="left" data-hide-transition="up" data-show-delay="400" data-hide-delay="200">
-              <div class="main-slider__inner">
+              <div class="main-slider__inner text-center">
                 <div class="main-slider__title" ></div>
-                <div class="main-slider__subtitle " style="color: #E84C3D; background-color:rgba(255, 255, 255, 0.55); padding:30px; -webkit-border-top-left-radius: 10px;
+                <div class="main-slider__subtitle " style="color: #E84C3D; background-color:rgba(255, 255, 255, 0.95); padding:30px; -webkit-border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
     -ms-border-bottom-right-radius: 10px;
     -moz-border-bottom-right-radius: 10px;
     -webkit-border-bottom-right-radius: 10px; text-transform: capitalize;">"Unlimted Mock Exams"</div>
-                <a class="main-slider__btn btn btn-warning btn-effect" href="#.">Join Today</a> </div>
+                <a class="main-slider__btn btn btn-warning btn-effect" href="<?=URL?>signup">Join Today</a> </div>
             </div>
           </div>
         </div>
@@ -194,9 +194,77 @@ $objgen		=	new general();
       <!-- end main-slider --> 
       <!-- end main-slider --> 
       
+      <div class="tricky">
+        <div class="col-sm-3">
+          <div class="single_why_choose">
+            <div class="single_why_choose_icon2"> <img src="<?=URL?>images/31487924-courrrses-learner-educated-icon.png" alt=""> </div>
+            <h2 style="color: #26C2DC;"><strong style="font-weight: 900;">3732</strong></h2>
+            <h3> Learner Educated</h3>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="single_why_choose">
+            <div class="single_why_choose_icon2"> <img src="<?=URL?>images/2fa4bb21-courrrses-categories-listed-icon.png" alt=""> </div>
+            <h2 style="color: #26C2DC;"><strong style="font-weight: 900;">98</strong></h2>
+            <h3> Final Exams Completed</h3>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="single_why_choose">
+            <div class="single_why_choose_icon2"> <img src="<?=URL?>images/0b91ad83-courrrses-languages-available.png" alt=""> </div>
+            <h2 style="color: #26C2DC;"><strong style="font-weight: 900;">73</strong></h2>
+            <h3> Languages Available</h3>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="single_why_choose">
+            <div class="single_why_choose_icon2"> <img src="<?=URL?>images/bfa8d252-courrrses-courses-available-icon.png" alt=""> </div>
+            <h2 style="color: #26C2DC;"><strong style="font-weight: 900;">326</strong></h2>
+            <h3> Lessons Available</h3>
+          </div>
+        </div>
+      </div>
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="border-decor_top">
+              <section class="section-default" style="margin-top:72px; margin-bottom:0;">
+                <div class="wrap-title wow zoomIn" data-wow-duration="2s" style="visibility: visible; animation-duration: 2s; animation-name: zoomIn; max-width:100%;border: 5px solid #545454;height: auto;padding-bottom: 35px; background: rgba(204, 204, 204, 0.24);">
+                  <h2 class="ui-title-block ui-title-block_mod-d" style="margin-top:37px;margin-bottom:25px;"><strong>Select your Exam</strong></h2>
+                  
+                  <!--<div class="ui-subtitle-block ui-subtitle-block_mod-c">Having over 9 million students worldwide and more than 50,000 online courses available.</div>--> 
+                  <?php
+						if($exam_count>0)
+						{
+							foreach($exam_arr as $key=>$val)
+							{
+						?>
+                        <a href="<?=URL?>login"> <button class="btn btn-primary btn-effect" style="margin-bottom:7px;"><?php echo $objgen->check_tag($val['short_name']); ?></button></a> 
+                        <?php
+							}
+						}
+					    ?>
+                  
+                 </div>
+                
+                <!-- end wrap-title -->
+                
+                <ul class="advantages advantages_mod-b list-unstyled">
+                </ul>
+              </section>
+              <!-- end section-advantages --> 
+            </div>
+            <!-- end border-decor_top --> 
+          </div>
+          <!-- end col --> 
+        </div>
+        <!-- end row --> 
+      </div>
+      
       <!-- end section-default -->
       
-      <section class="section-categories wow fadeInUp" data-wow-duration="2s">
+      <section class="section-categories wow fadeInUp" data-wow-duration="2s" >
         <div class="section__inner">
           <div class="container">
             <div class="row">
@@ -311,72 +379,8 @@ list of things that you might need for the exams...
         </div>
         <!-- end section__inner --> 
       </section>
-      <div class="tricky">
-        <div class="col-sm-3">
-          <div class="single_why_choose">
-            <div class="single_why_choose_icon2"> <img src="<?=URL?>images/31487924-courrrses-learner-educated-icon.png" alt=""> </div>
-            <h2 style="color: #26C2DC;"><strong style="font-weight: 900;">3732</strong></h2>
-            <h3> Learner Educated</h3>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="single_why_choose">
-            <div class="single_why_choose_icon2"> <img src="<?=URL?>images/2fa4bb21-courrrses-categories-listed-icon.png" alt=""> </div>
-            <h2 style="color: #26C2DC;"><strong style="font-weight: 900;">98</strong></h2>
-            <h3> Final Exams Completed</h3>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="single_why_choose">
-            <div class="single_why_choose_icon2"> <img src="<?=URL?>images/0b91ad83-courrrses-languages-available.png" alt=""> </div>
-            <h2 style="color: #26C2DC;"><strong style="font-weight: 900;">73</strong></h2>
-            <h3> Languages Available</h3>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="single_why_choose">
-            <div class="single_why_choose_icon2"> <img src="<?=URL?>images/bfa8d252-courrrses-courses-available-icon.png" alt=""> </div>
-            <h2 style="color: #26C2DC;"><strong style="font-weight: 900;">326</strong></h2>
-            <h3> Lessons Available</h3>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="border-decor_top">
-              <section class="section-default" style="margin-top:72px; margin-bottom:0;">
-                <div class="wrap-title wow zoomIn" data-wow-duration="2s" style="visibility: visible; animation-duration: 2s; animation-name: zoomIn; max-width:100%;border: 5px solid #545454;height: auto;padding-bottom: 35px; background: rgba(204, 204, 204, 0.24);">
-                  <h2 class="ui-title-block ui-title-block_mod-d" style="margin-top:37px;margin-bottom:25px;"><strong>Select your Exam</strong></h2>
-                  
-                  <!--<div class="ui-subtitle-block ui-subtitle-block_mod-c">Having over 9 million students worldwide and more than 50,000 online courses available.</div>--> 
-                  <?php
-						if($exam_count>0)
-						{
-							foreach($exam_arr as $key=>$val)
-							{
-						?>
-                        <a href="<?=URL?>login"> <button class="btn btn-primary btn-effect" style="margin-bottom:7px;"><?php echo $objgen->check_tag($val['exam_name']); ?></button></a> 
-                        <?php
-							}
-						}
-					    ?>
-                  
-                 </div>
-                
-                <!-- end wrap-title -->
-                
-                <ul class="advantages advantages_mod-b list-unstyled">
-                </ul>
-              </section>
-              <!-- end section-advantages --> 
-            </div>
-            <!-- end border-decor_top --> 
-          </div>
-          <!-- end col --> 
-        </div>
-        <!-- end row --> 
-      </div>
+      
+      
       <!-- end container --> 
       
       <!-- why choose us -->

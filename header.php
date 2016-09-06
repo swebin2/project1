@@ -29,7 +29,7 @@ if($exam_count>0)
 							foreach($exam_arr as $key=>$val)
 							{
 						?>
-                        <li><a href="<?=URL?>login"><?php echo $objgen->check_tag($val['exam_name']); ?></a> </li>
+                        <li><a href="<?=URL?>login"><?php echo $objgen->check_tag($val['short_name']); ?></a> </li>
                         <?php
 							}
 						}

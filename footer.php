@@ -55,7 +55,7 @@
       </div>-->
       <div class="footer-bottom" style="margin-top:0px;">
         <div class="grid-row clear-fix">
-          <div class="copyright">TrickyScore 2016 .Created by <a href="http://smartwebin.com/" target="_blank">Smart Web In</a></div>
+          <div class="copyright" style="color:#FFF;">Copyright &copy; TrickyScore 2016. </div>
           <nav class="footer-nav">
             <ul class="clear-fix">
               <li> <a href="<?=URL?>">Home</a> </li>
@@ -65,6 +65,13 @@
               <li> <a href="<?=URL?>login">Login</a> </li>
             </ul>
           </nav>
+             
         </div>
+     
       </div>
+          
+      
+       <div  style="font-size:10px;color:#FFF;text-align:right;margin-right:10px;" align="right">Passionately created by <a style="font-size:10px;" target="_blank" href="http://smartwebin.com/"><span style="color:#FEC263">Smart</span><span style="color:#29B650">Web</span><span style="color:#1EA2C9">In</span></a> </div>
+    
+
     </footer>

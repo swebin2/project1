@@ -766,7 +766,7 @@ if($_POST['pid']==6){
             <select required="" class="form-control" name="duration_type" id="duration_type" onchange="setQn_numN_dur($(this).val());">
                 <option value="">Select</option>
                 <option value="1">50 questions - 30 min </option>
-                <option value="2">100 questions - 1 hr </option>
+                <option value="2">100 questions - 60 min </option>
            </select>
             <div id="qnnumdur">
                 <input type="hidden" id="duration" name="duration" value="">

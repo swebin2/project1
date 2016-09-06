@@ -23,8 +23,17 @@ if (isset($_SESSION['exam'][$usrid])) {
     $examId = $_SESSION['exam'][$usrid]['id'];
     if ($_SESSION['exam'][$usrid]['exam_creator'] == 'user') {
         $result = $objgen->get_Onerow("user_exam_list", "AND id=" . $examId);
+        $updateExmStatus = $objgen->upd_Row("user_exam_list", "status='inactive'", "id='$examId'");
+        if ($result['created_mode'] != 'system') {
+            $exmPkgId = $_SESSION['exam'][$usrid]['exam_package'];
+            $exmCountUpdate = $objgen->updateUserExamCount($usrid, $exmPkgId);
+        }
     } else {
         $result = $objgen->get_Onerow("exam_list", "AND id=" . $examId);
+        if ($result['exam_assign'] == 'group') {
+            $exmPkgId = $_SESSION['exam'][$usrid]['exam_package'];
+            $exmCountUpdate = $objgen->updateUserExamCount($usrid, $exmPkgId);
+        }
     }
 
     $exam_name = $objgen->check_tag($result['exam_name']);
@@ -171,11 +180,7 @@ if (isset($_SESSION['exam'][$usrid])) {
     $insertedTempId = $getInsertedTempId['exam_score_id'];
     $updateExamLog = $objgen->upd_Row('user_exam_log', "exam_score_id='$getLastInsertId'", "exam_score_id='$insertedTempId'");
 
-    if ($result['exam_assign'] == 'group') {
-
-        $exmPkgId = $_SESSION['exam'][$usrid]['exam_package'];
-        $exmCountUpdate = $objgen->updateUserExamCount($usrid, $exmPkgId);
-    }
+    
 
     /*
      * send mail & sms

@@ -151,28 +151,43 @@ header("location:".URL."payment");
          <?php
 		}
 		?>
+        
+       
+     
+
       
-      <br clear="all" />
+     <br clear="all" />
       
          <div class="panel-title">
         You can choose multiple exams
        </div>
+  <!-- End Top Stats -->
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <?php
+		if($exam_count>0)
+		{
+			foreach($exam_arr as $key=>$val)
+			{
+				$cl ="";
+				if($key==0)
+				 $cl = "in";
+	?>
+    <!--<div class="panel panel-default">-->
+  <div class="">
+    <div class="panel-heading" role="tab" id="heading<?=$key?>" style="padding:0px;">
+    
       
-      	<?php
-				if($exam_count>0)
-				{
-				 foreach($exam_arr as $key=>$val)
-				 {
-											  
-                 ?>
-        <div class="kode-alert alert1">
+         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$key?>" aria-expanded="true" aria-controls="collapseOne">
+         <div class="kode-alert alert1">
+          <label  style="font-size:24px">  <?=$key+1?>. <?=$objgen->check_tag($val['exam_name'])?> </label>
+          </div>
+         </a>
       
-       
-                        <label  style="font-size:24px">  <?=$key+1?>. <?=$objgen->check_tag($val['exam_name'])?> </label>
-                    </div>
-          
-          
-      	<?php
+
+    </div>
+    <div id="collapse<?=$key?>" class="panel-collapse collapse <?=$cl?>" role="tabpanel" aria-labelledby="heading<?=$key?>">
+      <div class="panel-body" style="border:none">
+      <?php
 		
 			$where = " and exam_id=".$val['id'];
 			$pkg_count = $objgen->get_AllRowscnt("exam_package",$where);
@@ -197,21 +212,18 @@ header("location:".URL."payment");
 					 {
 					 	$class = "panel-success";
 					 }
+					 
+					 $packcpunt = $objgen->get_AllRowscnt("exam_permission"," and package_id='".$val1['id']."' and status='active'");
 											  
                  ?>
       <div class="col-md-6 col-lg-4">
       <div class="panel <?=$class?>">
 
-        <div class="panel-title">
-        
-         
-       <div class="radio radio-inline">
+        <div class="radio radio-inline">
          <input type="radio" name="package<?=$val['id']?>" value="<?=$objgen->check_tag($val1['amount'])?>::<?=$val1['id']?>" id="package<?=$key+1?><?=$key1+1?>" onClick="show_amount()" class="rbl">
            <label for="package<?=$key+1?><?=$key1+1?>"> Package <?=$objgen->check_tag($val1['package_no'])?></label>
         </div>
        
-         
-        </div>
          <div class="panel-heading">
            Rs. <?=$objgen->check_tag($val1['amount'])?>
             </div>
@@ -220,8 +232,7 @@ header("location:".URL."payment");
          Duration : <?=$objgen->check_tag($val1['period'])?> Days
         </div>
 
-      <!--  <div class="panel-footer">This is Panel Footer</div>-->
-
+      
       </div>
     </div>
      <?php
@@ -229,11 +240,19 @@ header("location:".URL."payment");
 				 }
 				}
 			?>
-            <br clear="all" />
-            <?php
-				 }
-				}
-				?>
+      </div>
+    </div>
+  </div>
+  <?php
+			}
+		}
+  ?>
+
+  </div>
+
+      
+   
+      	
         <div align="center" >
         <div style="font-size:16px" id="tot_amount"></div>
         <input name="tot_val" id="tot_val" type="hidden" value="" >

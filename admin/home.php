@@ -176,10 +176,9 @@ if($exam_count>0)
     
   </ul>
   </div>
-  <!-- End Top Stats -->
   
-  
-  <div class="panel panel-widget">
+  <br clear="all" />
+    <div class="panel panel-widget">
      
 
       
@@ -188,22 +187,33 @@ if($exam_count>0)
          <div class="panel-title">
         Packages
        </div>
+  <!-- End Top Stats -->
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <?php
+		if($exam_count>0)
+		{
+			foreach($exam_arr as $key=>$val)
+			{
+				$cl ="";
+				if($key==0)
+				 $cl = "in";
+	?>
+    <!--<div class="panel panel-default">-->
+  <div class="">
+    <div class="panel-heading" role="tab" id="heading<?=$key?>" style="padding:0px;">
+    
       
-      	<?php
-				if($exam_count>0)
-				{
-				 foreach($exam_arr as $key=>$val)
-				 {
-											  
-                 ?>
-        <div class="kode-alert alert1">
+         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$key?>" aria-expanded="true" aria-controls="collapseOne">
+         <div class="kode-alert alert1">
+          <label  style="font-size:24px">  <?=$key+1?>. <?=$objgen->check_tag($val['exam_name'])?> </label>
+          </div>
+         </a>
       
-       
-                        <label  style="font-size:24px">  <?=$key+1?>. <?=$objgen->check_tag($val['exam_name'])?> </label>
-                    </div>
-          
-          
-      	<?php
+
+    </div>
+    <div id="collapse<?=$key?>" class="panel-collapse collapse <?=$cl?>" role="tabpanel" aria-labelledby="heading<?=$key?>">
+      <div class="panel-body" style="border:none">
+      <?php
 		
 			$where = " and exam_id=".$val['id'];
 			$pkg_count = $objgen->get_AllRowscnt("exam_package",$where);
@@ -237,7 +247,7 @@ if($exam_count>0)
 
         <div class="panel-title">
   
-          Package <?=$objgen->check_tag($val1['package_no'])?></label>
+           <label for="package<?=$key+1?><?=$key1+1?>"> Package <?=$objgen->check_tag($val1['package_no'])?></label>
               
          
         </div>
@@ -258,13 +268,18 @@ if($exam_count>0)
 				 }
 				}
 			?>
-            <br clear="all" />
-            <?php
-				 }
-				}
-				?>
-        
       </div>
+    </div>
+  </div>
+  <?php
+			}
+		}
+  ?>
+
+  </div>
+</div>
+  
+  
       
 
 </div>

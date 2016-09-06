@@ -163,6 +163,7 @@ if(isset($_POST['Reset']))
                                             <tr>
                                                 <th>Code</th>
                                                 <th>Exam</th>
+                                                <th>Short Name</th>
 												<th>Group</th>
                                                 <th>Edit</th>
                                                 <th>Delete</th>
@@ -180,6 +181,7 @@ if(isset($_POST['Reset']))
                                             <tr>
                                                 <td><?php echo $objgen->check_tag($val['code']); ?></td>
                                                 <td><?php echo $objgen->check_tag($val['exam_name']); ?></td>
+                                                <td><?php echo $objgen->check_tag($val['short_name']); ?></td>
 												<td><?php echo $objgen->check_tag($result['name']); ?></td>
                                                 <td><a href="<?=$add_url?>/?edit=<?=$val['id']?>&page=<?=$page?>" role="button" ><span class="fa fa-edit"></span></a></td>
                                                 <td><a href="<?=$list_url?>/?del=<?=$val['id']?>&page=<?=$page?>" role="button" onClick="return confirm('Do you want to delete this Exam?')"><span class="fa fa-trash-o"></span></a></td>
