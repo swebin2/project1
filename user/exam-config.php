@@ -12,6 +12,8 @@ if($_GET['msg']==1)
 }
 
 $usrid = $_SESSION['ma_log_id'];
+$getUserInfo = $objgen->get_Onerow("users", " AND id='$usrid'");
+
 $getAvailUserPackageCount = $objgen->get_AllRowscnt('exam_permission'," AND user_id='$usrid' AND status='active'");
 
 $getAllExamsCount = $objgen->get_AllRowscnt('exmas'," AND id IN (SELECT exam_id FROM `exam_permission` WHERE user_id='$usrid' AND status='active')");
@@ -21,6 +23,7 @@ if($getAllExamsCount>0){
 if(isset($_POST['create'])){
     $date = date("Y-m-d");
     $examId = $_POST['exam'];
+    $getExamInfo = $objgen->get_Onerow("exmas", " AND id='$examId'");
     $getSectionByExamCnt = $objgen->get_AllRowscnt('section'," AND exam_id='$examId'");
     if($getSectionByExamCnt>0){
         $getSectionByExam = $objgen->get_AllRows('section', 0, $getSectionByExamCnt, '', " AND exam_id='$examId'", '', 'id');
@@ -31,7 +34,7 @@ if(isset($_POST['create'])){
     $explanationStatus = 'no';
     $msg = $objgen->ins_Row('user_exam_list','user_id,duration,totno_of_qu,explanation,created_mode,status,created_date',"'".$usrid."','".$exam_duration."','".$exam_totnumqns."','".$explanationStatus."','system','active','".$date."'");
     $insrt = $objgen->get_insetId();
-    $exam_name = 'sg-exam-'.$usrid.'-'.$insrt;
+    $exam_name = 'System Gen '.$getExamInfo['exam_name'].' '.$getUserInfo['full_name'].' '.$insrt;
     $updateExmName = $objgen->upd_Row('user_exam_list', "exam_name='$exam_name'", "id='$insrt'");
     $totAssignedQns = 0;
     for($i=0;$i<$getSectionByExamCnt;$i++){

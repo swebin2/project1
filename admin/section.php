@@ -161,6 +161,7 @@ if(isset($_POST['Reset']))
                                      <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
+                                                <th>ID</th>
                                                 <th>Code</th>
                                                 <th>Section</th>
 												<th>Exam</th>
@@ -178,6 +179,7 @@ if(isset($_POST['Reset']))
                                                   $result   = $objgen->get_Onerow("exmas","AND id=".$val['exam_id']);
 											?>
                                             <tr>
+                                                <td><?php echo $objgen->check_tag($val['id']); ?></td>
                                                 <td><?php echo $objgen->check_tag($val['code']); ?></td>
                                                 <td><?php echo $objgen->check_tag($val['name']); ?></td>
 												<td><?php echo $objgen->check_tag($result['exam_name']); ?></td>

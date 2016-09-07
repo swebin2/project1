@@ -5,7 +5,7 @@ require_once "chk_login.php";
 $objgen = new general();
 
 //$where = " AND id NOT IN(SELECT exam_id FROM `user_exam_score` WHERE user_id='$usrid' GROUP BY exam_id)";
-$where = " AND user_id='$usrid' AND created_mode!='system'";
+$where = " AND user_id='$usrid' AND created_mode!='system' AND status='active'";
 $row_count = $objgen->get_AllRowscnt("user_exam_list", $where);
 if ($row_count > 0) {
     $res_arr = $objgen->get_AllRows("user_exam_list", 0, $row_count, "id desc", $where);
@@ -107,7 +107,7 @@ $getLatestSystemGenExamArr = $objgen->get_AllRows("user_exam_list", 0, 1, "id de
                                                     <td><?php echo $objgen->check_tag($getLatestSystemGenExamArr[0]['exam_name']); ?></td>
                                                     <td><?php echo $objgen->check_tag($getLatestSystemGenExamArr[0]['duration']); ?></td>
                                                     <td><?php echo $objgen->check_tag($getLatestSystemGenExamArr[0]['totno_of_qu']); ?></td>
-                                                    <td><a href="<?= URLUR ?>exam-start/?id=<?=$getLatestSystemGenExamArr[0]['id'] ?>&cat=user" role="button" class="btn btn-success" ><span class="fa fa-clock-o"></span>&nbsp;&nbsp;Start</a></td>            
+                                                    <td><a href="<?= URLUR ?>exam-start/?id=<?= $getLatestSystemGenExamArr[0]['id'] ?>&cat=user" role="button" class="btn btn-success" ><span class="fa fa-clock-o"></span>&nbsp;&nbsp;Start</a></td>            
                                                 </tr>
                                                 <?php
                                             }

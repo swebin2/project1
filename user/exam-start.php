@@ -14,7 +14,7 @@ if(isset($_GET['id']))
                $result   = $objgen->get_Onerow("user_exam_list","AND id=".$id);
            }else{
 			   
-			    $result   = $objgen->get_Onerow("exam_list","AND id=".$id);
+		$result   = $objgen->get_Onerow("exam_list","AND id=".$id);
 				
 				if($result['exam_assign']=='group')
 				{

@@ -14,6 +14,9 @@ if($_GET['msg']==1)
 
     $usrid = $_SESSION['ma_log_id'];
     $getExamId = $_POST['exam_id'];
+    
+    $getUserInfo = $objgen->get_Onerow("users", " AND id='$usrid'");
+    $getExamInfo = $objgen->get_Onerow("exmas", " AND id='$getExamId'");
     if(empty($getExamId)){
 //        header("location: exam-config");
     }
@@ -33,14 +36,12 @@ if($_GET['msg']==1)
         $sectionId      .= $userExamSectionArr[$i]['section_id'].',';
     }
     $sectionId = rtrim($sectionId, ',');
-	
-	//print_r($sectionId);
     
     
     /*
      * for all qn count with all difficulty
      */
-    $where = " AND section IN($sectionId)";
+    $where = " AND section IN($sectionId) AND exam='$getExamId' AND status='active'";
     $getAllDiffQnCount = $objgen->get_AllRowscnt('question', $where);
     /*
      * for unused qncount with all difficulty
@@ -68,7 +69,7 @@ if($_GET['msg']==1)
 if(isset($_POST['create'])){
     $date = date("Y-m-d");
     if($_POST['onoffswitch']=='on'){
-        echo $exam_duration = $objgen->check_input($_POST['duration']);
+        $exam_duration = $objgen->check_input($_POST['duration']);
         if($exam_duration==''){
             $exam_duration = 'Untimed';
         }else{
@@ -86,7 +87,7 @@ if(isset($_POST['create'])){
     }
     $msg = $objgen->ins_Row('user_exam_list','user_id,duration,totno_of_qu,explanation,created_mode,status,created_date',"'".$usrid."','".$exam_duration."','".$exam_totnumqns."','".$explanationStatus."','manual','active','".$date."'");
     $insrt = $objgen->get_insetId();
-    $exam_name = 'exam-'.$usrid.'-'.$insrt;
+    $exam_name = $getExamInfo['exam_name'].' '.$getUserInfo['full_name'].' '.$insrt;
     $updateExmName = $objgen->upd_Row('user_exam_list', "exam_name='$exam_name'", "id='$insrt'");
     if($insrt){
         foreach ($_POST['section'] as $key => $value) {
