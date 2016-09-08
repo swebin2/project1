@@ -113,6 +113,11 @@ if(isset($_REQUEST['module']) &&  trim($_REQUEST['module'])!="")
    $module = trim($_REQUEST['module']);
    $where .= " and module ='".$module."'";
 }
+if(isset($_REQUEST['sts']) &&  trim($_REQUEST['sts'])!="")
+{
+   $sts = trim($_REQUEST['sts']);
+   $where .= " and status ='".$sts."'";
+}
 //echo $where;
 $row_count = $objgen->get_AllRowscnt("question",$where);
 if($row_count>0)
@@ -122,7 +127,7 @@ if($row_count>0)
   $objPN->pageSize($pagesize);
   $objPN->setCurrPage($page);
   $objPN->setDispType('PG_BOOSTRAP');
-  $pages = $objPN->get(array("un" => $un,"exam_group" => $exam_group,"exam" => $exam,"section" => $section,"subject" => $subject,"module" => $module), 1, WEBLINKAD."/".$params[0]."/", "", "active");
+  $pages = $objPN->get(array("un" => $un,"sts" => $sts,"exam_group" => $exam_group,"exam" => $exam,"section" => $section,"subject" => $subject,"module" => $module), 1, WEBLINKAD."/".$params[0]."/", "", "active");
   $res_arr = $objgen->get_AllRows("question",$pagesize*($page-1),$pagesize,"id asc",$where);
 }
 
@@ -449,6 +454,18 @@ function drop(ev){
 											?>
                                             </span>
 								
+										</div>
+                                        
+                                        <div class="form-group">
+										  <label for="input3"  class="form-label">Status</label>
+										  <select class="form-control" name="sts" id="sts" >
+											<option value="" selected="selected">Select</option>
+										
+											<option value="active" <?php if($sts=='active') { ?> selected="selected" <?php } ?> >Active</option>
+                                            	<option value="inactive" <?php if($sts=='inactive') { ?> selected="selected" <?php } ?> >Inactive</option>
+											
+											
+										</select>
 										</div>
                                         <br clear="all" />
 				<button type="submit" class="btn btn-default" name="Search"><span class="fa fa-search"></span>&nbsp;Search</button>

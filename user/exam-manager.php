@@ -17,6 +17,7 @@ if($_GET['msg']==1)
     
     $getUserInfo = $objgen->get_Onerow("users", " AND id='$usrid'");
     $getExamInfo = $objgen->get_Onerow("exmas", " AND id='$getExamId'");
+    $getExamName = $getExamInfo['exam_name'];
     if(empty($getExamId)){
 //        header("location: exam-config");
     }
@@ -87,7 +88,10 @@ if(isset($_POST['create'])){
     }
     $msg = $objgen->ins_Row('user_exam_list','user_id,duration,totno_of_qu,explanation,created_mode,status,created_date',"'".$usrid."','".$exam_duration."','".$exam_totnumqns."','".$explanationStatus."','manual','active','".$date."'");
     $insrt = $objgen->get_insetId();
+    $getExamId = $_POST['exam_id'];
+    $getExamInfo = $objgen->get_Onerow("exmas", " AND id='$getExamId'");
     $exam_name = $getExamInfo['exam_name'].' '.$getUserInfo['full_name'].' '.$insrt;
+    $exam_name=  ucwords($exam_name);
     $updateExmName = $objgen->upd_Row('user_exam_list', "exam_name='$exam_name'", "id='$insrt'");
     if($insrt){
         foreach ($_POST['section'] as $key => $value) {
@@ -172,6 +176,7 @@ if(isset($_POST['create'])){
                                 </div>
                                 <div class="col-md-12 col-lg-12" style="padding-top: 0px">
                                     <form name="frm" action="" onsubmit="return validateForm()" method="post">
+                                        <input type="hidden" name="exam_id" value="<?= $getExamId ?>">
                                     <div class="col-md-3 col-lg-3">
                                         <nav class="segmented-button">
                                             <input type="radio" name="exm_mode" value="test" id="exm_mode_test" checked>
@@ -238,7 +243,7 @@ if(isset($_POST['create'])){
                                                     $exmMode        = 'test';
                                                     $exmQnFilter    = 'all';
                                                     $exmDiffLevel   = 'all';
-                                                    $where = ' AND section='.$sectionId;
+                                                    $where = " AND section='$sectionId' AND exam='$getExamId' AND status='active'";
                                                     $sectionQnCount = $objgen->get_AllRowscnt('question',$where);
                                                     $totsecQnCount += $sectionQnCount;
 

@@ -32,6 +32,13 @@ if(isset($_POST['Create']))
 	{
 		$errors[] = "This section is already exists.";
 	}
+	
+	$brd_exit1 = $objgen->chk_Ext("section","code='$code'");
+	if($brd_exit1>0)
+	{
+		$errors[] = "This code is already exists.";
+	}
+
 
    if(empty($errors))
 	{
@@ -69,6 +76,13 @@ if(isset($_POST['Update']))
 	{
 		$errors[] = "This section is already exists.";
 	}
+	
+	$brd_exit1 = $objgen->chk_Ext("section","code='$code' and id<>$id");
+	if($brd_exit1>0)
+	{
+		$errors[] = "This code is already exists.";
+	}
+
 	
    if(empty($errors))
 	{

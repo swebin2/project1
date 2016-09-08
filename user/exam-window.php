@@ -63,10 +63,10 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
 
         foreach ($secli_arr as $key => $val) {
             if ($group_id == 0 || $exam_id == 0) {
-                $where = " and section='" . $val['section_id'] . "'";
+                $where = " and section='" . $val['section_id'] . "' AND status='active'";
             } else {
 
-                $where = " and exam_group = '" . $group_id . "' and exam='" . $exam_id . "' and section='" . $val['section_id'] . "'";
+                $where = " and exam_group = '" . $group_id . "' and exam='" . $exam_id . "' and section='" . $val['section_id'] . "' AND status='active'";
             }
 
             $qu_count = $objgen->get_AllRowscnt("question", $where);

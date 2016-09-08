@@ -35,6 +35,7 @@ if(isset($_POST['create'])){
     $msg = $objgen->ins_Row('user_exam_list','user_id,duration,totno_of_qu,explanation,created_mode,status,created_date',"'".$usrid."','".$exam_duration."','".$exam_totnumqns."','".$explanationStatus."','system','active','".$date."'");
     $insrt = $objgen->get_insetId();
     $exam_name = 'System Gen '.$getExamInfo['exam_name'].' '.$getUserInfo['full_name'].' '.$insrt;
+    $exam_name = ucwords($exam_name);
     $updateExmName = $objgen->upd_Row('user_exam_list', "exam_name='$exam_name'", "id='$insrt'");
     $totAssignedQns = 0;
     for($i=0;$i<$getSectionByExamCnt;$i++){
