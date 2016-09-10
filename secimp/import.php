@@ -29,7 +29,7 @@ $objgen		=	new general();
 					$exam_id     = $Row[5];
 					$new_secid   = $Row[7];
 					
-					$where = " and section='$old_secid'";
+					$where = " and section='$old_secid' and exam='$exam_id'";
 					$row_count = $objgen->get_AllRowscnt("question",$where);
 					if($row_count>0)
 					{
@@ -39,7 +39,7 @@ $objgen		=	new general();
 					 
 					 foreach($res_arr as $key=>$val)
 					 {
-					   $msg = $objgen->upd_Row('question',"exam='".$exam_id."',section='".$new_secid."',update_flag=1","id=".$val['id']);
+					   $msg = $objgen->upd_Row('question',"section='".$new_secid."',update_flag=1","id=".$val['id']);
 					 }
 					 
 					  //print_r($res_arr);exit;

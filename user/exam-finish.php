@@ -19,7 +19,14 @@ function is_array_empty($arr) {
     }
 }
 
+
 if (isset($_SESSION['exam'][$usrid])) {
+    $qnArr = $_SESSION['exam'][$usrid]['qid'];
+    $qnAnsArr = $_SESSION['exam'][$usrid]['exam_qnSts'];
+
+    $qnArrCount = count($qnArr);;
+    $qnAnsArrCount = count($qnAnsArr);
+    $unseenQnCount = $qnArrCount-$qnAnsArrCount;
     $examId = $_SESSION['exam'][$usrid]['id'];
     if ($_SESSION['exam'][$usrid]['exam_creator'] == 'user') {
         $result = $objgen->get_Onerow("user_exam_list", "AND id=" . $examId);
@@ -291,7 +298,7 @@ if (isset($_SESSION['exam'][$usrid])) {
                                 <div>Questions <?= $totno_of_qu ?></div>
                                 <div>Correct Answer : <?= $correctAnsCount ?></div>
                                 <div>Wrong Answer : <?= $wrongAnsCount ?></div>
-                                <div>Unanswered : <?= $unanswerCount ?></div>
+                                <div>Unanswered : <?= $unanswerCount+$unseenQnCount ?></div>
                                 <div>Total Mark : <?= $grandTotalMark ?></div>
 
                                 <a href="<?= URLUR ?>exam-list" role="button" class="btn btn-success" ><span class="fa fa-clock-o"></span>&nbsp;&nbsp;Take Another Exam</a>

@@ -118,7 +118,7 @@ if(isset($_REQUEST['sts']) &&  trim($_REQUEST['sts'])!="")
    $sts = trim($_REQUEST['sts']);
    $where .= " and status ='".$sts."'";
 }
-//echo $where;
+//echo $where;exit;
 $row_count = $objgen->get_AllRowscnt("question",$where);
 if($row_count>0)
 {
@@ -549,7 +549,7 @@ function drop(ev){
 												  $result2   = $objgen->get_Onerow("exmas","AND id=".$val['exam']);
 												  
 												   
-												   $result3   		= $objgen->get_Onerow("section","AND id='".$val['section']."'");
+												   $result3   		= $objgen->get_Onerow("section","AND id='".$val['section']."' AND exam_id='".$val['exam']."'");
 												   $result4   		= $objgen->get_Onerow("subject","AND id='".$val['subject']."'");
 												   $result5   		= $objgen->get_Onerow("module","AND id='".$val['module']."'");
 					   
@@ -625,8 +625,17 @@ function drop(ev){
                                                 <td><!--<b><?php echo $val['id']; ?>.</b>&nbsp;		-->									<?php echo $objgen->basedecode($val['question']); ?></td>
                                                 <td><?=$qtyp?></td>
 												<td><?php echo $objgen->check_tag($result['name']); ?></td>
-												<td><?php echo $objgen->check_tag($result2['exam_name']); ?></td>
-                                                <td><?php echo $objgen->check_tag($result3['name']); ?></td>
+												<td><?php echo $objgen->check_tag($result2['exam_name']); ?> (<?php echo $objgen->check_tag($result2['code']); ?>)</td>
+                                                <td>
+												<?php
+                                                if($result3['name']!="")
+												{
+												?>
+												<?php echo $objgen->check_tag($result3['name']); ?> (<?php echo $objgen->check_tag($result3['code']); ?>)
+                                                <?php
+												}
+											  ?>
+                                                </td>
                                                 <td><?php
 												   if($val['img_status']==2)
 												   {
