@@ -205,9 +205,10 @@ if(isset($_POST['create'])){
                             $examExistsStatus = 0;
                         }
                     ?>
-                    var exam_exists_status = <?= $examExistsStatus ?>;
+//                    var exam_exists_status = <?= $examExistsStatus ?>;
+                    var exam_exists_status =0;
                     if(exam_exists_status==1){
-                        alert("System Generated Exam is already exists. You can not create multiple system generated exam.");
+                        alert("System Generated Exam is already exist in Saved Exams. Please complete exam to start new one. Multiple system generated exams not allowed.");
                     }else{
                         $.ajax({
                             type: "POST",

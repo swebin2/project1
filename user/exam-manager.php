@@ -175,7 +175,7 @@ if(isset($_POST['create'])){
                                     </div>
                                 </div>
                                 <div class="col-md-12 col-lg-12" style="padding-top: 0px">
-                                    <form name="frm" action="" onsubmit="return validateForm()" method="post">
+                                    <form name="frm" id="frm" action="" onsubmit="return validateForm()" method="post">
                                         <input type="hidden" name="exam_id" value="<?= $getExamId ?>">
                                     <div class="col-md-3 col-lg-3">
                                         <nav class="segmented-button">
@@ -278,13 +278,13 @@ if(isset($_POST['create'])){
                                         <div class="chk_timer_container">
                                             <p>Timer</p>
                                             <div class="onoffswitch">
-                                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+<!--                                                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
                                                 <label class="onoffswitch-label" for="myonoffswitch">
                                                     <span class="onoffswitch-inner"></span>
                                                     <span class="onoffswitch-switch"></span>
-                                                </label>
+                                                </label>-->
                                                 <div class="max_exm_time">
-                                                    <select id="duration" name="duration" class="form-control">
+                                                    <select id="duration" name="duration" class="form-control" required="required">
                                                         <option value="">Select</option>
                                                         <option value="00:05">00:05</option>
                                                         <option value="00:10">00:10</option>
@@ -442,6 +442,12 @@ if(isset($_POST['create'])){
                 }
             }
             function validateForm() {
+                var selectedQnCnt = $("#totqncnt").val();
+                if(selectedQnCnt>120){
+                    alert("Select maximum of 120 questions");
+                    return false;
+                }
+                
                 var x = document.forms["frm"]["totqncnt"].value;
                 if (x == 0 || x == "") {
                     alert("Select atleast one question");
