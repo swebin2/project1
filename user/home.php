@@ -3,12 +3,75 @@ require_once "chk_login.php";
 $objgen		=	new general();
 //echo $objgen->decrypt_pass("de8EsXT2Oxeb+MnBX3JCEQHwRfBDnqey6pDXMDLg0h4=");
 
-$where = " and status='active' and user_id=".$usrid;
+/*$where = " and status='active' and user_id=".$usrid;
 $exam_per = $objgen->get_AllRowscnt("exam_permission",$where);
 if($exam_per>0)
 {
   $per_arr = $objgen->get_AllRows("exam_permission",0,$exam_per,"id asc",$where);
 }
+*/
+$row_count 		= 0;
+$row_count2 	= 0;
+$row_count3 	= 0;
+$row_count4 	= 0;
+$exam_ok		= array();
+
+// Public Exams Start
+$where = " and exam_id=0 and exam_assign='link' and avaibility='always'";
+$row_count2 = $objgen->get_AllRowscnt("exam_list",$where);
+if($row_count2>0)
+{
+  $res_arr2 = $objgen->get_AllRows("exam_list",0,$row_count2,"id desc",$where);
+}
+// Public Exams End
+
+// Public Exams Specific
+$where = " and exam_id=0 and exam_assign='link' and avaibility='specific' and start_date <= now() and end_date>=now()";
+$row_count3 = $objgen->get_AllRowscnt("exam_list",$where);
+if($row_count3>0)
+{
+  $res_arr3 = $objgen->get_AllRows("exam_list",0,$row_count3,"id desc",$where);
+}
+// Public Exams Specific End
+
+// Private Exams 
+$where = " and status='active' and user_id=".$usrid;
+$exam_per = $objgen->get_AllRowscnt("exam_permission",$where);
+if($exam_per>0)
+{
+  
+   $per_arr = $objgen->get_AllRows("exam_permission",0,$exam_per,"id asc",$where);
+
+	foreach($per_arr as $key=>$val)
+	{
+		$exam_ok[] = $val['exam_id'];
+	}
+	
+   
+ // Private Exams Specific
+	
+	$where = " and exam_id in ( ".implode(",",$exam_ok).")  and avaibility='specific' and start_date <= now() and end_date>=now()";
+	$row_count4 = $objgen->get_AllRowscnt("exam_list",$where);
+	if($row_count4>0)
+	{
+	  $res_arr4 = $objgen->get_AllRows("exam_list",0,$row_count4,"id desc",$where);
+	}
+
+// Private Exams Specific End
+
+// Private Exams Start
+
+	$where = " and exam_id in ( ".implode(",",$exam_ok).") and avaibility='always'";
+	$row_count = $objgen->get_AllRowscnt("exam_list",$where);
+	if($row_count>0)
+	{
+	  $res_arr = $objgen->get_AllRows("exam_list",0,$row_count,"id desc",$where);
+	}
+// Private Exams End
+}
+
+$where = " AND user_id='$usrid'";
+$chkexatt_count = $objgen->get_AllRowscnt("user_exam_score", $where);
 
 ?>
 <!DOCTYPE html>
@@ -74,6 +137,201 @@ if($exam_per>0)
     
   </ul>
   </div>
+  
+  <div class="container-default">
+
+  <div class="row">
+  
+      <div class="col-md-12 col-lg-12">
+      
+                                         
+      <div class="panel panel-default">
+      
+      
+       <h3>Group Analysis</h3>
+
+        <div class="panel-body">
+              <?php
+			  if($chkexatt_count>0)
+			  {
+				  ?>
+          <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <td>Exam</td>
+                <td>No. of Questions</td>
+                <td>Total Attended</td>
+                <td>Correct Answers</td>
+                <td>Wrong Answers</td>
+                <td>Unanswered</td>
+                <td>Your Score</td>
+                <td>Highest User Score</td>
+              </tr>
+            </thead>
+            <tbody>
+            	<?php
+				if($row_count3>0)
+				{
+				 foreach($res_arr3 as $key=>$val)
+				 {
+					 
+					    $where = " AND user_id='$usrid' and exam_id=".$val['id'];
+						$exatt_count = $objgen->get_AllRowscnt("user_exam_score", $where);
+						if ($exatt_count > 0) {
+							
+							$exatt_arr = $objgen->get_AllRows("user_exam_score", 0, 1, "id desc", $where);
+						
+						foreach($exatt_arr as $k=>$v)
+						{	
+							 $correctAnsCount 	= $v['correct_answer_num'];
+                             $wrongAnsCount		= $v['wrong_answer_num'];
+                             $unansCount		= $v['unanswered_num'];
+						}
+						
+						$maxscore = $objgen->get_MAxVal("user_exam_score","exam_mark","max_exam_mark","exam_id=".$val['id']);
+                 ?>
+              <tr>
+                <td><?php echo $objgen->check_tag($val['exam_name']); ?></td>
+                <td><?php echo $objgen->check_tag($val['totno_of_qu']); ?></td>
+                <td><?=($correctAnsCount+$wrongAnsCount)?></td>
+                <td><?=$correctAnsCount?></td>
+                <td><?=$wrongAnsCount?></td>
+                <td><?=$unansCount?></td>
+                <td><?php echo $v['exam_mark']; ?></td>
+                <td><?php echo $maxscore['max_exam_mark']; ?></td>         
+              </tr>
+              <?php
+			  
+				   }
+				 }
+				}
+				?>
+                	<?php
+				if($row_count4>0)
+				{
+				 foreach($res_arr4 as $key=>$val)
+				 {
+			   
+			   
+			     $where = " AND user_id='$usrid' and exam_id=".$val['id'];
+						$exatt_count = $objgen->get_AllRowscnt("user_exam_score", $where);
+						if ($exatt_count > 0) {
+							
+							$exatt_arr = $objgen->get_AllRows("user_exam_score", 0, 1, "id desc", $where);
+						
+						foreach($exatt_arr as $k=>$v)
+						{	
+							 $correctAnsCount 	= $v['correct_answer_num'];
+                             $wrongAnsCount		= $v['wrong_answer_num'];
+                             $unansCount		= $v['unanswered_num'];
+						}
+						$maxscore = $objgen->get_MAxVal("user_exam_score","exam_mark","max_exam_mark","exam_id=".$val['id']);
+                 ?>
+              <tr>
+                <td><?php echo $objgen->check_tag($val['exam_name']); ?></td>
+                <td><?php echo $objgen->check_tag($val['totno_of_qu']); ?></td>
+                <td><?=($correctAnsCount+$wrongAnsCount)?></td>
+                <td><?=$correctAnsCount?></td>
+                <td><?=$wrongAnsCount?></td>
+                <td><?=$unansCount?></td>
+                <td><?php echo $v['exam_mark']; ?></td>
+                <td><?php echo $maxscore['max_exam_mark']; ?></td>                
+              </tr>
+              <?php
+						}
+				 }
+				}
+				?>
+                	<?php
+				if($row_count>0)
+				{
+				 foreach($res_arr as $key=>$val)
+				 {
+					 
+			     $where = " AND user_id='$usrid' and exam_id=".$val['id'];
+						$exatt_count = $objgen->get_AllRowscnt("user_exam_score", $where);
+						if ($exatt_count > 0) {
+							
+							$exatt_arr = $objgen->get_AllRows("user_exam_score", 0, 1, "id desc", $where);
+						
+						foreach($exatt_arr as $k=>$v)
+						{	
+							 $correctAnsCount 	= $v['correct_answer_num'];
+                             $wrongAnsCount		= $v['wrong_answer_num'];
+                             $unansCount		= $v['unanswered_num'];
+						}
+					$maxscore = $objgen->get_MAxVal("user_exam_score","exam_mark","max_exam_mark","exam_id=".$val['id']);						  
+                 ?>
+              <tr>
+                <td><?php echo $objgen->check_tag($val['exam_name']); ?></td>
+                <td><?php echo $objgen->check_tag($val['totno_of_qu']); ?></td>
+                <td><?=($correctAnsCount+$wrongAnsCount)?></td>
+                <td><?=$correctAnsCount?></td>
+                <td><?=$wrongAnsCount?></td>
+                <td><?=$unansCount?></td>
+                <td><?php echo $v['exam_mark']; ?></td>
+                <td><?php echo $maxscore['max_exam_mark']; ?></td>                   
+              </tr>
+              <?php
+				 }
+				 }
+				}
+				?>
+                <?php
+				if($row_count2>0)
+				{
+				 foreach($res_arr2 as $key=>$val)
+				 {
+					 
+			     $where = " AND user_id='$usrid' and exam_id=".$val['id'];
+						$exatt_count = $objgen->get_AllRowscnt("user_exam_score", $where);
+						if ($exatt_count > 0) {
+							
+							$exatt_arr = $objgen->get_AllRows("user_exam_score", 0, 1, "id desc", $where);
+						
+						foreach($exatt_arr as $k=>$v)
+						{	
+							 $correctAnsCount 	= $v['correct_answer_num'];
+                             $wrongAnsCount		= $v['wrong_answer_num'];
+                             $unansCount		= $v['unanswered_num'];
+						}
+					$maxscore = $objgen->get_MAxVal("user_exam_score","exam_mark","max_exam_mark","exam_id=".$val['id']);						  
+                 ?>
+              <tr>
+                 <td><?php echo $objgen->check_tag($val['exam_name']); ?></td>
+                <td><?php echo $objgen->check_tag($val['totno_of_qu']); ?></td>
+                <td><?=($correctAnsCount+$wrongAnsCount)?></td>
+                <td><?=$correctAnsCount?></td>
+                <td><?=$wrongAnsCount?></td>
+                <td><?=$unansCount?></td>
+                <td><?php echo $v['exam_mark']; ?></td>
+                <td><?php echo $maxscore['max_exam_mark']; ?></td>                  
+              </tr>
+              <?php
+				 }
+				 }
+				}
+				?>
+            </tbody>
+          </table>
+             <?php
+			  }
+			  ?>
+        </div>
+        
+
+        
+        
+      </div>
+    </div>
+
+
+
+	
+      
+    </div>
+  </div>
+  
   <!-- End Top Stats -->
  <div class="panel panel-widget">
       <?php

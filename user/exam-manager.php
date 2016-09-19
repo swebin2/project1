@@ -275,6 +275,7 @@ if(isset($_POST['create'])){
                                             <input type="hidden" id="totqncnt" name="totqncnt" value="0">
                                             
                                         </div>
+                                        <p><i>*only 120 questions are allowed.</i></p>
                                         <div class="chk_timer_container">
                                             <p>Timer</p>
                                             <div class="onoffswitch">

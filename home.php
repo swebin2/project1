@@ -232,7 +232,7 @@ $objgen		=	new general();
               <section class="section-default" style="margin-top:72px; margin-bottom:0;">
                 <div class="wrap-title wow zoomIn" data-wow-duration="2s" style="visibility: visible; animation-duration: 2s; animation-name: zoomIn; max-width:100%;border: 5px solid #545454;height: auto;padding-bottom: 35px; background: rgba(204, 204, 204, 0.24);">
                   <h2 class="ui-title-block ui-title-block_mod-d" style="margin-top:37px;margin-bottom:25px;"><strong>Select your Exam</strong></h2>
-                  
+       
                   <!--<div class="ui-subtitle-block ui-subtitle-block_mod-c">Having over 9 million students worldwide and more than 50,000 online courses available.</div>--> 
                   <?php
 						if($exam_count>0)
@@ -240,7 +240,7 @@ $objgen		=	new general();
 							foreach($exam_arr as $key=>$val)
 							{
 						?>
-                        <a href="<?=URL?>login"> <button class="btn btn-primary btn-effect" style="margin-bottom:7px;"><?php echo $objgen->check_tag($val['short_name']); ?></button></a> 
+                        <a href="<?=URL?>login" title="<?php echo $objgen->check_tag($val['exam_name']); ?>"   > <button class="btn btn-primary btn-effect" style="margin-bottom:7px;"  ><?php echo $objgen->check_tag($val['short_name']); ?></button></a> 
                         <?php
 							}
 						}

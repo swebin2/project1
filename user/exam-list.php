@@ -5,37 +5,30 @@ require_once "chk_login.php";
 $objgen		=	new general();
 		
 $row_count 		= 0;
-$row_count2 		= 0;
-$row_count3 		= 0;
-$row_count4 		= 0;
+$row_count2 	= 0;
+$row_count3 	= 0;
+$row_count4 	= 0;
 $exam_ok		= array();
 
-// Public Exams
-
+// Public Exams Start
 $where = " and exam_id=0 and exam_assign='link' and avaibility='always'";
 $row_count2 = $objgen->get_AllRowscnt("exam_list",$where);
 if($row_count2>0)
 {
   $res_arr2 = $objgen->get_AllRows("exam_list",0,$row_count2,"id desc",$where);
 }
-
 // Public Exams End
 
 // Public Exams Specific
-
 $where = " and exam_id=0 and exam_assign='link' and avaibility='specific' and start_date <= now() and end_date>=now()";
 $row_count3 = $objgen->get_AllRowscnt("exam_list",$where);
 if($row_count3>0)
 {
   $res_arr3 = $objgen->get_AllRows("exam_list",0,$row_count3,"id desc",$where);
 }
-
 // Public Exams Specific End
 
-
-
 // Private Exams 
-
 $where = " and status='active' and user_id=".$usrid;
 $exam_per = $objgen->get_AllRowscnt("exam_permission",$where);
 if($exam_per>0)
@@ -49,7 +42,7 @@ if($exam_per>0)
 	}
 	
    
-   // Private Exams Specific
+ // Private Exams Specific
 	
 	$where = " and exam_id in ( ".implode(",",$exam_ok).")  and avaibility='specific' and start_date <= now() and end_date>=now()";
 	$row_count4 = $objgen->get_AllRowscnt("exam_list",$where);
@@ -60,8 +53,8 @@ if($exam_per>0)
 
 // Private Exams Specific End
 
+// Private Exams Start
 
-   
 	$where = " and exam_id in ( ".implode(",",$exam_ok).") and avaibility='always'";
 	$row_count = $objgen->get_AllRowscnt("exam_list",$where);
 	if($row_count>0)
@@ -70,7 +63,6 @@ if($exam_per>0)
 	}
 
 }
-
 // Private Exams End
 
 ?>

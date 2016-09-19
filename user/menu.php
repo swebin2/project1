@@ -22,16 +22,44 @@ if($head_url=='exam-list')
   $menu10 = "active"
 ?>
 <div class="sidebar clearfix">
-
+  <style>
+  /* Tooltip */
+  .test + .tooltip > .tooltip-inner {
+      background-color:#009688; 
+      color: #FF0; 
+      border: 1px solid green; 
+      padding: 15px;
+      font-size: 14px;
+	  min-width: 350px;
+	  font-weight:bold;
+	
+  }
+  /* Tooltip on top */
+  .test + .tooltip.top > .tooltip-arrow {
+      border-top: 5px solid green;
+  }
+  /* Tooltip on bottom */
+  .test + .tooltip.bottom > .tooltip-arrow {
+      border-bottom: 5px solid blue;
+  }
+  /* Tooltip on left */
+  .test + .tooltip.left > .tooltip-arrow {
+      border-left: 5px solid red;
+  }
+  /* Tooltip on right */
+  .test + .tooltip.right > .tooltip-arrow {
+      border-right: 5px solid black;
+  }
+  </style>
 <ul class="sidebar-panel nav">
   <li class="sidetitle">MAIN</li>
   <li><a href="<?=URLUR?>home" class="<?=$menu1?>"><span class="icon color5" ><i class="fa fa-home"></i></span>Dashboard<!--<span class="label label-default">2</span>--></a></li>
- 	<li><a href="<?=URLUR?>packages" class="<?=$menu4?>"><span class="icon color10" ><i class="fa fa-shopping-cart"></i></span>Buy Packages</a></li>
-	<li><a href="<?=URLUR?>exam-list" class="<?=$menu5?>"><span class="icon color7" ><i class="fa fa-clock-o"></i></span>Exams</a></li>
-    <li><a href="<?=URLUR?>exam-config" class="<?=$menu6?>"><span class="icon color11" ><i class="fa fa-bar-chart"></i></span>Exam Manager</a></li>
-    <li><a href="<?=URLUR?>exam-list-user" class="<?=$menu7?>"><span class="icon color12" ><i class="fa fa-save"></i></span>Saved Exams</a></li>
-    <li><a href="<?=URLUR?>exam-history" class="<?=$menu8?>"><span class="icon color13" ><i class="fa fa-th"></i></span>Exam History</a></li>
-      <li><a href="<?=URLUR?>exam-analysis" class="<?=$menu9?>"><span class="icon color14" ><i class="fa fa-bar-chart"></i></span>Exam Analysis</a></li> 
+ 	<li><a href="<?=URLUR?>packages" class="<?=$menu4?> test" data-toggle="tooltip"  data-placement="right" title="Choose your exam’s packages and Buy online (Net banking/Credit Card/ Debit Card etc.)" ><span class="icon color10" ><i class="fa fa-shopping-cart"></i></span>Buy Packages</a></li>
+	<li><a href="<?=URLUR?>exam-list" class="<?=$menu5?> test" data-toggle="tooltip"  data-placement="right" title="All your package exams and Open Exams are listed here!"><span class="icon color7" ><i class="fa fa-clock-o"></i></span>Exams</a></li>
+    <li><a href="<?=URLUR?>exam-config" class="<?=$menu6?> test" data-toggle="tooltip"  data-placement="right" title="Prepare and “practice” your exams based on your analysis (System Generated mock test or build your own set). Select your option and press Continue…" ><span class="icon color11" ><i class="fa fa-bar-chart"></i></span>Exam Manager</a></li>
+    <li><a href="<?=URLUR?>exam-list-user" class="<?=$menu7?> test" data-toggle="tooltip"  data-placement="right" title="All your unattended and dropped Exams will be listed here." ><span class="icon color12" ><i class="fa fa-save"></i></span>Saved Exams</a></li>
+    <li><a href="<?=URLUR?>exam-history" class="<?=$menu8?> test" data-toggle="tooltip"  data-placement="right" title="Snapshots of all your exams (package exams and Open Exams) listed here. Get more details by clicking on each exam." ><span class="icon color13" ><i class="fa fa-th"></i></span>Exam History</a></li>
+      <li><a href="<?=URLUR?>exam-analysis" class="<?=$menu9?> test" data-toggle="tooltip"  data-placement="right" title="Identify your strength and weakness on topic wise by reviewing attended exams and prepare through Exam manager…" ><span class="icon color14" ><i class="fa fa-bar-chart"></i></span>Exam Analysis</a></li> 
 <!--  <li><a href="#"><span class="icon color7"><i class="fa fa-flask"></i></span>UI Elements<span class="caret"></span></a>
     <ul>
       <li><a href="icons.html">Icons</a></li>

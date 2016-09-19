@@ -169,6 +169,7 @@ if(isset($_POST['Reset']))
                   <label class="form-label" for="example2">User Type</label>
                   <select class="form-control" name="ut">
 													<option value="">Select</option>
+                                                    <option value="vendor" <?php if($ut=='vendor') { ?> selected="selected" <?php } ?> >Vendor</option>
 													<option value="staff" <?php if($ut=='staff') { ?> selected="selected" <?php } ?> >Staff</option>
 													<option value="admin" <?php if($ut=='admin') { ?> selected="selected" <?php } ?> >Admin</option>
 												</select>
