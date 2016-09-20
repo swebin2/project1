@@ -70,8 +70,60 @@ if($exam_per>0)
 // Private Exams End
 }
 
-$where = " AND user_id='$usrid'";
-$chkexatt_count = $objgen->get_AllRowscnt("user_exam_score", $where);
+$flag=0;
+
+if($row_count>0)
+{
+ foreach($res_arr as $key=>$val)
+ {
+    $where = " AND user_id='$usrid' and exam_id=".$val['id'];
+    $chkexatt_count = $objgen->get_AllRowscnt("user_exam_score", $where);
+	if($chkexatt_count>0)
+    {
+		 $flag=1;
+	}
+ }
+}
+
+
+if($row_count2>0)
+{
+ foreach($res_arr2 as $key=>$val)
+ {
+    $where = " AND user_id='$usrid' and exam_id=".$val['id'];
+    $chkexatt_count = $objgen->get_AllRowscnt("user_exam_score", $where);
+	if($chkexatt_count>0)
+    {
+		 $flag=1;
+	}
+ }
+}
+
+if($row_count3>0)
+{
+ foreach($res_arr3 as $key=>$val)
+ {
+    $where = " AND user_id='$usrid' and exam_id=".$val['id'];
+    $chkexatt_count = $objgen->get_AllRowscnt("user_exam_score", $where);
+	if($chkexatt_count>0)
+    {
+		 $flag=1;
+	}
+ }
+}
+
+if($row_coun4t>0)
+{
+ foreach($res_arr4 as $key=>$val)
+ {
+    $where = " AND user_id='$usrid' and exam_id=".$val['id'];
+    $chkexatt_count = $objgen->get_AllRowscnt("user_exam_score", $where);
+	if($chkexatt_count>0)
+    {
+		 $flag=1;
+	}
+ }
+}
 
 ?>
 <!DOCTYPE html>
@@ -137,7 +189,10 @@ $chkexatt_count = $objgen->get_AllRowscnt("user_exam_score", $where);
     
   </ul>
   </div>
-  
+    <?php
+			  if($flag>0)
+			  {
+				  ?>
   <div class="container-default">
 
   <div class="row">
@@ -151,10 +206,7 @@ $chkexatt_count = $objgen->get_AllRowscnt("user_exam_score", $where);
        <h3>Group Analysis</h3>
 
         <div class="panel-body">
-              <?php
-			  if($chkexatt_count>0)
-			  {
-				  ?>
+            
           <table class="table table-hover table-bordered">
             <thead>
               <tr>
@@ -314,9 +366,7 @@ $chkexatt_count = $objgen->get_AllRowscnt("user_exam_score", $where);
 				?>
             </tbody>
           </table>
-             <?php
-			  }
-			  ?>
+            
         </div>
         
 
@@ -331,7 +381,9 @@ $chkexatt_count = $objgen->get_AllRowscnt("user_exam_score", $where);
       
     </div>
   </div>
-  
+   <?php
+			  }
+			  ?>
   <!-- End Top Stats -->
  <div class="panel panel-widget">
       <?php

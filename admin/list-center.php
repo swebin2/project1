@@ -1,12 +1,12 @@
 <?php
 require_once "includes/includepath.php";
 require_once "chk_login.php";
+
 $objgen		=	new general();
 
-$pagehead = "Registered Users";
-$list_url = URLAD."reg-users";
-$view_url = URLAD."view-exam-history";
-
+$pagehead = "Center";
+$list_url = URLAD."list-center";
+$add_url  = URLAD."add-center";
 
 $objPN		= 	new page(1);
 /** Page Settings  **/
@@ -15,11 +15,14 @@ $page	 	= isset($_REQUEST['page'])	?	$_REQUEST['page']	:	"1";
 
 if(isset($_GET['del']))
 {
-   $id= $_GET['del'];
-   $msg     = $objgen->del_Row("users","id=".$id);
-    if($msg=="")
-   {
-	header("location:".$list_url."/?msg=3&page=".$page);
+    $id= $_GET['del'];
+	if($msg=="")
+    {
+	   $msg     = $objgen->del_Row("center","id=".$id);
+	   if($msg=="")
+	   {
+		header("location:".$list_url."/?msg=3&page=".$page);
+	   }
    }
 }
 
@@ -32,20 +35,20 @@ if(isset($_GET['st']))
 	 if($st=='inactive')
 	  $status = "active";
 	 
-	 $msg	=	$objgen->upd_Row("users","status='$status'","id=".$id);
+	 $msg	=	$objgen->upd_Row("center","status='$status'","id=".$id);
 	 header('location:'.$list_url.'/?msg=4&page='.$page);
 }
 
 if($_GET['msg']==2)
 {
 
-  $msg2 = "User Updated Successfully.";
+  $msg2 = "Center Updated Successfully.";
 }
 
 if($_GET['msg']==3)
 {
 
-  $msg2 = "User Deleted Successfully.";
+  $msg2 = "Center Deleted Successfully.";
 }
 
 if($_GET['msg']==4)
@@ -55,48 +58,19 @@ if($_GET['msg']==4)
 }
 
 $where = "";
-
-if($_SESSION['MYPR_adm_type']=="vendor")
-{
-	$allow_id = array();
-	 $exam_id = $_SESSION['MYPR_exam_id'];
-	 
-	$where2 = " and exam_id=".$exam_id;
-	$per_count = $objgen->get_AllRowscnt("exam_permission",$where2);
-	if($per_count>0)
-	{
-	    $per_arr = $objgen->get_AllRows("exam_permission",0,$per_count,"id asc",$where2,"user_id");
-		foreach($per_arr as $k=>$v)
-		{
-			$allow_id[] = $v['user_id'];
-		}
-	}
-	
-	if(count($allow_id)>0)
-	{
-		$where = "and id IN (".implode(',',$allow_id).")";
-	}
-	else
-	{
-		$where = "and id=0";
-	}
-
-}
-
 if(isset($_REQUEST['un']) &&  trim($_REQUEST['un'])!="")
 {
   $un = trim($_REQUEST['un']);
-  $where .= " and email = '".$un."'";
+  $where .= " and username like '%".$un."%'";
 }
 
 if(isset($_REQUEST['ut']) &&  trim($_REQUEST['ut'])!="")
 {
   $ut = trim($_REQUEST['ut']);
-  $where .= " and mobile = '".$ut."'";
+  $where .= " and center_name like '%".$ut."%'";
 }
 
-
-$row_count = $objgen->get_AllRowscnt("users",$where);
+$row_count = $objgen->get_AllRowscnt("center",$where);
 if($row_count>0)
 {
   
@@ -105,7 +79,7 @@ if($row_count>0)
   $objPN->setCurrPage($page);
   $objPN->setDispType('PG_BOOSTRAP');
   $pages = $objPN->get(array("un" => $un, "ut" => $ut), 1, WEBLINKAD."/".$params[0]."/", "", "active");
-  $res_arr = $objgen->get_AllRows("users",$pagesize*($page-1),$pagesize,"id desc",$where);
+  $res_arr = $objgen->get_AllRows("center",$pagesize*($page-1),$pagesize,"id desc",$where);
 }
 
 if(isset($_POST['Reset']))
@@ -164,13 +138,13 @@ if(isset($_POST['Reset']))
             <div class="panel-body">
               <form class="form-inline" method="post" enctype="multipart/form-data" >
 			    <div class="form-group">
-                  <label class="form-label" for="example1">Email</label>
-                 <input type="text" class="form-control" value="<?=$un?>" name="un"  />
+                  <label class="form-label" for="example1">Username</label>
+                 <input type="text" class="form-control" value="<?=$un?>" name="un"   />
                 </div>
 			
 		            <div class="form-group">
-                  <label class="form-label" for="example2">Mobile</label>
-                 	<input type="text" class="form-control" value="<?=$ut?>" name="ut"  />
+                  <label class="form-label" for="example2">Center Name</label>
+                  <input type="text" class="form-control" value="<?=$ut?>" name="ut"   />
                 </div>
 		
 				
@@ -184,6 +158,14 @@ if(isset($_POST['Reset']))
 
 	
       <div class="panel panel-default">
+
+             <div class="panel-title">
+       <div class="pull-right">
+				<button type="buttom" class="btn btn-success" name="Reset" onClick="window.location='<?=$add_url?>'"><span class="fa fa-plus"></span>&nbsp;Add New</button>
+				</div>
+         
+        </div>
+          <br clear="all" />
             <div class="panel-body">
 		
 					<div class="row">
@@ -205,24 +187,29 @@ if(isset($_POST['Reset']))
                                     <?php
                                     }
                                     ?>
-                                  <table id="example1" class="table table-bordered">
+                                    	 <?php
+                                    if($msg!="")
+                                    {
+                                    ?>
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <i class="fa fa-ban"></i>
+                                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                        <b>Alert!</b> <?php echo $msg; ?>
+                                    </div>
+                                 
+                                    <?php
+                                    }
+                                    ?>
+                                    <table id="example1" class="table table-bordered">
                                         <thead>
                                             <tr>
+                                                <th>Username</th>
+                                                <th>Center</th>
                                                 <th>Email</th>
-												<th>Name</th>
-                                                <th>Mobile</th>
-												<th>Login Type</th>
-                                                <th>View</th>
-                                                 <?php
-                                                if($_SESSION['MYPR_adm_type']=="admin")
-												{
-													?>
-                                                <th>User ID</th>
+                                                <th>Phone</th>
+                                                <th>Edit</th>
                                                 <th>Change Status</th>
                                                 <th>Delete</th>
-                                                <?php
-												}
-												?>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -231,42 +218,15 @@ if(isset($_POST['Reset']))
 										{
 										  foreach($res_arr as $key=>$val)
 											  {
-
-	  
-
+											  
+                                              
 											?>
                                             <tr>
-                                                <td>
-												<?php echo $objgen->check_tag($val['email']); ?><br />
-												 <a href="javascript:;" onClick="javascript:$('#pass<?=$val['id']?>' ).toggle();" >Show Pass</a>
-												 <div id="pass<?=$val['id']?>" style="display:none">
-												 <?=$objgen->decrypt_pass($val['password'])?>
-												 </div>
-												 </td>
-												<td><?php echo $objgen->check_tag($val['full_name']); ?></td>
-                                                <td><?php echo $objgen->check_tag($val['mobile']); ?></td>
-												<td>
-												  <?php
-												  if($val['facebook_id']!="")
-												  {
-												    echo "Facebook";
-												  }
-												  else if($val['google_id']!="")
-												  {
-												     echo "Google";
-												  }
-												  else
-												  {
-												    echo "General";
-												  }
-												  											  
-												  ?>
-												</td>
-                                                <td><a href="<?=$view_url?>/?user=<?=$val['id']?>&page=<?=$page?>" role="button" ><span class="fa fa-search"></span></a></td> <?php
-                                                if($_SESSION['MYPR_adm_type']=="admin")
-												{
-													?>
-                                                <td><?php echo $objgen->check_tag($val['id']); ?></td>
+                                                <td><?php echo $objgen->check_tag($val['username']); ?></td>
+                                                <td><?php echo $objgen->check_tag($val['center_name']); ?></td>
+                                                <td><?php echo $objgen->check_tag($val['email']); ?></td>
+                                                <td><?php echo $objgen->check_tag($val['phone']); ?></td>
+                                                <td><a href="<?=$add_url?>/?edit=<?=$val['id']?>&page=<?=$page?>" role="button" ><span class="fa fa-edit"></span></a></td>
                                                 <td>
 												<?php
 												if($val['status']=='active')
@@ -283,10 +243,7 @@ if(isset($_POST['Reset']))
 												}
 												?>
 												</td>
-                                                <td><a href="<?=$list_url?>/?del=<?=$val['id']?>&page=<?=$page?>" role="button" onClick="return confirm('Do you want to delete this User?')"><span class="fa fa-trash-o"></span></a></td>
-                                                <?php
-												}
-												?>
+                                                <td><a href="<?=$list_url?>/?del=<?=$val['id']?>&page=<?=$page?>" role="button" onClick="return confirm('Do you want to delete this Center?')"><span class="fa fa-trash-o"></span></a></td>
                                             </tr>
                                           
                                          <?php

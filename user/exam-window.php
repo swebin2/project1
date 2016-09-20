@@ -8,9 +8,11 @@ $objgen = new general();
 //unset($_SESSION['exam'][$usrid]['qid']);
 //echo $_SESSION['exam'][$usrid]['id'];
 //doubt with this 2nd condition on 'if' statement
+   
 if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['qid'])) {
-
+    
     $qulist_arr = array();
+    $qulist_str = '';
     $_SESSION['exam'][$usrid]['qid'] = array();
 
     $id = $_SESSION['exam'][$usrid]['id'];
@@ -74,15 +76,42 @@ if (isset($_SESSION['exam'][$usrid]['id']) && empty($_SESSION['exam'][$usrid]['q
                 $qu_arr = $objgen->get_AllRows("question", 0, $val['no_of_qu'], "rand()", $where);
                 foreach ($qu_arr as $k => $v) {
                     $qulist_arr[] = $v['id'];
+                    $qulist_str .= $v['id'].',';
                 }
             }
         }
+        /* select questions if the no. of question is not matched with selected no. of exam questions. */
+        if(count($qulist_arr)<$totno_of_qu){
+            $remainingQnCount = $totno_of_qu-count($qulist_arr);
+            foreach ($secli_arr as $key => $val) {
+                $qulist_str_rtrim = rtrim($qulist_str, ',');
+                if ($group_id == 0 || $exam_id == 0) {
+                    $where = " and section='" . $val['section_id'] . "' AND status='active' AND id NOT IN ($qulist_str_rtrim)";
+                } else {
 
+                    $where = " and exam_group = '" . $group_id . "' and exam='" . $exam_id . "' and section='" . $val['section_id'] . "' AND status='active' AND id NOT IN ($qulist_str_rtrim)";
+                }
+
+                $qu_count = $objgen->get_AllRowscnt("question", $where);
+                if ($qu_count > 0) {
+                    if($qu_count>=$remainingQnCount){
+                        $qnCntlimit = $remainingQnCount;
+                    }else{
+                       $qnCntlimit = $qu_count;
+                    }
+                    $qu_arr = $objgen->get_AllRows("question", 0, $qnCntlimit, "rand()", $where);
+                    foreach ($qu_arr as $k => $v) {
+                        $qulist_arr[] = $v['id'];
+                    }
+                }
+                $remainingQnCount = $remainingQnCount-$qnCntlimit;
+            }
+        }
+        
         $_SESSION['exam'][$usrid]['qid'] = $qulist_arr;
     }
     $_SESSION['exam'][$usrid]['exam_name'] = $objgen->check_tag($result['exam_name']);
 }
-
 //print_r($_SESSION[$usrid]['exam']['id']);
 //print_r($_SESSION['exam'][$usrid]['qid']);
 ?>

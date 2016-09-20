@@ -14,7 +14,7 @@ if($_GET['msg']==1)
 
 if($_GET['msg']==3)
 {
-  $msg2 = "Photo Delted Successfully.";
+  $msg2 = "Photo Deleted Successfully.";
 }
 
 
@@ -42,7 +42,7 @@ if(isset($_GET['delimg']))
 	
 	 if($msg=="")
 	 {
-		header("location:edit-profile/?msg=3&edit=".$edit."&page=".$page);
+		header("location:".URLUR."edit-profile/?msg=3&edit=".$edit."&page=".$page);
 	 }
 }
 
@@ -88,7 +88,7 @@ if(isset($_POST['Change']))
 	  $msg = $objgen->upd_Row('users',"full_name='".$full_name."',email='".$email."',photo='".$photo."'","id=".$usrid);
 	  if($msg=="")
 	  {
-		  header("location:edit-profile/?msg=1&page=".$page);
+		  header("location:".URLUR."edit-profile/?msg=1&page=".$page);
 	  }
 	  
 	}

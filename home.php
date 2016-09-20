@@ -181,11 +181,11 @@ $objgen		=	new general();
 					data-show-transition="left" data-hide-transition="up" data-show-delay="400" data-hide-delay="200">
               <div class="main-slider__inner text-center">
                 <div class="main-slider__title" ></div>
-                <div class="main-slider__subtitle " style="color: #E84C3D; background-color:rgba(255, 255, 255, 0.95); padding:30px; -webkit-border-top-left-radius: 10px;
+                <div class="main-slider__subtitle " style="color: #E84C3D; background-color:rgba(255, 255, 255, 1); padding:30px; -webkit-border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
     -ms-border-bottom-right-radius: 10px;
     -moz-border-bottom-right-radius: 10px;
-    -webkit-border-bottom-right-radius: 10px; text-transform: capitalize;">"Unlimted Mock Exams"</div>
+    -webkit-border-bottom-right-radius: 10px; text-transform: capitalize;">"Sure-shot Question Bank"</div>
                 <a class="main-slider__btn btn btn-warning btn-effect" href="<?=URL?>signup">Join Today</a> </div>
             </div>
           </div>
