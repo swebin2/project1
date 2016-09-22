@@ -46,7 +46,7 @@ if(isset($_GET['delimg']))
 	
 	 if($msg=="")
 	 {
-		header("location:".URLAD."add-center/?msg=3&edit=".$edit."&page=".$page);
+		header("location:".URLAD."add-center/?msg=3&edit=".$id."&page=".$page);
 	 }
 }
 
@@ -288,7 +288,7 @@ if(isset($_POST['Cancel']))
 											if($photo!="")
 											{
 											?>
-											<p class="help-block"><img src="<?=URL?>photos/small/<?php echo $photo; ?>"   />&nbsp;&nbsp;<a href="<?=URLAD?>edit-center/?delimg=<?=$id?>" role="button" onClick="return confirm('Do you want to delete this Logo?')"><span class="fa fa-trash-o"></span></a></p>
+											<p class="help-block"><img src="<?=URL?>photos/small/<?php echo $photo; ?>"   />&nbsp;&nbsp;<a href="<?=URLAD?>add-center/?delimg=<?=$id?>&edit=<?=$id?>" role="button" onClick="return confirm('Do you want to delete this Logo?')"><span class="fa fa-trash-o"></span></a></p>
 											<?php
 											}
 											?>

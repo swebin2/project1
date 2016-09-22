@@ -168,6 +168,7 @@ if (!empty($getAllExamsByUser)) {
         unset($sectionArr);
         $examScoreId = $value['id'];
         $examId = $value['exam_id'];
+        
         $exam_created_by = $value['exam_created_by'];
         $examDate = $value['exam_attended_on'];
         $examDate = date('jS F Y h:i A', strtotime($examDate));
@@ -178,6 +179,9 @@ if (!empty($getAllExamsByUser)) {
         }
         $getExamDetails = $objgen->get_Onerow($examTable, " AND id='$examId'", 'exam_name');
         $examName = $getExamDetails['exam_name'];
+        $getExmCorrectAnsCnt = $objgen->get_AllRowscnt('user_exam_log', " AND `exam_id`='$examId' AND user_id='$usrid' AND qn_attend_status='answered' AND answer_status='1'", '`id`');
+        $getExmWrongAnsCnt = $objgen->get_AllRowscnt('user_exam_log', " AND `exam_id`='$examId' AND user_id='$usrid' AND qn_attend_status='answered' AND answer_status='0'", '`id`');
+        $getExmUnattendedQnCnt = $objgen->get_AllRowscnt('user_exam_log', " AND `exam_id`='$examId' AND user_id='$usrid' AND qn_attend_status='unanswered'", '`id`');
         $getMarkBySectionCnt = $objgen->get_AllRowscnt('user_exam_log', " AND `exam_score_id`='$examScoreId'", '`qn_section_id`');
         if($getMarkBySectionCnt>0){
             $getMarkBySection = $objgen->get_AllRows('user_exam_log', 0, $getMarkBySectionCnt, '', " AND `exam_score_id`='$examScoreId'", '`qn_section_id`', '`qn_section_id`,SUM(`exam_mark`) as section_total_mark');
@@ -204,7 +208,7 @@ if (!empty($getAllExamsByUser)) {
                  }else{
                     $jsonsectionArr = ','.json_encode($sectionArr);
                  }
-            echo "window.onload = showExmChart('exam_bar_chart".$i."','$examName attended on $examDate'$jsonsectionArr);";
+            echo "window.onload = showExmChart('exam_bar_chart".$i."','$examName attended on $examDate'$jsonsectionArr,$getExmCorrectAnsCnt,$getExmWrongAnsCnt,$getExmUnattendedQnCnt);";
 
             $i++;
         }
@@ -213,7 +217,6 @@ if (!empty($getAllExamsByUser)) {
 }
 ?>
             function showChartModal(exm_name, attend_date, section_data) {
-                //alert(attend_date);
                 $("#chartModal").modal('show');
                 // Build the chart
                 $('#chart-container').highcharts({
@@ -256,7 +259,7 @@ if (!empty($getAllExamsByUser)) {
             }
 
             //bar chart function
-            function showExmChart(div_id, title,sectionData) {
+            function showExmChart(div_id, title,sectionData,correctAnsCount,wrongAnsCount,unattendedCount) {
                 if (typeof sectionData == "undefined"){
                     sectionData = '';
                 }
@@ -316,6 +319,31 @@ if (!empty($getAllExamsByUser)) {
                                     fontFamily: 'Verdana, sans-serif',
                                     background: 'red'
                                 }
+                            }
+                        }, {
+                            tooltip: {
+                                pointFormat: 'Number of questions: <b>{point.y:.1f}</b>'
+                            },
+                            type: 'pie',
+                            name: 'Total consumption',
+                            data: [{
+                                name: 'Correct',
+                                y: correctAnsCount,
+                                color: Highcharts.getOptions().colors[0] // Jane's color
+                            }, {
+                                name: 'Wrong',
+                                y: wrongAnsCount,
+                                color: Highcharts.getOptions().colors[1] // John's color
+                            }, {
+                                name: 'Not attended',
+                                y: unattendedCount,
+                                color: Highcharts.getOptions().colors[2] // Joe's color
+                            }],
+                            center: [70, 50],
+                            size: 100,
+                            showInLegend: false,
+                            dataLabels: {
+                                enabled: false
                             }
                         }]
                 });

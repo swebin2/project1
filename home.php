@@ -175,13 +175,13 @@ $objgen		=	new general();
             </div>
           </div>
           <div class="sp-slide"> <img class="sp-image" src="<?=URL?>images/2.jpg"
-					data-src="<?=URL?>images/slider2.jpg"
-					data-retina="<?=URL?>images/slider2.jpg" alt="img"/>
+					data-src="<?=URL?>images/slider3.jpg"
+					data-retina="<?=URL?>images/slider3.jpg" alt="img"/>
             <div class="item-wrap sp-layer  sp-padding" data-horizontal="200" data-vertical="30"
 					data-show-transition="left" data-hide-transition="up" data-show-delay="400" data-hide-delay="200">
               <div class="main-slider__inner text-center">
                 <div class="main-slider__title" ></div>
-                <div class="main-slider__subtitle " style="color: #E84C3D; background-color:rgba(255, 255, 255, 1); padding:30px; -webkit-border-top-left-radius: 10px;
+                <div class="main-slider__subtitle " style="color: #E84C3D; background-color:rgba(255, 255, 255, 0.55); padding:30px; -webkit-border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
     -ms-border-bottom-right-radius: 10px;
     -moz-border-bottom-right-radius: 10px;

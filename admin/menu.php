@@ -88,8 +88,8 @@ if($head_url=='list-coupon' || $head_url=='add-coupon')
   <li><a href="<?=URLAD?>questions" class="<?=$menu9?>"><span class="icon color8" ><i class="fa fa-flask"></i></span>Questions</a></li>
    <li><a href="<?=URLAD?>import-questions" class="<?=$menu10?>"><span class="icon color13" ><i class="fa fa-upload"></i></span>Import Questions</a></li>
       <li><a href="<?=URLAD?>manage-exam" class="<?=$menu11?>"><span class="icon color7" ><i class="fa fa-cube"></i></span>Manage Exam</a></li>
-	  <li><a href="<?=URLAD?>list-center" class="<?=$submenu14?>" ><span class="icon color9" ><i class="fa fa-desktop"></i></span> Manage Center</a></li>
-       <li><a href="<?=URLAD?>list-coupon" class="<?=$submenu15?>" ><span class="icon color10" ><i class="fa fa-gift"></i></span> Manage Coupons</a></li>
+	  <li><a href="<?=URLAD?>list-center" class="<?=$menu14?>" ><span class="icon color9" ><i class="fa fa-desktop"></i></span> Manage Center</a></li>
+       <li><a href="<?=URLAD?>list-coupon" class="<?=$menu15?>" ><span class="icon color10" ><i class="fa fa-gift"></i></span> Manage Coupons</a></li>
     <?php
 	}
 	?>
