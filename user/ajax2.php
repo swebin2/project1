@@ -144,7 +144,7 @@ if ($_POST['pid'] == 1) {
                 ?>
                 <form class="form-horizontal" role="form" id='login' method="post" action="">
                     <input type="hidden" name="qn_id" value="<?= $result['id']; ?>">
-                    <textarea class="form-control custom-control" rows="3" style="resize:none" name="ans"></textarea>
+                    <textarea class="form-control custom-control" rows="3" style="resize:none" name="ans"><?= $_SESSION['exam'][$usrid]['exam_qnAns'][$result['id']][0] ?></textarea>
                 </form>
                 <?php
             }
@@ -163,7 +163,13 @@ if ($_POST['pid'] == 1) {
                             <div class="form-group"> <?= $alphas[$key2] ?>&nbsp;&nbsp;
                                 <div class="radio radio-<?= $cls ?> radio-inline">
 
-                                    <input type="radio"  value="<?= $val2['id'] ?>" id="answer<?= $key + 1 ?><?= $key2 + 1 ?>" name="answerrdo<?= $key + 1 ?>"  />
+                                    <input type="radio" 
+                                        <?php
+                                        if($_SESSION['exam'][$usrid]['exam_qnAns'][$result['id']][0]==$val2['id']){
+                                            echo 'checked';
+                                        }
+                                        ?>
+                                    value="<?= $val2['id'] ?>" id="answer<?= $key + 1 ?><?= $key2 + 1 ?>" name="answerrdo<?= $key + 1 ?>"  />
 
                                     <label for="answer<?= $key + 1 ?><?= $key2 + 1 ?>">
                                         <?= $objgen->basedecode($val2['answer']) ?>
@@ -188,8 +194,15 @@ if ($_POST['pid'] == 1) {
                                 <option value="">Select</option>
                                 <?php
                                 foreach ($res_arr2 as $key2 => $val2) {
+                                    
                                     ?>
-                                    <option value="<?= $val2['id'] ?>"><?= $objgen->basedecode($val2['answer']) ?></option>
+                                    <option
+                                        <?php
+                                        if($_SESSION['exam'][$usrid]['exam_qnAns'][$result['id']][0]==$val2['id']){
+                                            echo 'selected';
+                                        }
+                                        ?>
+                                        value="<?= $val2['id'] ?>"><?= $objgen->basedecode($val2['answer']) ?></option>
 
                                     <?php
                                 }
@@ -215,7 +228,13 @@ if ($_POST['pid'] == 1) {
                             <div class="form-group"> <?= $alphas[$key2] ?>&nbsp;&nbsp;
                                 <div class="checkbox checkbox-<?= $cls ?> checkbox-inline">
 
-                                    <input type="checkbox"  value="<?= $val2['id'] ?>" id="chkanswer<?= $key + 1 ?><?= $key2 + 1 ?>" name="answerchk<?= $key + 1 ?>"  />
+                                    <input type="checkbox"
+                                           <?php
+                                        if($_SESSION['exam'][$usrid]['exam_qnAns'][$result['id']][0]==$val2['id']){
+                                            echo 'checked';
+                                        }
+                                        ?>
+                                           value="<?= $val2['id'] ?>" id="chkanswer<?= $key + 1 ?><?= $key2 + 1 ?>" name="answerchk<?= $key + 1 ?>"  />
 
                                     <label for="chkanswer<?= $key + 1 ?><?= $key2 + 1 ?>">
                                         <?= $objgen->basedecode($val2['answer']) ?>
@@ -237,7 +256,7 @@ if ($_POST['pid'] == 1) {
                         <input type="hidden" name="qn_id" value="<?= $result['id']; ?>">
                         <div>
 
-                            <input name="answerfill"  class="form-control" value="" >
+                            <input name="answerfill"  class="form-control" value="<?= $_SESSION['exam'][$usrid]['exam_qnAns'][$result['id']][0] ?>" >
                         </div>
                     </form>
                     <?php
@@ -591,10 +610,10 @@ if ($_POST['pid'] == 3) {
             $sectionName = $getSectionDetails['name'];
             if ($exmQnFilter == 'all') {
                 if ($exmDiffLevel == 'all') {
-                    $where = ' AND section=' . $sectionId;
+                    $where = ' AND section=' . $sectionId." AND exam='$getExamId' AND status='active'";
                     $sectionQnCount = $objgen->get_AllRowscnt('question', $where);
                 } else {
-                    $where = "AND section='$sectionId' $difficultyCond";
+                    $where = "AND section='$sectionId' AND exam='$getExamId' AND status='active' $difficultyCond";
                     $sectionQnCount = $objgen->get_AllRowscnt('question', $where);
                 }
             } elseif ($exmQnFilter == 'unused') {
@@ -682,7 +701,7 @@ if ($_POST['pid'] == 4) {
     /*
      * for all qn count with all difficulty
      */
-    $where = " AND section IN($sectionId) $difficultyCond";
+    $where = " AND section IN($sectionId) AND exam='$getExamId' AND status='active' $difficultyCond";
     $getAllDiffQnCount = $objgen->get_AllRowscnt('question', $where);
     /*
      * for unused qncount with all difficulty

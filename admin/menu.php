@@ -61,7 +61,7 @@ if($head_url=='manage-exam' || $head_url=='add-exam-list')
   $menu13 = "active";
 if($head_url=='list-center' || $head_url=='add-center')
   $menu14 = "active";
-if($head_url=='list-coupon' || $head_url=='add-coupon')
+if($head_url=='list-coupon' || $head_url=='add-coupon' || $head_url=='list-coupon-cat')
   $menu15 = "active";
 ?>
 <div class="sidebar clearfix">

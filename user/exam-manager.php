@@ -44,6 +44,8 @@ if($_GET['msg']==1)
      */
     $where = " AND section IN($sectionId) AND exam='$getExamId' AND status='active'";
     $getAllDiffQnCount = $objgen->get_AllRowscnt('question', $where);
+    
+    
     /*
      * for unused qncount with all difficulty
      */
